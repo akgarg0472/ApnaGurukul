@@ -1,0 +1,165 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <title>Register</title>
+</head>
+
+<body>
+<form th:action="@{/register}" method="post" id="signup-form" th:object="${users}">
+
+    <div id="signup-pib" class="signup-form">
+        <div class="signup-form-field">
+            <select id="role" name="role" onfocusout="validateRole()" required>
+                <option value="default" class="my-option">--- Select Role ---</option>
+                <option value="faculty">Teacher</option>
+                <option value="student">Student/Organization</option>
+            </select>
+            <p id="role-error" class="color-error">Please select your role</p>
+            <div th:if="${session.Role_Error}">
+                <p class="color-error" th:text="${session.Role_Error}"></p>
+                <th:block th:text="${#session.removeAttribute('Role_Error')}"/>
+            </div>
+        </div>
+
+        <div class="signup-form-field">
+            <input type="text" id="name" name="name" placeholder="Enter name" class="signup-form-input" required
+                   oninvalid="this.setCustomValidity('Name can\'t be empty')" oninput="this.setCustomValidity('')"
+                   onfocusout="validateName()" onkeyup="validateName()">
+            <p id="name-error" class="color-error">Please enter correct name</p>
+            <div th:if="${session.Name_Error}">
+                <p class="color-error" th:text="${session.Name_Error}"></p>
+                <th:block th:text="${#session.removeAttribute('Name_Error')}"/>
+            </div>
+        </div>
+
+        <div class="signup-form-field">
+            <input type="email" class="signup-form-input" id="username" name="username" placeholder="Enter email"
+                   onfocusout="validateEmail()">
+            <p id="email-error" class="color-error">Please enter correct email</p>
+            <p id="email-registered-error" class="color-error">Email already registered</p>
+            <div th:if="${session.Email_Error}">
+                <p class="color-error" th:text="${session.Email_Error}"></p>
+                <th:block th:text="${#session.removeAttribute('Email_Error')}"/>
+            </div>
+        </div>
+
+        <div class="signup-form-field">
+            <input type="password" id="password" name="password" placeholder="Enter password" class="signup-form-input"
+                   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" onfocusout="validatePassword()"
+                   onkeyup="validatePassword()"
+                   oninvalid="this.setCustomValidity('Please enter correct format password')"
+                   required>
+            <p id="password-error" class="color-error">Your password must be minimum 8 characters long, contain letters,
+                one special character and numbers, and must not contain spaces</p>
+            <div th:if="${session.Password_Error}">
+                <p class="color-error" th:text="${session.Password_Error}"></p>
+                <th:block th:text="${#session.removeAttribute('Password_Error')}"/>
+            </div>
+        </div>
+
+        <div class="signup-form-field">
+            <input type="tel" class="signup-form-input" id="phone" name="phone" placeholder="Enter 10 digit phone"
+                   onfocusout="validatePhone()">
+            <p id="phone-error" class="color-error">Please enter 10 digit phone number</p>
+            <div th:if="${session.Phone_Error}">
+                <p class="color-error" th:text="${session.Phone_Error}"></p>
+                <th:block th:text="${#session.removeAttribute('Phone_Error')}"/>
+            </div>
+        </div>
+
+        <button type="button" onclick="validateUserPersonalInformation()">Continue</button>
+    </div>
+
+    <div id="signup-aib" class="signup-form">
+        <div class="signup-form-field">
+            <input type="text" class="signup-form-input" name="address" id="address" placeholder="Enter address"
+                   onfocusout="validateAddress()" required>
+            <p class="color-error" id="address-error">Please enter correct address</p>
+            <div th:if="${session.Address_Error}">
+                <p class="color-error" th:text="${session.Address_Error}"></p>
+                <th:block th:text="${#session.removeAttribute('Address_Error')}"/>
+            </div>
+        </div>
+
+        <div class="signup-form-field">
+            <input type="text" class="signup-form-input" name="city" id="city" placeholder="Enter city"
+                   onfocusout="validateCity()" required>
+            <p class="color-error" id="city-error">Please enter city</p>
+            <div th:if="${session.City_Error}">
+                <p class="color-error" th:text="${session.City_Error}"></p>
+                <th:block th:text="${#session.removeAttribute('City_Error')}"/>
+            </div>
+        </div>
+
+        <div class="signup-form-field">
+            <select class="signup-form-input" id="country" name="country" onfocusout="validateCountry()"
+                    required></select>
+            <p class="color-error" id="country-error">Please select your country</p>
+            <div th:if="${session.Country_Error}">
+                <p class="color-error" th:text="${session.Country_Error}"></p>
+                <th:block th:text="${#session.removeAttribute('Country_Error')}"/>
+            </div>
+        </div>
+
+        <div class="signup-form-field">
+            <select class="signup-form-input" name="state" id="state" onfocusout="validateState()" required></select>
+            <p class="color-error" id="state-country-error">Please select country first</p>
+            <p class="color-error" id="state-error">Please select your state</p>
+            <div th:if="${session.State_Error}">
+                <p class="color-error" th:text="${session.State_Error}"></p>
+                <th:block th:text="${#session.removeAttribute('State_Error')}"/>
+            </div>
+        </div>
+
+        <div class="signup-form-field">
+            <input type="text" class="signup-form-input" name="pincode" id="pincode" placeholder="Enter pincode"
+                   required onfocusout="validatePincode()" onkeyup="validatePincode()">
+            <p class="color-error" id="pincode-error">Please enter valid pincode</p>
+            <div th:if="${session.Pincode_Error}">
+                <p class="color-error" th:text="${session.Pincode_Error}"></p>
+                <th:block th:text="${#session.removeAttribute('Pincode_Error')}"/>
+            </div>
+        </div>
+
+        <div class="signup-form-field">
+            <button type="button" onclick="submitSignupForm()">Submit</button>
+        </div>
+    </div>
+</form>
+
+<script type="text/javascript" th:src="@{/js/script.js}"></script>
+<script type="text/javascript" th:src="@{/js/countries.js}"></script>
+
+<script>
+    populateCountries("country", "state");
+</script>
+
+<script>
+    $(document).ready(() => {
+        $("#signup-pib").show();
+        $("#signup-aib").hide();
+
+        $("#role-error").hide();
+        $("#name-error").hide();
+        $("#email-error").hide();
+        $("#email-registered-error").hide();
+        $("#password-error").hide();
+        $("#phone-error").hide();
+
+        $("#address-error").hide();
+        $("#city-error").hide();
+        $("#country-error").hide();
+        $("#state-country-error").hide();
+        $("#state-error").hide();
+        $("#pincode-error").hide();
+    });
+</script>
+</body>
+
+</html>

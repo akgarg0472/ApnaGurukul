@@ -1,0 +1,54 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.signup-form {
+    margin-left: 30%;
+    margin-right: 30%;
+    margin-top: 10vh;
+    border: 1px solid #000;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+
+.signup-form-field {
+    margin: 0 10% 20px 10%;
+    width: auto;
+}
+
+.signup-form-input, .signup-form select {
+    width: 100%;
+    padding-top: .375rem;
+    padding-bottom: .375rem;
+    text-align: center;
+    line-height: 1.5;
+    font: 400 13px Arial;
+    border-radius: 6px;
+    outline: none;
+    border: 1px solid #ced4da;
+}
+
+.signup-form-input:focus {
+    border-color: rgba(76, 175, 80, 0.8);
+    border-width: 1.5px;
+    transition: border-color 0.2s ease-in-out;
+}
+
+.signup-form button {
+    border-radius: 8px;
+    width: 20%;
+    height: 30px;
+    margin-left: 40%;
+    margin-right: 40%;
+    text-align: center;
+    padding: 5px 10px 5px 10px;
+    outline: none;
+}
+
+.color-error {
+    margin-top: .50rem;
+    color: #dc3545 !important;
+    font-size: .875em;
+}
