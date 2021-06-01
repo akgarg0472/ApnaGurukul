@@ -42,12 +42,13 @@ public class UserAuthenticationSuccessHandler implements AuthenticationSuccessHa
         }
 
         if (hasAdminRole) {
+            System.out.println("Welcome admin sir");
             redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "/admin/dashboard");
-        }
-        if (hasTeacherRole) {
+        } else if (hasTeacherRole) {
+            System.out.println("welcome guruji");
             redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "/faculty/dashboard");
-        }
-        if (hasStudentRole) {
+        } else if (hasStudentRole) {
+            System.out.println("welcome huhh..");
             redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "/student/dashboard");
         } else {
             throw new IllegalStateException("User is not a valid Apna Gurukul user");

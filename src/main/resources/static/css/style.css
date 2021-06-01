@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
 * {
     margin: 0;
     padding: 0;
@@ -146,7 +148,6 @@ input::-webkit-inner-spin-button {
     border: 12px solid #f3f3f3;
     border-radius: 50%;
     border-top: 12px solid #538FFB;
-    border-bottom: 12px solid #538FFB;
     width: 60px;
     height: 60px;
     -webkit-animation: spin 1s linear infinite;
@@ -177,4 +178,115 @@ input::-webkit-inner-spin-button {
     margin-top: 10px;
     font-size: 1rem;
     font-family: 'Trebuchet MS', sans-serif;;
+}
+
+/*login page styling*/
+.login-container {
+    position: absolute;
+    margin-top: 0;
+    margin-left: 60%;
+    padding: 0;
+    width: 30%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid red;
+    width: 100%;
+    border-radius: 16px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    border: solid 2px #39C0ED;
+}
+
+.login-form .heading {
+    font-size: 40px;
+    background: -webkit-linear-gradient(180deg, #ff9f4a, #ff3c83);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 50px;
+    font-family: 'Montserrat', sans-serif;
+
+}
+
+.login-input-field {
+    padding: 0.50rem;
+    width: 66%;
+    border-color: pink;
+    outline: none;
+    margin-top: 30px;
+    transition: width 0.2318s ease-in-out;
+    border-top: 0;
+    border-right: 0;
+    border-left: 0;
+    font-size: 16px;
+}
+
+.login-input-field:focus {
+    width: 75%;
+    transition: width 0.2318s ease-in-out;
+}
+
+.login-container .login-form button {
+    padding: 0.50rem;
+    width: 50%;
+    border-radius: 20px;
+    outline: none;
+    border: 2px solid #F93154;
+    background-color: #F93154;
+    margin-top: 10px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 200ms ease-in-out;
+}
+
+.login-container .login-form button i {
+    position: relative;
+    float: right;
+    margin-top: 2px;
+    font-size: 20px;
+}
+
+.login-container .login-form button:hover {
+    cursor: pointer;
+    -moz-box-shadow: 0 0 5px #F93154;
+    -webkit-box-shadow: 0 0 5px #F93154;
+    box-shadow: 0 0 5px #F93154;
+    transition: all 200ms ease-in-out;
+}
+
+.lfp_link, .lunr_link {
+    text-decoration: none;
+    margin-top: 40px;
+    color: #333;
+    padding-bottom: 5px;
+    position: relative;
+}
+
+.lfp_link:before, .lunr_link::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 1.5px;
+    bottom: 0;
+    left: 0;
+    background-color: #333;
+    visibility: hidden;
+    transform: scaleX(0);
+    transition: all 0.5s ease-in-out;
+}
+
+.lfp_link:hover:before, .lunr_link:hover:before {
+    visibility: visible;
+    transform: scaleX(0.99);
 }

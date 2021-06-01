@@ -1,15 +1,61 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"/>
     <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Login</title>
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <title>Login - ApnaGurukul</title>
 </head>
 
 <body>
-<h1>This is the login page</h1>
+<div class="login-container">
+    <form th:action="@{/verify-login}" method="post" class="login-form" id="login-form">
+        <h1 class="heading">Login</h1>
+        <input type="text" class="login-input-field" id="username" name="username" autocomplete="off"
+               placeholder="Enter registered email" value="gargakhilesh0407@gmail.com"/>
+        <p class="color-error" id="ere">Email id is not registered</p>
+        <p class="color-error" id="eee">Please enter valid email</p>
+
+        <input type="password" class="login-input-field" id="password" name="password" autocomplete="off"
+               placeholder="Enter password" onfocusout="validatePassword()" value="Pass@1234"/>
+        <p class="color-error" id="password-error" style="width: 70%">Your password must be minimum 8 characters
+            long, contain letters, one special character and numbers, and must not contain spaces</p>
+
+        <a href="/forgot-password" class="lfp_link">Forgot Password?</a>
+        <button type="button" onclick="login()">Login&ensp;<i class="fa fa-spinner fa-spin" id="lbl-anim"></i></button>
+        <button type="submit" style="display: none" id="slb">Submit</button>
+        <a href="/signup" class="lunr_link">Create new Account</a>
+    </form>
+</div>
+
+<div th:if="${session.registrationSuccessful}">
+    <th:block th:text="${#session.removeAttribute('registrationSuccessful')}"/>
+    <script>
+        swal("Congratulations!", "Account created successfully!", "success");
+    </script>
+</div>
+
+<div th:if="${session.logoutSuccess}">
+    <th:block th:text="${#session.removeAttribute('logoutSuccess')}"/>
+    <script>
+        swal("Successfully logged out");
+    </script>
+</div>
+
+<script type="text/javascript" th:src="@{/js/script.js}"></script>
+<script>
+    $(document).ready(() => {
+        $("#lbl-anim").hide();
+        $("#ere").hide();
+        $("#eee").hide();
+        $("#password-error").hide();
+    })
+</script>
 </body>
 
 </html>

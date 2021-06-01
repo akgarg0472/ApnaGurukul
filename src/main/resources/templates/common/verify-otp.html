@@ -17,9 +17,10 @@
         <p style="text-align: center; margin-bottom: 10px">
             Please Enter the OTP to verify your account
         </p>
-        <input class="otp-form-input" type="number" max="999999" min="100000" maxlength="6"
-               placeholder="Enter 6-digit OTP" id="otp-sb-ti" required
-               oninput="if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"/>
+        <input class="otp-form-input" type="password" maxlength="6" placeholder="Enter 6-digit OTP" id="otp-sb-ti"
+               pattern="[0-9]+" required
+               oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
+               if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"/>
         <br/>
         <p id="timer-countdown">Resend otp in <span id="timer"></span></p>
         <button type="button" class="orb-button disabled-button" id="orb" onclick="resendOTP()">Resend OTP</button>

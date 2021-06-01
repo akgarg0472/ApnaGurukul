@@ -103,6 +103,7 @@ public class RegistrationController {
                 user.setJoinDate(LocalDate.now());
                 this.usersRepository.save(user);
                 EmailSender.sendEmail(user.getUsername(), "Registration successful", EmailMessages.registrationSuccessMessage(user.getUsername(), user.getName()));
+                session.setAttribute("registrationSuccessful", "Registration successful");
                 return "REGISTRATION_SUCCESSFUL";
             } else {
                 return "OTP_MISMATCHED";

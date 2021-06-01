@@ -311,3 +311,62 @@ const confirmOTP = async () => {
         }
     }
 };
+
+const login = async () => {
+    const _csrf = $("input[name=_csrf]").val();
+    const email = $("#username").val();
+    const password = $("#password").val();
+    const loader = $("#lbl-anim");
+    const ere = $("#ere");
+    const eee = $("#eee");
+    const pe = $("#password-error");
+    let isEmailRegistered;
+    const emailValidator = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const passwordValidator = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}";
+
+    if (email.trim() === '') {
+        eee.show();
+        ere.hide();
+        return;
+    }
+
+    if (!email.trim().match(emailValidator)) {
+        eee.show();
+        ere.hide();
+        return;
+    }
+
+    if (password.trim() === '') {
+        pe.show();
+        return;
+    }
+
+    if (!password.trim().match(passwordValidator)) {
+        pe.show();
+        return;
+    }
+
+    const loginForm = $("#login-form");
+    console.log(loginForm.serialize());
+    loader.show();
+
+    await $.post("/verify-username", `_csrf=${_csrf}&email=${email}`)
+        .done((resp) => {
+            isEmailRegistered = resp;
+        })
+        .fail((resp) => {
+            console.log(resp);
+        });
+    loader.hide();
+
+    if (isEmailRegistered) {
+        ere.hide();
+        eee.hide();
+        pe.hide();
+        $("#slb").click();
+    } else {
+        ere.show();
+        eee.hide();
+        pe.hide();
+    }
+}

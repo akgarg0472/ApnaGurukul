@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class HomeController {
 
@@ -27,5 +29,12 @@ public class HomeController {
     public String register(Model model) {
         model.addAttribute("users", new Users());
         return "common/register";
+    }
+
+
+    @RequestMapping(value = "/logout-success", method = RequestMethod.GET)
+    public String logout(HttpSession session) {
+        session.setAttribute("logoutSuccess", "Logout successful");
+        return "redirect:/login";
     }
 }
