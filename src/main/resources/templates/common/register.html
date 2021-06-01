@@ -16,8 +16,8 @@
     <div id="signup-pib" class="signup-form">
         <div class="signup-form-field">
             <select id="role" name="role" onfocusout="validateRole()" required>
-                <option value="default" class="my-option">--- Select Role ---</option>
                 <option value="faculty">Teacher</option>
+                <option value="default" class="my-option">--- Select Role ---</option>
                 <option value="student">Student/Organization</option>
             </select>
             <p id="role-error" class="color-error">Please select your role</p>
@@ -30,7 +30,7 @@
         <div class="signup-form-field">
             <input type="text" id="name" name="name" placeholder="Enter name" class="signup-form-input" required
                    oninvalid="this.setCustomValidity('Name can\'t be empty')" oninput="this.setCustomValidity('')"
-                   onfocusout="validateName()" onkeyup="validateName()">
+                   onfocusout="validateName()" onkeyup="validateName()" value="akhil">
             <p id="name-error" class="color-error">Please enter correct name</p>
             <div th:if="${session.Name_Error}">
                 <p class="color-error" th:text="${session.Name_Error}"></p>
@@ -40,7 +40,7 @@
 
         <div class="signup-form-field">
             <input type="email" class="signup-form-input" id="username" name="username" placeholder="Enter email"
-                   onfocusout="validateEmail()">
+                   onfocusout="validateEmail()" value="akhilesh.21008@ggnindia.dronacharya.info">
             <p id="email-error" class="color-error">Please enter correct email</p>
             <p id="email-registered-error" class="color-error">Email already registered</p>
             <div th:if="${session.Email_Error}">
@@ -52,7 +52,7 @@
         <div class="signup-form-field">
             <input type="password" id="password" name="password" placeholder="Enter password" class="signup-form-input"
                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" onfocusout="validatePassword()"
-                   onkeyup="validatePassword()"
+                   onkeyup="validatePassword()" value="Pass@1234"
                    oninvalid="this.setCustomValidity('Please enter correct format password')"
                    required>
             <p id="password-error" class="color-error">Your password must be minimum 8 characters long, contain letters,
@@ -65,7 +65,7 @@
 
         <div class="signup-form-field">
             <input type="tel" class="signup-form-input" id="phone" name="phone" placeholder="Enter 10 digit phone"
-                   onfocusout="validatePhone()">
+                   onfocusout="validatePhone()" value="1234567890">
             <p id="phone-error" class="color-error">Please enter 10 digit phone number</p>
             <div th:if="${session.Phone_Error}">
                 <p class="color-error" th:text="${session.Phone_Error}"></p>
@@ -79,7 +79,7 @@
     <div id="signup-aib" class="signup-form">
         <div class="signup-form-field">
             <input type="text" class="signup-form-input" name="address" id="address" placeholder="Enter address"
-                   onfocusout="validateAddress()" required>
+                   onfocusout="validateAddress()" value="address" required>
             <p class="color-error" id="address-error">Please enter correct address</p>
             <div th:if="${session.Address_Error}">
                 <p class="color-error" th:text="${session.Address_Error}"></p>
@@ -89,7 +89,7 @@
 
         <div class="signup-form-field">
             <input type="text" class="signup-form-input" name="city" id="city" placeholder="Enter city"
-                   onfocusout="validateCity()" required>
+                   onfocusout="validateCity()" value="city" required>
             <p class="color-error" id="city-error">Please enter city</p>
             <div th:if="${session.City_Error}">
                 <p class="color-error" th:text="${session.City_Error}"></p>
@@ -119,7 +119,7 @@
 
         <div class="signup-form-field">
             <input type="text" class="signup-form-input" name="pincode" id="pincode" placeholder="Enter pincode"
-                   required onfocusout="validatePincode()" onkeyup="validatePincode()">
+                   required onfocusout="validatePincode()" onkeyup="validatePincode()" value="123456">
             <p class="color-error" id="pincode-error">Please enter valid pincode</p>
             <div th:if="${session.Pincode_Error}">
                 <p class="color-error" th:text="${session.Pincode_Error}"></p>
@@ -127,11 +127,25 @@
             </div>
         </div>
 
+        <p style="margin: 15px; color: #6c757d; text-align: center">We will send an OTP to verify you.</p>
+
         <div class="signup-form-field">
-            <button type="button" onclick="submitSignupForm()">Submit</button>
+            <button type="button" onclick="submitSignupForm()">Signup</button>
         </div>
     </div>
 </form>
+
+
+<div class="loader-container" id="processing-container">
+    <p class="loader-message">Please wait</p>
+    <p class="loader-message">Checking your information</p>
+</div>
+
+<!-- loader -->
+<div class="loader-container" id="loader-container">
+    <div class="loader"></div>
+    <p class="loader-message">Processing your request</p>
+</div>
 
 <script type="text/javascript" th:src="@{/js/script.js}"></script>
 <script type="text/javascript" th:src="@{/js/countries.js}"></script>
@@ -142,6 +156,9 @@
 
 <script>
     $(document).ready(() => {
+        $("#loader-container").hide();
+        $("#processing-container").hide();
+
         $("#signup-pib").show();
         $("#signup-aib").hide();
 

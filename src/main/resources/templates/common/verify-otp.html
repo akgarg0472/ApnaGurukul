@@ -1,13 +1,61 @@
 <!doctype html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <title>Verify OTP</title>
 </head>
-<body>
 
+<body>
+<div class="otp-form-container">
+    <form th:action="@{/process-otp-verification}" method="post">
+        <p style="text-align: center; margin-bottom: 10px">
+            Please Enter the OTP to verify your account
+        </p>
+        <input class="otp-form-input" type="number" max="999999" min="100000" maxlength="6"
+               placeholder="Enter 6-digit OTP" id="otp-sb-ti" required
+               oninput="if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"/>
+        <br/>
+        <p id="timer-countdown">Resend otp in <span id="timer"></span></p>
+        <button type="button" class="orb-button disabled-button" id="orb" onclick="resendOTP()">Resend OTP</button>
+        <button type="button" id="osb" onclick="confirmOTP()">Confirm OTP</button>
+    </form>
+</div>
+
+<!-- loader -->
+<div class="loader-container" id="loader-container">
+    <div class="otp-loader"></div>
+    <p class="loader-message">Verifying OTP</p>
+</div>
+
+<div class="loader-container" id="resend-loader-container">
+    <div class="otp-loader"></div>
+    <p class="loader-message">Requesting new OTP</p>
+</div>
+
+<script type="text/javascript" th:src="@{/js/script.js}"></script>
+<script type="text/javascript">
+    $(document).ready(() => {
+        $("#loader-container").hide();
+        $("#resend-loader-container").hide();
+        const orb = document.getElementById("orb");
+
+        if (orb !== null) {
+            orb.disabled = true;
+        }
+
+        let duration = 60;
+        let display = document.getElementById("timer");
+        startTimer(duration, display);
+        $("#timer-countdown").show();
+        $("#orb").hide();
+    });
+</script>
 </body>
+
 </html>

@@ -5,7 +5,7 @@ public class EmailMessages {
     public static String forgotPasswordOTPMessage(String toEmail,
                                                   String name,
                                                   String otp) {
-        return "Dear " + "<strong>" + name + "</strong>" +
+        return "Dear " + "<strong>" + name + "</strong>," +
                 "<br><br>" +
                 "OTP to reset password of your account " + toEmail + " is " +
                 "<strong>" + otp + "</strong>. Use this otp to reset your password." +
@@ -15,7 +15,7 @@ public class EmailMessages {
                 "<br><br>" +
                 "Regards" +
                 "<br>" +
-                "Team ApnaGurukul" +
+                "SKAK (Team ApnaGurukul)" +
                 "<br>" +
                 "India";
     }
@@ -24,10 +24,10 @@ public class EmailMessages {
     public static String registrationOTPMessage(String email,
                                                 String name,
                                                 int otp) {
-        return "Dear " + "<strong>" + name + "</strong>" +
-                "<br><br>" +
-                "Thank you for registering on ApnaGurukul." +
+        return "Dear " + "<strong>" + name + "</strong>," +
                 "<br>" +
+                "Greetings from team ApnaGurukul." +
+                "<br><br>" +
                 "OTP to complete registration process of your account with email " + email + " is " +
                 "<strong>" + otp + "</strong>. This OTP is valid for 5 minutes only. Use this otp to complete the registration process." +
                 "<br><br>" +
@@ -35,7 +35,7 @@ public class EmailMessages {
                 "<br><br>" +
                 "Regards" +
                 "<br>" +
-                "Team ApnaGurukul" +
+                "SKAK (Team ApnaGurukul)" +
                 "<br>" +
                 "India";
     }
@@ -43,11 +43,11 @@ public class EmailMessages {
 
     public static String registrationSuccessMessage(String email,
                                                     String name) {
-        return "Dear " + "<strong>" + name + "</strong>" +
+        return "Dear " + "<strong>" + name + "</strong>," +
                 "<br><br>" +
-                "Thank you for registering with us on ApnaGurukul." +
-                "<br>" +
-                "We are pleased to inform you that your account with email id '" + email + "' is " +
+                "Thank you for registering on ApnaGurukul." +
+                "<br><br>" +
+                "We are pleased to inform you that your account with username '" + email + "' is " +
                 "successfully registered and verified with us." +
                 "<br>" +
                 "Have a happy and cheerful experience with us." +
@@ -56,7 +56,7 @@ public class EmailMessages {
                 "<br>" +
                 "Regards" +
                 "<br>" +
-                "Team ApnaGurukul" +
+                "SKAK (Team ApnaGurukul)" +
                 "<br>" +
                 "India";
     }
@@ -64,7 +64,7 @@ public class EmailMessages {
 
     public static String passwordSuccessfullyChangedMessage(String email,
                                                             String name) {
-        return "Dear " + "<strong>" + name + "</strong>" +
+        return "Dear " + "<strong>" + name + "</strong>," +
                 "<br><br>" +
                 "Password of your account " + email + " is " +
                 "successfully changed. Use your new credentials to login on our portal." +
@@ -75,7 +75,7 @@ public class EmailMessages {
                 "<br>" +
                 "Regards" +
                 "<br>" +
-                "Team ApnaGurukul" +
+                "SKAK (Team ApnaGurukul)" +
                 "<br>" +
                 "India";
     }

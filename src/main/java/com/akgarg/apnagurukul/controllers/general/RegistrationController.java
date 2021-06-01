@@ -9,12 +9,12 @@ import com.akgarg.apnagurukul.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.time.LocalDate;
 
 
 @Controller
@@ -33,15 +33,12 @@ public class RegistrationController {
         this.otpGenerator = otpGenerator;
     }
 
-    @RequestMapping(value = "/signup", method = RequestMethod.GET)
-    public String register(Model model) {
-        model.addAttribute("users", new Users());
-        return "common/register";
-    }
 
     @ResponseBody
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String processRegister(@Valid @ModelAttribute Users user, BindingResult bindingResult, HttpSession session) {
+    public String processRegister(@Valid @ModelAttribute Users user,
+                                  BindingResult bindingResult,
+                                  HttpSession session) {
         if (user == null) {
             return "null";
         }
@@ -88,10 +85,62 @@ public class RegistrationController {
 
 
     @ResponseBody
+    @RequestMapping(value = "process-otp-verification", method = RequestMethod.POST)
+    public String processOtpVerification(HttpSession session,
+                                         @RequestParam("otp") int otp) {
+        Users user = (Users) session.getAttribute("newUserRegistration");
+
+        if (user != null) {
+            int generatedOtp = this.otpGenerator.getOtp(user.getUsername());
+
+            if (generatedOtp == 0) {
+                return "OTP_EXPIRED";
+            }
+
+            if (generatedOtp == otp) {
+                session.removeAttribute("newUserRegistration");
+                this.otpGenerator.deleteOTP(user.getUsername());
+                user.setJoinDate(LocalDate.now());
+                this.usersRepository.save(user);
+                EmailSender.sendEmail(user.getUsername(), "Registration successful", EmailMessages.registrationSuccessMessage(user.getUsername(), user.getName()));
+                return "REGISTRATION_SUCCESSFUL";
+            } else {
+                return "OTP_MISMATCHED";
+            }
+        }
+        return "UNAUTHORIZED_ACCESS";
+    }
+
+
+    @RequestMapping(value = "/verify-otp", method = RequestMethod.GET)
+    public String verifyOtp(HttpSession session) {
+        if (session.getAttribute("newUserRegistration") != null) {
+            return "common/verify-otp";
+        } else {
+            return "redirect:/signup";
+        }
+    }
+
+
+    @ResponseBody
+    @RequestMapping(value = "/resend-otp", method = RequestMethod.POST)
+    public boolean resendOTP(HttpSession session) {
+        Users user = (Users) session.getAttribute("newUserRegistration");
+
+        if (user != null) {
+            this.otpGenerator.deleteOTP(user.getUsername());
+            int otp = this.otpGenerator.generateOTP(user.getUsername());
+            return EmailSender.sendEmail(user.getUsername(), "OTP for registration confirmation", EmailMessages.registrationOTPMessage(user.getUsername(), user.getName(), otp));
+        }
+
+        return false;
+    }
+
+
+    @ResponseBody
     @RequestMapping(value = "/verify-username", method = RequestMethod.POST)
     public boolean isUserRegistered(@RequestParam("email") String email) {
         Users user = this.usersRepository.getUsersByUsernameEquals(email);
-        System.out.println(user);
         return user != null;
     }
 

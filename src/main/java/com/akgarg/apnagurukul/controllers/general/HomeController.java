@@ -1,11 +1,11 @@
 package com.akgarg.apnagurukul.controllers.general;
 
+import com.akgarg.apnagurukul.entity.Users;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import javax.servlet.http.HttpSession;
 
 @Controller
 public class HomeController {
@@ -17,12 +17,15 @@ public class HomeController {
     }
 
 
-    @RequestMapping(value = "/verify-otp", method = RequestMethod.GET)
-    public String verifyOtp(HttpSession session) {
-        if (session.getAttribute("newUserRegistration") != null) {
-            return "common/verify-otp";
-        } else {
-            return "common/register";
-        }
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login() {
+        return "common/login";
+    }
+
+
+    @RequestMapping(value = "/signup", method = RequestMethod.GET)
+    public String register(Model model) {
+        model.addAttribute("users", new Users());
+        return "common/register";
     }
 }
