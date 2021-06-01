@@ -79,6 +79,7 @@ public class RegistrationController {
             session.setAttribute("newUserRegistration", user);
             return "SUCCESS";
         } else {
+            this.otpGenerator.deleteOTP(user.getUsername());
             return "FAIL";
         }
     }
