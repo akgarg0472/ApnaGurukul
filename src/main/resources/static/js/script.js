@@ -10,6 +10,7 @@ const validateRole = () => {
     }
 };
 
+
 const validateName = () => {
     const name = $("#name").val();
 
@@ -21,6 +22,7 @@ const validateName = () => {
         return false;
     }
 };
+
 
 const validateEmail = () => {
     const emailValidator =
@@ -35,6 +37,7 @@ const validateEmail = () => {
         return false;
     }
 };
+
 
 const validatePassword = () => {
     const passwordValidator = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}";
@@ -53,6 +56,7 @@ const validatePassword = () => {
     }
 };
 
+
 const validatePhone = () => {
     const phoneValidator = /^\d{10}$/;
     const phone = $("#phone").val();
@@ -70,6 +74,7 @@ const validatePhone = () => {
     }
 };
 
+
 const validateAddress = () => {
     const address = $("#address").val();
 
@@ -81,6 +86,7 @@ const validateAddress = () => {
         return false;
     }
 };
+
 
 const validateCity = () => {
     const city = $("#city").val();
@@ -94,6 +100,7 @@ const validateCity = () => {
     }
 };
 
+
 const validateCountry = () => {
     const country = $("#country").val();
 
@@ -106,6 +113,7 @@ const validateCountry = () => {
         return false;
     }
 };
+
 
 const validateState = () => {
     const state = $("#state").val();
@@ -125,6 +133,7 @@ const validateState = () => {
     }
 };
 
+
 const validatePincode = () => {
     const pincode = $("#pincode").val();
 
@@ -136,6 +145,7 @@ const validatePincode = () => {
         return false;
     }
 };
+
 
 const validateUserPersonalInformation = async () => {
     const pib = $("#signup-pib");
@@ -150,8 +160,8 @@ const validateUserPersonalInformation = async () => {
         .done((resp) => {
             isEmailRegistered = resp;
         })
-        .fail((resp) => {
-            console.log(resp);
+        .fail(() => {
+            // todo later (process verifying email error)
         });
     loader.hide();
 
@@ -167,14 +177,14 @@ const validateUserPersonalInformation = async () => {
             pib.hide();
             aib.show();
         } else {
-            // show correct input warnings
-            console.log("rectify errors in personal info");
+            // todo show enter correct input warnings
         }
     } else {
         // email already registered, show error message
         $("#email-registered-error").show();
     }
 };
+
 
 const submitSignupForm = async () => {
     const signupForm = $("#signup-form");
@@ -194,8 +204,8 @@ const submitSignupForm = async () => {
             .done((resp) => {
                 response = resp;
             })
-            .fail((resp) => {
-                console.log(resp);
+            .fail(() => {
+                // todo later
             });
         loader.hide();
 
@@ -215,6 +225,7 @@ const submitSignupForm = async () => {
         console.log("errors in registration form");
     }
 };
+
 
 const startTimer = (duration, display) => {
     let timer = duration;
@@ -240,6 +251,7 @@ const startTimer = (duration, display) => {
         }
     }, 1000);
 };
+
 
 const resendOTP = async () => {
     const loaderContainer = $("#resend-loader-container");
@@ -270,10 +282,11 @@ const resendOTP = async () => {
     $("#timer-countdown").show();
 };
 
-const confirmOTP = async () => {
+
+const confirmOTP = async (processingUrl) => {
     const otp = $("#otp-sb-ti").val();
     const _csrf = $("input[name=_csrf]").val();
-    const url = "/process-otp-verification";
+    const url = `/${processingUrl}`;
     const loader = $("#loader-container");
     let confirmOtpResult = null;
 
@@ -285,8 +298,8 @@ const confirmOTP = async () => {
             .done((resp) => {
                 confirmOtpResult = resp;
             })
-            .fail((resp) => {
-                console.log("OTP verification failed response: " + resp);
+            .fail(() => {
+                // todo later
             });
 
         loader.hide();
@@ -305,12 +318,16 @@ const confirmOTP = async () => {
                 swal("Congratulations", "Registration successful!", "success");
                 window.location = "/login";
                 break;
+            case "FP_OTP_VERIFIED":
+                window.location = "/new-password";
+                break;
             default:
                 swal("Something went wrong, Please try again after some time");
                 break;
         }
     }
 };
+
 
 const login = async () => {
     const _csrf = $("input[name=_csrf]").val();
@@ -346,10 +363,7 @@ const login = async () => {
         return;
     }
 
-    const loginForm = $("#login-form");
-    console.log(loginForm.serialize());
     loader.show();
-
     await $.post("/verify-username", `_csrf=${_csrf}&email=${email}`)
         .done((resp) => {
             isEmailRegistered = resp;
@@ -368,5 +382,81 @@ const login = async () => {
         ere.show();
         eee.hide();
         pe.hide();
+    }
+}
+
+
+const verifyFpEmail = async () => {
+    const email = $("#username").val();
+    const _csrf = $("input[name=_csrf]").val();
+    const ere = $("#ere");
+    const ee = $("#email-error");
+    const isEmailValidated = validateEmail();
+    let isEmailRegistered = false;
+
+    await $.post("/verify-username", `_csrf=${_csrf}&email=${email}`)
+        .done((resp) => {
+            isEmailRegistered = resp;
+        })
+        .fail(() => {
+            // todo later
+        });
+
+    if (!isEmailValidated) {
+        ere.hide();
+        return;
+    }
+
+    if (!isEmailRegistered) {
+        ee.hide();
+        ere.show();
+        return;
+    }
+
+    // at this point, email exists and is valid, proceed to otp input section
+    ee.hide();
+    ere.hide();
+    $("#fp-sbn").click();
+}
+
+// new password section code
+const checkNP = () => {
+    const passwordValidator = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}";
+    const newPassword = $("#new-pass").val();
+
+    if (newPassword === null || newPassword === '' || !newPassword.match(passwordValidator)) {
+        $("#np-error").show();
+        return false;
+    } else {
+        $("#np-error").hide();
+        return true;
+    }
+}
+
+const checkCNP = () => {
+    const passwordValidator = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}";
+    const confirmNewPassword = $("#conf-new-pass").val();
+
+    if (confirmNewPassword === null || confirmNewPassword === '' || !confirmNewPassword.match(passwordValidator)) {
+        $("#cnp-error").show();
+        $("#npm-error").hide();
+        return false;
+    } else {
+        $("#cnp-error").hide();
+        $("#npm-error").hide();
+        return true;
+    }
+}
+
+const validateNP = () => {
+    const newPassword = $("#new-pass").val();
+    const confirmNewPassword = $("#conf-new-pass").val();
+
+    if (checkNP() && checkCNP() && newPassword === confirmNewPassword) {
+        $("#loader-container").show();
+        $("#npm-error").hide();
+        $("#snpbtn").click();
+    } else {
+        $("#npm-error").show();
     }
 }

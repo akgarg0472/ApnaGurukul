@@ -19,7 +19,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         Users users = this.usersRepository.getUserByUsername(username);
 
         if (users == null) {
-            throw new UsernameNotFoundException(username + " is not a registered user");
+            throw new UsernameNotFoundException(username + " is not a registered user at ApnaGurukul");
         }
 
         return new UserDetailsImpl(users);

@@ -76,6 +76,14 @@ public class RegistrationController {
         boolean sendEmail = EmailSender.sendEmail(user.getUsername(), "Registration OTP", EmailMessages.registrationOTPMessage(user.getUsername(), user.getName(), otp));
 
         if (sendEmail) {
+            if (session.getAttribute("forgotPasswordRequest") != null) {
+                session.removeAttribute("forgotPasswordRequest");
+            }
+
+            if (session.getAttribute("fpEmail") != null) {
+                session.removeAttribute("fpEmail");
+            }
+
             session.setAttribute("newUserRegistration", user);
             return "SUCCESS";
         } else {
@@ -114,20 +122,16 @@ public class RegistrationController {
     }
 
 
-    @RequestMapping(value = "/verify-otp", method = RequestMethod.GET)
-    public String verifyOtp(HttpSession session) {
-        if (session.getAttribute("newUserRegistration") != null) {
-            return "common/verify-otp";
-        } else {
-            return "redirect:/signup";
-        }
-    }
-
-
     @ResponseBody
     @RequestMapping(value = "/resend-otp", method = RequestMethod.POST)
     public boolean resendOTP(HttpSession session) {
-        Users user = (Users) session.getAttribute("newUserRegistration");
+        Users user = null;
+
+        if (session.getAttribute("newUserRegistration") != null) {
+            user = (Users) session.getAttribute("newUserRegistration");
+        } else if (session.getAttribute("forgotPasswordRequest") != null) {
+            user = this.usersRepository.getUserByUsername((String) session.getAttribute("fpEmail"));
+        }
 
         if (user != null) {
             this.otpGenerator.deleteOTP(user.getUsername());
@@ -137,13 +141,4 @@ public class RegistrationController {
 
         return false;
     }
-
-
-    @ResponseBody
-    @RequestMapping(value = "/verify-username", method = RequestMethod.POST)
-    public boolean isUserRegistered(@RequestParam("email") String email) {
-        Users user = this.usersRepository.getUsersByUsernameEquals(email);
-        return user != null;
-    }
-
 }

@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@200&display=swap');
 
 * {
     margin: 0;
@@ -79,7 +80,6 @@
 
 .otp-form-container button {
     width: 100%;
-    border-radius: 0;
     height: 30px;
     border-radius: 6px;
     outline: none;
@@ -102,7 +102,7 @@ input::-webkit-inner-spin-button {
 
 .orb-button {
     margin-bottom: 10px;
-    background-color: #f93154;
+    background-color: #f93154 !important;
     color: #fff;
 }
 
@@ -217,7 +217,7 @@ input::-webkit-inner-spin-button {
 
 }
 
-.login-input-field {
+.login-input-field, .new-pass-input {
     padding: 0.50rem;
     width: 66%;
     border-color: pink;
@@ -230,7 +230,7 @@ input::-webkit-inner-spin-button {
     font-size: 16px;
 }
 
-.login-input-field:focus {
+.login-input-field:focus, .new-pass-input:focus {
     width: 75%;
     transition: width 0.2318s ease-in-out;
 }
@@ -289,4 +289,135 @@ input::-webkit-inner-spin-button {
 .lfp_link:hover:before, .lunr_link:hover:before {
     visibility: visible;
     transform: scaleX(0.99);
+}
+
+/*forgot password styling*/
+.fp-cont {
+    margin-left: 30%;
+    margin-top: 10vh;
+    min-height: 50px;
+    width: 40%;
+}
+
+.fp-form-cont {
+    padding: 10px;
+}
+
+.fp-form {
+    /* border: 2px solid red; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 0px 10px 0px;
+}
+
+.fp-form fieldset {
+    width: 90%;
+    border-radius: 12px;
+    -moz-border-radius: 12px;
+    -webkit-border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.fp-form fieldset input {
+    width: 66%;
+    text-align: center;
+    padding: 0.5rem;
+    border-radius: 16px;
+    transition: width 0.2s ease-in-out;
+}
+
+.fp-form fieldset input:focus {
+    outline: none;
+    width: 82%;
+    transition: width 0.2s ease-in-out;
+}
+
+.fp-button {
+    padding: 0.50rem;
+    outline: none;
+    background-color: #00B74A;
+    margin-top: 20px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 200ms ease-in-out;
+    width: 50%;
+    height: 30px;
+    border-radius: 16px;
+    border: none;
+}
+
+.fp-button:hover {
+    cursor: pointer;
+    -moz-box-shadow: 0 0 5px #00B74A;
+    -webkit-box-shadow: 0 0 5px #00B74A;
+    box-shadow: 0 0 5px #00B74A;
+    transition: all 200ms ease-in-out;
+}
+
+.fp-form fieldset p {
+    margin-bottom: 0;
+}
+
+/*new password section styling*/
+.new-pass-cont {
+    margin-left: 30%;
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10vh;
+    min-height: 70vh;
+}
+
+.np-form-cont {
+    width: 100%;
+    border: 2px solid green;
+    border-radius: 4px;
+    padding: 50px 10px 50px 10px;
+}
+
+.np-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.new-pass-btn {
+    padding: 0.50rem;
+    width: 50%;
+    border-radius: 20px;
+    outline: none;
+    border: 2px solid #F93154;
+    background-color: #F93154;
+    margin-top: 50px !important;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 200ms ease-in-out;
+}
+
+.new-pass-btn:hover {
+    cursor: pointer;
+    -moz-box-shadow: 0 0 5px #F93154;
+    -webkit-box-shadow: 0 0 5px #F93154;
+    box-shadow: 0 0 5px #F93154;
+    transition: all 200ms ease-in-out;
+    color: #E9E4E3;
+}
+
+.np-form .head {
+    font-family: 'Raleway', sans-serif;
+    font-size: 1.5rem;
+    font-weight: bolder;
+    margin-bottom: 20px;
 }

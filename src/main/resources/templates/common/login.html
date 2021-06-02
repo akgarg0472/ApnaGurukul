@@ -16,6 +16,8 @@
 <div class="login-container">
     <form th:action="@{/verify-login}" method="post" class="login-form" id="login-form">
         <h1 class="heading">Login</h1>
+        <p class="color-error" id="inv-cred" style="font-size: 1rem; display: none">Invalid login credentials</p>
+
         <input type="text" class="login-input-field" id="username" name="username" autocomplete="off"
                placeholder="Enter registered email" value="gargakhilesh0407@gmail.com"/>
         <p class="color-error" id="ere">Email id is not registered</p>
@@ -44,6 +46,29 @@
     <th:block th:text="${#session.removeAttribute('logoutSuccess')}"/>
     <script>
         swal("Successfully logged out");
+    </script>
+</div>
+
+<div th:if="${session.passwordChangedSuccessfully}">
+    <th:block th:text="${#session.removeAttribute('passwordChangedSuccessfully')}"/>
+    <script>
+        swal("", "Password successfully updated", "success");
+    </script>
+</div>
+
+<div th:if="${param.invalid_credentials}">
+    <script>
+        $("#inv-cred").show();
+
+        const fkey = (e) => {
+            e = e || window.onkeydown;
+            if (e.keyCode === 116) {
+                window.location = "/login";
+            }
+        }
+        document.onkeydown = fkey;
+        document.onkeypress = fkey
+        document.onkeyup = fkey;
     </script>
 </div>
 

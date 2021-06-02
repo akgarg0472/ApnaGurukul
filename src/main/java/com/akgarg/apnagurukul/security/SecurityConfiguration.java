@@ -54,7 +54,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
 
-    // bean to enable http tracing in actuator
+    // enables http tracing in actuator
     @Bean
     public HttpTraceRepository getHttpTraceRepository() {
         return new InMemoryHttpTraceRepository();
@@ -80,7 +80,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .loginPage("/login")
                 .loginProcessingUrl("/verify-login")
                 .successHandler(this.userAuthenticationSuccessHandler)
-                .failureUrl("/login?error")
+                .failureUrl("/login?invalid_credentials")
                 .and()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
