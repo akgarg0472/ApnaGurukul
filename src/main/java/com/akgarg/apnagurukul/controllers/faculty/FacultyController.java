@@ -14,4 +14,10 @@ public class FacultyController {
     public String dashboard() {
         return "This is the faculty dashboard";
     }
+
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String facultyLogout() {
+        System.out.println("faculty logout called");
+        return "redirect:/logout";
+    }
 }

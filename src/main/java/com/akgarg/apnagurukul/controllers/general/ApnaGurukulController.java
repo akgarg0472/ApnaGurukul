@@ -23,10 +23,10 @@ public class ApnaGurukulController {
         this.usersRepository = usersRepository;
     }
 
-    @ResponseBody
+
     @RequestMapping(value = {"/", "/home"}, method = RequestMethod.GET)
     public String home() {
-        return "This is the home page of the apna gurukul";
+        return "common/home";
     }
 
 

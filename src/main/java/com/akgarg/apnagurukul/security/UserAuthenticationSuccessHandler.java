@@ -36,7 +36,6 @@ public class UserAuthenticationSuccessHandler implements AuthenticationSuccessHa
                 break;
             } else if (grantedAuthority.getAuthority().equals("ROLE_STUDENT")) {
                 hasStudentRole = true;
-                break;
             }
         }
 

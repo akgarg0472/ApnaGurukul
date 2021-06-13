@@ -14,4 +14,10 @@ public class AdminController {
     public String dashboard() {
         return "This is the admin dashboard";
     }
+
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String adminLogout() {
+        System.out.println("admin logout called");
+        return "redirect:/logout";
+    }
 }

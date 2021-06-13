@@ -1,0 +1,361 @@
+:root {
+    --myFontFamily: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.random-container {
+    position: relative;
+    background-color: #f93154;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 18px;
+}
+
+.my-navbar {
+    background-color: #f1f1f1;
+    height: 12vh;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-slogan {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: 100px;
+}
+
+.logo-slogan a img {
+    height: 8vh;
+}
+
+.nav-links .links {
+    list-style: none;
+    display: flex;
+}
+
+.nav-links .links li {
+    margin-right: 3rem;
+    padding: 2px;
+    font-family: sans-serif;
+}
+
+.nav-links .links li a {
+    text-decoration: none;
+    color: #6b7280;
+    font-weight: 500;
+    font-family: var(--myFontFamily);
+}
+
+.nav-links .links li a:hover {
+    color: rgba(17, 24, 39, 1);
+}
+
+/* .nav-links .links li a:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 1.5px;
+  bottom: 0;
+  left: 0;
+  color: rgba(107, 114, 128, 1);
+  visibility: hidden;
+  transform: scaleX(0);
+  transition: all 0.5s ease-in-out;
+}
+
+.nav-links .links li a:hover:before {
+  visibility: visible;
+  transform: scaleX(0.99);
+} */
+
+.nb-btns-link,
+.nb-btnr-link {
+    font-family: var(--myFontFamily);
+    color: #6b7280;
+    font-weight: 500;
+    text-decoration: none;
+    margin-right: 16px;
+}
+
+.nb-btns-link:hover,
+.nb-btnr-link:hover {
+    color: rgba(17, 24, 39, 1);
+}
+
+.nbr-art {
+    font-family: var(--myFontFamily);
+    color: #6b7280;
+    font-weight: 400;
+    text-decoration: none;
+    margin-right: 16px;
+}
+
+.nbr-art,
+.nb-btnr-link {
+    display: none;
+}
+
+.nb-su-btns {
+    height: 2.5rem;
+    width: 5rem;
+    border-radius: 8px;
+    margin-right: 100px;
+    outline: none;
+    border: none;
+    background-color: #f93154;
+    color: #fff;
+    font-family: var(--myFontFamily);
+    font-weight: 500;
+}
+
+.nb-su-btns:hover {
+    background-color: #b71c1c;
+    cursor: pointer;
+}
+
+#demo:hover {
+    cursor: pointer;
+}
+
+#demo .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #fbfbfb;
+    min-width: 12rem;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 99999;
+    list-style: none;
+    border-radius: 4px;
+    margin-top: 2px;
+}
+
+#demo .dropdown-content li {
+    padding: 1.5rem 0 1.5rem 1rem;
+    margin: 0;
+    font-family: var(--myFontFamily);
+}
+
+#demo .dropdown-content li:hover,
+.profile-dropdown-content li:hover {
+    background-color: #f2f2f2;
+    cursor: pointer;
+}
+
+.resp-nav {
+    display: none;
+}
+
+.menu-content {
+    display: none;
+}
+
+.rsnb-silnk {
+    display: none;
+}
+
+.profile-dropdown-content {
+    display: none;
+    position: absolute;
+    right: 50px;
+    background-color: #fbfbfb;
+    min-width: 12rem;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 99999;
+    list-style: none;
+    border-radius: 4px;
+    margin-top: 2px;
+}
+
+.profile-dropdown-content li {
+    padding: 0.75rem 0.75rem 0.75rem 0.75rem;
+    margin: 0;
+    font-family: var(--myFontFamily);
+}
+
+@media only screen and (max-width: 1000px) {
+    .nav-links .links li {
+        margin-right: 2rem;
+    }
+
+    .logo-slogan {
+        margin-left: 50px;
+    }
+
+    .nb-su-btns {
+        margin-right: 50px;
+    }
+}
+
+@media only screen and (max-width: 850px) {
+    .nav-links .links li {
+        margin-right: 1rem;
+    }
+
+    .logo-slogan {
+        margin-left: 30px;
+    }
+
+    .nb-su-btns {
+        margin-right: 30px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .nav-links,
+    .nav-ulusb,
+    .nb-btns-link {
+        display: none;
+    }
+
+    .resp-nav {
+        display: flex;
+    }
+
+    .my-navbar {
+        display: block;
+        height: auto;
+        min-height: 10vh;
+    }
+
+    .logo-slogan {
+        position: absolute;
+        margin-left: 18px;
+        margin-top: 5px;
+    }
+
+    .nav-links {
+        position: relative;
+        margin-top: 4.15rem;
+        width: 100%;
+        background-color: #f1f1f1;
+        z-index: 9999;
+    }
+
+    .nav-links .links {
+        flex-direction: column;
+    }
+
+    .nav-links .links li:hover {
+        background-color: #e7e8eb;
+        cursor: pointer;
+    }
+
+    .nav-links .links li a {
+        color: #212121;
+        font-weight: 400;
+    }
+
+    .nav-links .links li {
+        padding: 12px 0 12px 12px;
+    }
+
+    #demo .dropdown-content {
+        margin-left: 0;
+        position: relative;
+        background-color: #f1f1f1;
+        width: calc(100% - 16px);
+        box-shadow: none;
+    }
+
+    #demo .dropdown-content li {
+        padding: 1rem 0 1rem 1.5rem;
+        color: #212121;
+    }
+
+    #demo .dropdown-content li:hover {
+        background-color: #e7e8eb;
+        cursor: pointer;
+    }
+
+    .rnb-hamburger {
+        position: absolute;
+        top: 22px;
+        right: 0;
+        font-size: 1.5rem;
+        color: #6e6e6e;
+        margin-right: 1rem;
+    }
+
+    .rnb-hamburger:hover {
+        cursor: pointer;
+    }
+
+    .nav-ulusb {
+        position: relative;
+        flex-direction: column;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+
+    .nb-su-btns {
+        width: 98%;
+        border-radius: 4px;
+        margin: 0 1% 0 1%;
+    }
+
+    .rsnb-silnk {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 16px;
+    }
+
+    .profile-nav-ulusb {
+        display: none;
+        margin: 8px 0px 8px 0;
+        width: 97%;
+        position: relative;
+        padding: 8px 0 8px 12px;
+    }
+
+    .profile-nav-ulusb:hover {
+        color: #212121;
+        background-color: #e7e8eb;
+    }
+
+    #profile-dropdown-content {
+        display: none;
+        position: relative;
+        background-color: #f1f1f1;
+        width: calc(100% - 12px);
+        box-shadow: none;
+        margin-top: 32px;
+        margin-bottom: 4px;
+    }
+}
+
+@media only screen and (max-width: 200px) {
+    .logo-slogan {
+        margin-left: 10px;
+    }
+}
+
+.rotate-upper {
+    transform: rotate(180deg);
+    transition: transform 0.2s ease-in-out;
+}
+
+.rotate-down {
+    transform: rotate(0deg);
+    transition: transform 0.2s ease-in-out;
+}
+
+.profile-nav-ulusb {
+    margin-right: 50px;
+}
+
+.profile-nav-ulusb:hover {
+    cursor: pointer;
+}

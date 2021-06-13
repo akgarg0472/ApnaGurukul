@@ -55,4 +55,12 @@ public class UserDetailsImpl implements UserDetails {
     public boolean isEnabled() {
         return this.users.isEnabled();
     }
+
+    public String getName() {
+        return this.users.getName();
+    }
+
+    public String getRole() {
+        return this.users.getRole();
+    }
 }

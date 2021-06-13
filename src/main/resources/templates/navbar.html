@@ -1,0 +1,77 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="navbar"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<nav class="my-navbar">
+    <span class="logo-slogan">
+      <a href="/"> <img th:src="@{/images/logo.png}" alt="ApnaGurukul logo" src="#"></a>
+    </span>
+
+    <div class="nav-links" id="nav-links">
+        <ul class="links">
+            <li><a href="/">Home</a></li>
+
+            <li id="demo">
+                <a id="demo-link">Services&ensp;<i class="fa fa-caret-down" id="nb-crdn"></i></a>
+                <ul class="dropdown-content" id="dropdown-content">
+                    <li id="nvbr-dd-link">Service #1</li>
+                    <li id="nvbr-dd-link">Service #2</li>
+                    <li id="nvbr-dd-link">Service #3</li>
+                </ul>
+            </li>
+
+            <li><a href="#">About us</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#" style="margin-right: 0;">Support us</a></li>
+        </ul>
+    </div>
+
+
+    <div sec:authorize="isAnonymous()">
+        <!-- if user is not logged in -->
+        <div class="nav-ulusb" id="nav-ulusb">
+            <a href="/login" class="nb-btns-link">Sign in</a>
+            <div class="rsnb-silnk">
+                <span class="nbr-art">Already registered?&nbsp;<a href="/login" class="nb-btnr-link">Sign in</a></span>
+            </div>
+            <a href="/signup">
+                <button class="nb-su-btns">Sign up</button>
+            </a>
+        </div>
+    </div>
+
+    <div sec:authorize="isAuthenticated()">
+        <!-- if user is logged in -->
+        <div class="profile-nav-ulusb" id="profile-nav-ulusb">
+             <span style="color:#6b7280;" id="rnb-pnu-sp">
+           <div style="width: 50px;" id="rnb-up-div"><i class="fa fa-user" style="font-size: 1.5rem;" id="nb-up-ic">&nbsp;</i>
+          <i class="fa fa-caret-down" style="font-size: 1rem;" id="nb-pcrdn"></i>
+        </div>
+      </span>
+
+            <ul class="profile-dropdown-content" id="profile-dropdown-content">
+                <li id="nvbr-dd-link-uname"
+                    th:text="'Welcome, ' + ${#authentication.getPrincipal().getName().length > 20 ?
+                    #authentication.getPrincipal().getName().substring(0,21) : #authentication.getPrincipal().getName()}">
+                    Welcome user
+                </li>
+                <li id="nvbr-dd-link">My Profile</li>
+                <li id="nvbr-dd-link">Update Profile</li>
+                <li id="nvbr-dd-link">Change Password</li>
+                <li id="nvbr-dd-link" th:if="${#authentication.getPrincipal().getRole() == 'ROLE_ADMIN'}"
+                    onclick="logout(`admin`)">Logout
+                </li>
+                <li id="nvbr-dd-link" th:if="${#authentication.getPrincipal().getRole() == 'ROLE_FACULTY'}"
+                    onclick="logout(`teacher`)">Logout
+                </li>
+                <li id="nvbr-dd-link" th:if="${#authentication.getPrincipal().getRole() == 'ROLE_STUDENT'}"
+                    onclick="logout(`student`)">Logout
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="resp-nav">
+        <i class="fas fa-bars rnb-hamburger" id="rnb-hbgr"></i>
+    </div>
+</nav>
