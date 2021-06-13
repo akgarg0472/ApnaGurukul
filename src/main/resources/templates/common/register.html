@@ -23,6 +23,8 @@
 <form th:action="@{/register}" method="post" id="signup-form" th:object="${users}">
 
     <div id="signup-pib" class="signup-form">
+        <h1 class="heading">Register</h1>
+
         <div class="signup-form-field">
             <select id="role" name="role" onfocusout="validateRole()" required>
                 <option value="default" class="my-option">--- Select Role ---</option>
@@ -86,6 +88,8 @@
     </div>
 
     <div id="signup-aib" class="signup-form">
+        <h1 class="heading">Address</h1>
+
         <div class="signup-form-field">
             <input type="text" class="signup-form-input" name="address" id="address" placeholder="Enter address"
                    onfocusout="validateAddress()" value="address" required>
@@ -158,6 +162,7 @@
 
 <script type="text/javascript" th:src="@{/js/script.js}"></script>
 <script type="text/javascript" th:src="@{/js/countries.js}"></script>
+<script type="text/javascript" th:src="@{/js/navbar.js}"></script>
 
 <script>
     populateCountries("country", "state");

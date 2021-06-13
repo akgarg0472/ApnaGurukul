@@ -8,29 +8,53 @@
 
 /*signup page styling*/
 .signup-form {
-    margin-left: 30%;
-    margin-right: 30%;
-    margin-top: 10vh;
-    border: 1px solid #000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 25%;
+    margin-right: 25%;
+    width: 50%;
+    margin-top: 6vh;
     padding-top: 20px;
     padding-bottom: 20px;
+    border: 2px solid #26A69A;
+    border-radius: 16px;
 }
 
 .signup-form-field {
     margin: 0 10% 20px 10%;
-    width: auto;
+    width: 80%;
 }
 
-.signup-form-input, .signup-form select {
-    width: 100%;
+.signup-form-input {
+    padding: 0.50rem;
+    border-color: pink;
+    outline: none;
+    margin: 10px 5% 10px 5%;
+    width: 86%;
+    border-top: 0;
+    border-right: 0;
+    border-left: 0;
+    font-size: 16px;
+}
+
+.signup-form select {
+    margin: 0 5% 10px 5%;
+    width: 90%;
+    font: 400 16px Arial;
     padding-top: .375rem;
     padding-bottom: .375rem;
     text-align: center;
     line-height: 1.5;
-    font: 400 13px Arial;
-    border-radius: 6px;
     outline: none;
-    border: 1px solid #ced4da;
+    border-top: 0;
+    border-right: 0;
+    border-left: 0;
+}
+
+.signup-form .color-error {
+    margin-left: 5%;
 }
 
 .signup-form-input:focus {
@@ -40,14 +64,28 @@
 }
 
 .signup-form button {
-    border-radius: 8px;
-    width: auto;
-    height: 30px;
-    margin-left: 40%;
-    margin-right: 40%;
+    border-radius: 32px;
+    width: 40%;
+    height: 40px;
+    margin-left: 30%;
+    margin-right: 30%;
     text-align: center;
-    padding: 5px 10px 5px 10px;
+    padding: 10px 10px 28px 10px;
     outline: none;
+    background-color: #4DB6AC;
+    color: #fff;
+    font-size: 14px;
+    font-family: var(--myFontFamily);
+    border: none;
+}
+
+.signup-form button:hover {
+    cursor: pointer;
+    background-color: #26A69A;
+    -moz-box-shadow: 0 0 5px #4DB6AC;
+    -webkit-box-shadow: 0 0 5px #4DB6AC;
+    box-shadow: 0 0 5px #4DB6AC;
+    transition: all 200ms ease-in-out;
 }
 
 .color-error {
@@ -60,9 +98,10 @@
 .otp-form-container {
     margin-left: 35%;
     margin-right: 35%;
-    margin-top: 35vh;
+    margin-top: 25vh;
     border: 2px solid lightgray;
-    padding: 20px;
+    padding: 30px;
+    border-radius: 8px;
 }
 
 .otp-form-input {
@@ -206,7 +245,7 @@ input::-webkit-inner-spin-button {
     border: solid 2px #39C0ED;
 }
 
-.login-form .heading {
+.login-form .heading, .signup-form .heading {
     font-size: 40px;
     background: -webkit-linear-gradient(180deg, #ff9f4a, #ff3c83);
     -webkit-background-clip: text;
@@ -293,7 +332,7 @@ input::-webkit-inner-spin-button {
 /*forgot password styling*/
 .fp-cont {
     margin-left: 30%;
-    margin-top: 10vh;
+    margin-top: 15vh;
     min-height: 50px;
     width: 40%;
 }
@@ -371,7 +410,7 @@ input::-webkit-inner-spin-button {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 10vh;
+    margin-top: 5vh;
     min-height: 70vh;
 }
 
@@ -426,12 +465,92 @@ input::-webkit-inner-spin-button {
         margin-left: 55%;
         width: 40%;
     }
+
+    .otp-form-container {
+        margin-top: 25vh;
+        margin-left: 30%;
+        margin-right: 30%;
+    }
+
+    .new-pass-cont {
+        margin-left: 28%;
+        width: 44%;
+    }
+
+    .np-form-cont {
+        padding: 50px 0 50px 0;
+    }
+
+    .signup-form {
+        margin-top: 4vh;
+    }
+
+    .signup-form {
+        margin-top: 4vh;
+    }
+
+    .signup-form .heading {
+        margin-bottom: 36px;
+    }
+
+    .signup-form .heading {
+        margin-bottom: 18px;
+    }
+
+    #signup-aib {
+        margin-top: 2vh;
+    }
+
+    #signup-aib p {
+        margin: 0 15px 15px 15px !important;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .new-pass-cont {
+        margin-left: 25%;
+        width: 50%;
+    }
+
+    .np-form-cont {
+        padding: 40px 0 40px 0;
+    }
+
+    .fp-cont {
+        margin-left: 25%;
+        width: 50%;
+    }
 }
 
 @media only screen and (max-width: 768px) {
     .login-container {
         width: 45%;
         margin-left: 50%;
+    }
+
+    .otp-form-container {
+        margin-left: 25%;
+        margin-right: 25%;
+        padding: 25px;
+    }
+
+    .new-pass-cont {
+        margin-left: 20%;
+        width: 60%;
+    }
+
+    .np-form-cont {
+        padding: 30px 0 30px 0;
+    }
+
+    .fp-cont {
+        margin-left: 20%;
+        width: 60%;
+        margin-top: 20vh;
+    }
+
+    .signup-form {
+        margin-top: 5vh;
     }
 }
 
@@ -440,11 +559,61 @@ input::-webkit-inner-spin-button {
         margin-left: 20%;
         width: 60%;
     }
+
+    .otp-form-container {
+        margin-left: 20%;
+        margin-right: 20%;
+        padding: 20px;
+    }
+
+    .new-pass-cont {
+        margin-left: 15%;
+        width: 70%;
+    }
+
+    .np-form-cont {
+        padding: 20px 0 20px 0;
+    }
+
+    .fp-cont {
+        margin-left: 15%;
+        width: 70%;
+        margin-top: 25vh;
+    }
+
+    .signup-form {
+        margin-left: 20%;
+        margin-right: 20%;
+        width: 60%;
+    }
 }
 
 @media only screen and (max-width: 450px) {
     .login-container {
         margin-left: 15%;
+        width: 70%;
+    }
+
+    .otp-form-container {
+        margin-left: 15%;
+        margin-right: 15%;
+        padding: 15px;
+    }
+
+    .new-pass-cont {
+        margin-left: 10%;
+        width: 80%;
+    }
+
+    .fp-cont {
+        margin-left: 10%;
+        width: 80%;
+        margin-top: 25vh;
+    }
+
+    .signup-form {
+        margin-left: 15%;
+        margin-right: 15%;
         width: 70%;
     }
 }
@@ -455,11 +624,41 @@ input::-webkit-inner-spin-button {
         width: 90%;
     }
 
-    .login-form .heading {
+    .login-form .heading, .signup-form .heading {
         font-size: 32px;
     }
 
     .login-input-field {
         font-size: 14px;
+    }
+
+    .otp-form-container {
+        margin-left: 10%;
+        margin-right: 10%;
+        padding: 10px;
+    }
+
+    .new-pass-cont {
+        margin-left: 5%;
+        width: 90%;
+    }
+
+    .fp-cont {
+        margin-left: 2%;
+        width: 96%;
+        margin-top: 25vh;
+    }
+
+    .signup-form {
+        margin-left: 5%;
+        margin-right: 5%;
+        width: 90%;
+    }
+
+    .signup-form button {
+        width: 60%;
+        height: 40px;
+        margin-left: 20%;
+        margin-right: 20%;
     }
 }

@@ -56,7 +56,26 @@ public class ApnaGurukulController {
 
 
     @RequestMapping(value = "/signup", method = RequestMethod.GET)
-    public String register(Model model) {
+    public String register(Model model, Principal principal) {
+        if (principal != null) {
+            Users users = this.usersRepository.getUserByUsername(principal.getName());
+
+            if (users != null) {
+                String role = users.getRole();
+
+                switch (role) {
+                    case "ROLE_ADMIN":
+                        return "redirect:/admin/dashboard";
+
+                    case "ROLE_FACULTY":
+                        return "redirect:/faculty/dashboard";
+
+                    case "ROLE_STUDENT":
+                        return "redirect:/student/dashboard";
+                }
+            }
+        }
+
         model.addAttribute("users", new Users());
         return "common/register";
     }

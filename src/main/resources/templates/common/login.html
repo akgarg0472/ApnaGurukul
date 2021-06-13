@@ -52,14 +52,14 @@
 <div th:if="${session.logoutSuccess}">
     <th:block th:text="${#session.removeAttribute('logoutSuccess')}"/>
     <script>
-        swal("Successfully logged out");
+        swal("Logout success");
     </script>
 </div>
 
 <div th:if="${session.passwordChangedSuccessfully}">
     <th:block th:text="${#session.removeAttribute('passwordChangedSuccessfully')}"/>
     <script>
-        swal("", "Password successfully updated", "success");
+        swal("", "Password changed successfully", "success");
     </script>
 </div>
 
