@@ -24,6 +24,7 @@ $(".rnb-hamburger").on("click", () => {
     }
 });
 
+
 $(window).resize(() => {
     if ($(window).width() > 768) {
         $("#nav-links").css("display", "flex");
@@ -41,6 +42,7 @@ $(window).resize(() => {
     }
 });
 
+
 const toggleNavbarServicesDropDown = () => {
     $("#dropdown-content").animate({
         height: "toggle",
@@ -54,6 +56,7 @@ const toggleNavbarServicesDropDown = () => {
         $("#nb-crdn").addClass("rotate-down");
     }
 };
+
 
 const toggleUserProfileDropdown = () => {
     $("#profile-dropdown-content").animate({
@@ -69,13 +72,16 @@ const toggleUserProfileDropdown = () => {
     }
 };
 
+
 $("#demo").on("click", () => {
     toggleNavbarServicesDropDown();
 });
 
+
 $("#profile-nav-ulusb").on("click", () => {
     toggleUserProfileDropdown();
 });
+
 
 $(window).on("click", (e) => {
     if (e.target.id !== "demo-link" && e.target.id !== "nvbr-dd-link" && e.target.id !== "nb-crdn" && e.target.id !== "demo" && $("#dropdown-content").css("display") === "block") {
@@ -86,6 +92,7 @@ $(window).on("click", (e) => {
         toggleUserProfileDropdown();
     }
 });
+
 
 const logout = (type) => {
     switch (type) {

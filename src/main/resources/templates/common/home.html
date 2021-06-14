@@ -11,19 +11,98 @@
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="stylesheet" th:href="@{/css/navbar.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" th:href="@{/css/home.css}"/>
     <script type="text/javascript" th:src="@{/js/jquery.js}"></script>
     <title>ApnaGurukul -Home</title>
 </head>
 
 <body>
-<!--navbar-->
 <section th:insert="navbar :: navbar" style="display: flex;flex-direction: column;"></section>
 
-<div class="random-container">
-    <p>This is the home page of ApnaGurukul</p>
+<div class="home-cont-1">
+    <img th:src="@{/images/aglogo.png}" alt="apna gurukul logo" class="hmsp1-img" src="">
+    <p class="hmcn1-p" id="about-animation">Apna Gurukul</p>
+</div>
+
+<div class="hm-osts">
+    <h1>Statistics</h1>
+
+    <div class="osts-cards">
+        <div class="osts-card">
+            <p class="stats" th:data-count="${usersCount}"></p>
+            <p>Total users</p>
+        </div>
+
+        <div class="osts-card">
+            <p class="stats" th:data-count="${totalBooks}"></p>
+            <p>Total books</p>
+        </div>
+    </div>
+</div>
+
+<div class="hm-srvscnt">
+    <h1>Services offered</h1>
+
+    <div class="serv-cards">
+        <div class="serv-card">
+            <img th:src="@{/images/teacher.png}" alt="Teacher icon" src="">
+            <h3>Teacher</h3>
+            <p>Find a suitable teacher for you</p>
+        </div>
+
+        <div class="serv-card">
+            <img th:src="@{/images/student.png}" alt="Student icon" src="">
+            <h3>Student</h3>
+            <p>Find student to teach</p>
+        </div>
+
+        <div class="serv-card">
+            <img th:src="@{/images/buy-book.png}" alt="Buy book icon" src="">
+            <h3>Buy books</h3>
+            <p>Buy books at affordable cost</p>
+        </div>
+
+        <div class="serv-card">
+            <img src="images/sell-books.png" alt="Sell book icon">
+            <h3>Sell books</h3>
+            <p>Sell book at lowest possible cost</p>
+        </div>
+    </div>
+</div>
+
+<div class="hm-ogcnt">
+    <h2>Our Goal</h2>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus consequatur ab et rerum laborum repudiandae
+        placeat, vitae adipisci similique voluptas obcaecati magnam labore magni. Animi magni tempore id reiciendis, sed
+        deleniti adipisci voluptatum a consequuntur nemo consequatur odio accusantium ad, dolor possimus? Cum ullam
+        natus sapiente, cumque voluptatibus fugiat possimus?</p>
+    <button class="knab-btn">Know more</button>
+</div>
+
+<div class="footer">
+    <div class="footer-content">
+        <h3>Lorem ipsum</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus in excepturi aut dicta perferendis
+            voluptate at optio, magnam blanditiis doloremque neque ad. Voluptas, earum tempora.</p>
+    </div>
+
+    <ul class="social-links">
+        <li><a href="https://www.facebook.com" target="_blank">Facebook</a></li>
+        <li><a href="https://www.instagram.com" target="_blank">Instagram</a></li>
+        <li><a href="https://www.twitter.com" target="_blank">Twitter</a></li>
+        <li><a href="https://www.discord.com" target="_blank">Discord</a></li>
+    </ul>
+
+    <ul class="other-links">
+        <li><a href="/terms-and-conditions">Terms & Conditions</a></li>
+        <li><a href="/about-us">About us</a></li>
+        <li><a href="/contact-us">Contact us</a></li>
+    </ul>
 </div>
 
 <script type="text/javascript" th:src="@{/js/navbar.js}"></script>
+<script type="text/javascript" th:src="@{/js/homescript.js}"></script>
+<script type="text/javascript" th:src="@{/js/countup.js}"></script>
 </body>
 
 </html>

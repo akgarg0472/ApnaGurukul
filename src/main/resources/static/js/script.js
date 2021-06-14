@@ -419,7 +419,7 @@ const verifyFpEmail = async () => {
     $("#fp-sbn").click();
 }
 
-// new password section code
+
 const checkNP = () => {
     const passwordValidator = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}";
     const newPassword = $("#new-pass").val();
@@ -432,6 +432,7 @@ const checkNP = () => {
         return true;
     }
 }
+
 
 const checkCNP = () => {
     const passwordValidator = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}";
@@ -447,6 +448,7 @@ const checkCNP = () => {
         return true;
     }
 }
+
 
 const validateNP = () => {
     const newPassword = $("#new-pass").val();

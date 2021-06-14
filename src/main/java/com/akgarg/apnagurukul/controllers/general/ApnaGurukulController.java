@@ -25,7 +25,15 @@ public class ApnaGurukulController {
 
 
     @RequestMapping(value = {"/", "/home"}, method = RequestMethod.GET)
-    public String home() {
+    public String home(Model model) {
+        int totalusers = this.usersRepository.findAll().size();
+        int totalBooks = this.usersRepository.findAll().size();
+
+        // todo later
+        // int totalBooks = this.bookRepository.findAll().size();
+
+        model.addAttribute("usersCount", totalusers);
+        model.addAttribute("totalBooks", totalBooks);
         return "common/home";
     }
 
