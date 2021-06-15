@@ -96,9 +96,20 @@ public class ApnaGurukulController {
     }
 
 
+    @RequestMapping(value = "/about-us", method = RequestMethod.GET)
+    public String aboutUs() {
+        return "common/about-us";
+    }
+
+
+    @RequestMapping(value = "/contact-us", method = RequestMethod.GET)
+    public String contactUs() {
+        return "common/contact-us";
+    }
+
+
     @RequestMapping(value = "/logout-success", method = RequestMethod.GET)
     public String logout(HttpSession session) {
-        session.setAttribute("logoutSuccess", "Logout successful");
         return "redirect:/login";
     }
 

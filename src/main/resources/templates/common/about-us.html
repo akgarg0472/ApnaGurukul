@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+          integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/aboutus.css}"/>
+    <link rel="stylesheet" th:href="@{/css/footer.css}"/>
+    <script type="text/javascript" th:src="@{/js/jquery.js}"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <title>About us</title>
+</head>
+
+<body>
+<!--navbar-->
+<section th:insert="navbar :: navbar" style="display: flex;flex-direction: column;"></section>
+
+<!-- content of the page -->
+<div class="abtus-hd">
+    <p>About&ensp;us</p>
+</div>
+
+<div class="abtus-p">
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, quas ratione? Non perferendis
+        necessitatibus itaque beatae officiis id atque maiores in aut. Itaque rerum quod tempora corporis at ipsam
+        hic quae soluta, quos odio sint quidem cupiditate beatae possimus. Quisquam, ducimus dolor aut nulla
+        architecto quibusdam illum impedit! Enim odit, fugit reiciendis rerum impedit, tenetur earum vero assumenda
+        fugiat suscipit officia ullam aut laboriosam dignissimos nobis.</p>
+    <br>
+    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Incidunt possimus unde iste blanditiis doloremque
+        veniam quasi eligendi dolorem error id! Odio non alias reiciendis doloribus aspernatur id animi sed ex
+        adipisci doloremque, quod quae sunt provident saepe illum et aperiam eius natus quaerat illo! Deleniti
+        asperiores autem aliquid tenetur earum?</p>
+</div>
+
+<div class="abtus-ortm">
+    <p class="ortm-hd">Our Team</p>
+
+    <div class="ortm-cards">
+        <div class="ortm-card">
+            <div class="mbr-img">
+                <img src="images/user.png" alt="">
+            </div>
+
+            <p class="mbr-name">Member #1</p>
+
+            <div class="mbr-cntn">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi numquam voluptatem odio
+                    dignissimos eveniet? Repellat ipsum velit in aspernatur magni suscipit impedit odio! Recusandae
+                    consequuntur eligendi nisi ipsam quis laboriosam. Dolores dicta quae ad a dolore commodi cum,
+                    sunt, sapiente ullam provident incidunt. Voluptate nisi, quis ipsum eaque dolorum veniam.</p>
+            </div>
+        </div>
+
+        <div class="ortm-card">
+            <div class="mbr-img">
+                <img src="images/user.png" alt="">
+            </div>
+
+            <p class="mbr-name">Member #1</p>
+
+            <div class="mbr-cntn">
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Distinctio minus consectetur molestias
+                    aperiam pariatur nihil neque. Ad voluptatum voluptas at minus? Ex, possimus. Vero consectetur,
+                    necessitatibus unde maiores alias autem sequi impedit optio maxime distinctio nam? Nam soluta,
+                    numquam sit dolore ad itaque obcaecati, repellat molestias expedita sequi dolorem laboriosam.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<!--  -->
+<div class="footer">
+    <div class="footer-content">
+        <h3>Lorem ipsum</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus in excepturi aut dicta perferendis
+            voluptate at optio, magnam blanditiis doloremque neque ad. Voluptas, earum tempora.</p>
+    </div>
+
+    <ul class="social-links">
+        <li><a href="https://www.facebook.com" target="_blank">Facebook</a></li>
+        <li><a href="https://www.instagram.com" target="_blank">Instagram</a></li>
+        <li><a href="https://www.twitter.com" target="_blank">Twitter</a></li>
+        <li><a href="https://www.discord.com" target="_blank">Discord</a></li>
+    </ul>
+
+    <ul class="other-links">
+        <li><a href="/terms-and-conditions" target="_blank">Terms & Conditions</a></li>
+        <li><a href="/about-us" target="_blank">About us</a></li>
+        <li><a href="/contact-us" target="_blank">Contact us</a></li>
+    </ul>
+</div>
+
+<script type="text/javascript" th:src="@{/js/navbar.js}"></script>
+</body>
+
+</html>

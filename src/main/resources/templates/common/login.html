@@ -49,13 +49,6 @@
     </script>
 </div>
 
-<div th:if="${session.logoutSuccess}">
-    <th:block th:text="${#session.removeAttribute('logoutSuccess')}"/>
-    <script>
-        swal("Logout success");
-    </script>
-</div>
-
 <div th:if="${session.passwordChangedSuccessfully}">
     <th:block th:text="${#session.removeAttribute('passwordChangedSuccessfully')}"/>
     <script>
