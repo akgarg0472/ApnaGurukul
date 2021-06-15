@@ -13,9 +13,8 @@
             rgba(255, 255, 255, 0.5),
             rgba(255, 255, 255, 0.5)
     ),
-    url("https://firebasestorage.googleapis.com/v0/b/apnagurukul-35230.appspot.com/o/homepage_banner.jpg?alt=media");
+    url("/images/front-background.jpg");
     background-size: cover;
-    /* todo change */
 }
 
 .home-cont-1 p {

@@ -1,6 +1,8 @@
 package com.akgarg.apnagurukul.controllers.general;
 
+import com.akgarg.apnagurukul.entity.ContactUs;
 import com.akgarg.apnagurukul.entity.Users;
+import com.akgarg.apnagurukul.repository.ContactUsRepository;
 import com.akgarg.apnagurukul.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,10 +19,12 @@ import java.security.Principal;
 public class ApnaGurukulController {
 
     private final UsersRepository usersRepository;
+    private final ContactUsRepository contactUsRepository;
 
     @Autowired
-    public ApnaGurukulController(UsersRepository usersRepository) {
+    public ApnaGurukulController(UsersRepository usersRepository, ContactUsRepository contactUsRepository) {
         this.usersRepository = usersRepository;
+        this.contactUsRepository = contactUsRepository;
     }
 
 
@@ -129,5 +133,21 @@ public class ApnaGurukulController {
     public boolean isUserRegistered(@RequestParam("email") String email) {
         Users user = this.usersRepository.getUsersByUsernameEquals(email);
         return user != null;
+    }
+
+
+    @ResponseBody
+    @RequestMapping(value = "/cont-us-query", method = RequestMethod.POST)
+    public boolean contactUsQuery(@RequestParam("fname") String firstName,
+                                  @RequestParam("lname") String lastName,
+                                  @RequestParam("email") String email,
+                                  @RequestParam("desc") String description) {
+        if (lastName != null && !lastName.trim().equals("") && email != null && !email.trim().equals("") && description != null && !description.trim().equals("")) {
+            ContactUs contactUs = new ContactUs(firstName, lastName, email, description);
+            this.contactUsRepository.save(contactUs);
+            return true;
+        } else {
+            return false;
+        }
     }
 }
