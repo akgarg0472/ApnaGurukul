@@ -14,7 +14,7 @@
     <link rel="stylesheet" th:href="@{/css/home.css}"/>
     <link rel="stylesheet" th:href="@{/css/footer.css}"/>
     <script type="text/javascript" th:src="@{/js/jquery.js}"></script>
-    <title>ApnaGurukul -Home</title>
+    <title>ApnaGurukul - Home</title>
 </head>
 
 <body>
@@ -45,25 +45,25 @@
     <h1>Services offered</h1>
 
     <div class="serv-cards">
-        <div class="serv-card">
+        <div class="serv-card" onclick="swal('not implemented')">
             <img th:src="@{/images/teacher.png}" alt="Teacher icon" src="">
             <h3>Teacher</h3>
             <p>Find a suitable teacher for you</p>
         </div>
 
-        <div class="serv-card">
+        <div class="serv-card" onclick="swal('not implemented')">
             <img th:src="@{/images/student.png}" alt="Student icon" src="">
             <h3>Student</h3>
             <p>Find student to teach</p>
         </div>
 
-        <div class="serv-card">
+        <div class="serv-card" onclick="swal('not implemented')">
             <img th:src="@{/images/buy-book.png}" alt="Buy book icon" src="">
             <h3>Buy books</h3>
             <p>Buy books at affordable cost</p>
         </div>
 
-        <div class="serv-card">
+        <div class="serv-card" onclick="window.location.assign('/sell-book')">
             <img src="images/sell-books.png" alt="Sell book icon">
             <h3>Sell books</h3>
             <p>Sell book at lowest possible cost</p>

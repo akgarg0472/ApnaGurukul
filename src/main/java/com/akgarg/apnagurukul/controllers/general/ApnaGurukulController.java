@@ -94,6 +94,12 @@ public class ApnaGurukulController {
     }
 
 
+    @RequestMapping(value = "/sell-book", method = RequestMethod.GET)
+    public String sellBook() {
+        return "common/sell-book";
+    }
+
+
     @RequestMapping(value = "/forgot-password", method = RequestMethod.GET)
     public String forgotPassword() {
         return "common/forgot-password";
