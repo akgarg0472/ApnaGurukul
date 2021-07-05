@@ -283,3 +283,75 @@ input[type=number] {
         margin-bottom: 1rem;
     }
 }
+
+/* loader CSS */
+.loader-div {
+    background-color: rgba(118, 118, 119, 0.66);
+    height: 100vh;
+    backdrop-filter: blur(0.75px);
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    display: none;
+}
+
+.loader {
+    border: 10px solid #dddddd;
+    position: absolute;
+    border-top: 10px solid var(--myRed);
+    border-radius: 50%;
+    width: 66px;
+    height: 66px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    z-index: 9999;
+    animation: loaderspin 0.75s linear infinite;
+}
+
+@keyframes loaderspin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .loader {
+        width: 56px;
+        height: 56px;
+        border: 8px solid #f3f3f3;
+        border-top: 8px solid var(--myRed);
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    .loader {
+        width: 50px;
+        height: 50px;
+        border: 7px solid #f3f3f3;
+        border-top: 7px solid var(--myRed);
+    }
+}
+
+@media only screen and (max-width: 250px) {
+    .loader {
+        width: 40px;
+        height: 40px;
+        border: 6px solid #f3f3f3;
+        border-top: 6px solid var(--myRed);
+    }
+}
+
+@media only screen and (max-height: 500px) {
+    .loader {
+        width: 50px;
+        height: 50px;
+        border: 8px solid #f3f3f3;
+        border-top: 8px solid var(--myRed);
+    }
+}

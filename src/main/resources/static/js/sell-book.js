@@ -121,6 +121,8 @@ async function validateBookInformation() {
         return;
     }
 
+    const loader = $("#loader-div");
+    loader.show();
     const _csrf = $("input[name=_csrf]").val();
     const url = `/process-sell-book`;
     const image = bookPhoto[0].files[0];
@@ -134,6 +136,7 @@ async function validateBookInformation() {
 
     $.post(url, `_csrf=${_csrf}${bookData}`)
         .done((resp) => {
+            loader.hide();
             if (resp.severity === 'high') {
                 swal("Error", resp.message, "error");
             } else {
@@ -147,6 +150,7 @@ async function validateBookInformation() {
             }
         })
         .fail(() => {
+            loader.hide();
             swal({title: "Error", text: 'Something wrong happen, please try again later', type: "error"}).then(() => {
                 window.location = '/sell-book';
             });
