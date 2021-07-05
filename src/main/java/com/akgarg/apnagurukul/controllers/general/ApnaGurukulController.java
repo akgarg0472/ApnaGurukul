@@ -95,7 +95,10 @@ public class ApnaGurukulController {
 
 
     @RequestMapping(value = "/sell-book", method = RequestMethod.GET)
-    public String sellBook() {
+    public String sellBook(Principal principal, Model model) {
+        if (principal == null) {
+            model.addAttribute("userNotLogin", "userNotLogin");
+        }
         return "common/sell-book";
     }
 

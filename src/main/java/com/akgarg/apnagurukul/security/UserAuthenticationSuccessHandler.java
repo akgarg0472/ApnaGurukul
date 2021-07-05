@@ -1,5 +1,9 @@
 package com.akgarg.apnagurukul.security;
 
+import com.akgarg.apnagurukul.entity.Users;
+import com.akgarg.apnagurukul.helper.DateAndTimeMethods;
+import com.akgarg.apnagurukul.repository.UsersRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.DefaultRedirectStrategy;
@@ -17,6 +21,8 @@ public class UserAuthenticationSuccessHandler implements AuthenticationSuccessHa
 
     private final RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
+    @Autowired
+    private UsersRepository usersRepository;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest,
@@ -37,6 +43,12 @@ public class UserAuthenticationSuccessHandler implements AuthenticationSuccessHa
             } else if (grantedAuthority.getAuthority().equals("ROLE_STUDENT")) {
                 hasStudentRole = true;
             }
+        }
+
+        Users user = this.usersRepository.getUserByUsername(authentication.getName());
+        if (user != null) {
+            user.setLastLoginDate(DateAndTimeMethods.getCurrentTime());
+            this.usersRepository.save(user);
         }
 
         if (hasAdminRole) {

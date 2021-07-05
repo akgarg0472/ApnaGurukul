@@ -1,10 +1,7 @@
 package com.akgarg.apnagurukul.controllers.general;
 
 import com.akgarg.apnagurukul.entity.Users;
-import com.akgarg.apnagurukul.helper.EmailMessages;
-import com.akgarg.apnagurukul.helper.EmailSender;
-import com.akgarg.apnagurukul.helper.MyConstants;
-import com.akgarg.apnagurukul.helper.OTPGenerator;
+import com.akgarg.apnagurukul.helper.*;
 import com.akgarg.apnagurukul.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -14,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.time.LocalDate;
 
 
 @Controller
@@ -109,7 +105,7 @@ public class RegistrationController {
             if (generatedOtp == otp) {
                 session.removeAttribute("newUserRegistration");
                 this.otpGenerator.deleteOTP(user.getUsername());
-                user.setJoinDate(LocalDate.now());
+                user.setJoinDate(DateAndTimeMethods.getCurrentDate());
                 this.usersRepository.save(user);
                 EmailSender.sendEmail(user.getUsername(), "Registration successful", EmailMessages.registrationSuccessMessage(user.getUsername(), user.getName()));
                 session.setAttribute("registrationSuccessful", "Registration successful");

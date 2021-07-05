@@ -1,29 +1,26 @@
 package com.akgarg.apnagurukul.helper;
 
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.TimeZone;
 
 public class DateAndTimeMethods {
 
-    public static String getLastLoginTime() {
-        StringBuilder lastLogin = new StringBuilder();
+    public static String getCurrentDate() {
+        Date date = new Date();
+        DateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
+        df.setTimeZone(TimeZone.getTimeZone("Asia/Calcutta"));
 
-        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-        lastLogin.append(timeFormatter.format(LocalTime.now()));
+        return df.format(date);
+    }
 
-        TimeZone timeZone = TimeZone.getDefault();
-        String zoneName = timeZone.getDisplayName();
-        String[] array = zoneName.split(" ");
+    public static String getCurrentTime() {
+        Date date = new Date();
+        DateFormat df = new SimpleDateFormat("HH:mm:ss");
+        df.setTimeZone(TimeZone.getTimeZone("Asia/Calcutta"));
+        String time = df.format(date);
 
-        StringBuilder timeZoneID = new StringBuilder();
-        for (String s : array) {
-            timeZoneID.append(s.charAt(0));
-        }
-
-        lastLogin.append(" ");
-        lastLogin.append(timeZoneID);
-
-        return lastLogin.toString();
+        return time + " IST";
     }
 }

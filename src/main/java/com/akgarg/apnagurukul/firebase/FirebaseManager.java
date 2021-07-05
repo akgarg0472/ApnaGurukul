@@ -44,9 +44,34 @@ public class FirebaseManager {
         return tempFile;
     }
 
+
+    // takes mulytipart file as input data and uploads it to cloud after converting to image
+    // and returns url of image after successful upload else returns error
     public String upload(MultipartFile multipartFile, String fileName) {
         try {
             File file = this.convertToFile(multipartFile, fileName);
+            String uploadResult = this.uploadFile(file, fileName);
+            file.delete();
+            return uploadResult;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "error";
+        }
+    }
+
+    // takes byte array as input data and uploads it to cloud after converting to image
+    // and returns url of image after successful upload else returns error
+    public String upload(byte[] fileByteArray, String fileName) {
+        try {
+            File file = new File(fileName);
+            try (FileOutputStream fos = new FileOutputStream(fileName)) {
+                fos.write(fileByteArray);
+            } catch (IOException ioe) {
+                ioe.printStackTrace();
+                file.delete();
+                return "error";
+            }
+
             String uploadResult = this.uploadFile(file, fileName);
             file.delete();
             return uploadResult;

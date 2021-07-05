@@ -1,5 +1,6 @@
 package com.akgarg.apnagurukul.entity;
 
+import com.akgarg.apnagurukul.helper.DateAndTimeMethods;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
@@ -7,10 +8,9 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import java.time.LocalDate;
 import java.util.List;
 
-@SuppressWarnings({"FieldCanBeLocal", "unused"})
+@SuppressWarnings({"FieldCanBeLocal"})
 @Entity
 @Table(name = "users")
 public class Users {
@@ -67,8 +67,8 @@ public class Users {
     private List<Integer> classesTeach;
 
     private String profilePicture;
-    private LocalDate joinDate;
-    private String lastLogin;
+    private String joinDate;
+    private String lastLoginDate;
 
     @Column(name = "user_role")
     @NotBlank(message = "Role can't be empty")
@@ -90,7 +90,7 @@ public class Users {
 
 
     public Users() {
-        this.joinDate = LocalDate.now();
+        this.joinDate = DateAndTimeMethods.getCurrentDate();
         this.setAccountNonExpired(true);
         this.setAccountNonLocked(true);
         this.setEnabled(true);
@@ -255,11 +255,11 @@ public class Users {
         this.profilePicture = profilePicture;
     }
 
-    public LocalDate getJoinDate() {
+    public String getJoinDate() {
         return joinDate;
     }
 
-    public void setJoinDate(LocalDate joinDate) {
+    public void setJoinDate(String joinDate) {
         this.joinDate = joinDate;
     }
 
@@ -303,12 +303,12 @@ public class Users {
         this.enabled = enabled;
     }
 
-    public String getLastLogin() {
-        return lastLogin;
+    public String getLastLoginDate() {
+        return lastLoginDate;
     }
 
-    public void setLastLogin(String lastLogin) {
-        this.lastLogin = lastLogin;
+    public void setLastLoginDate(String lastLogin) {
+        this.lastLoginDate = lastLogin;
     }
 
     @Override
@@ -332,7 +332,7 @@ public class Users {
                 ", accountNonLocked=" + accountNonLocked +
                 ", credentialsNonExpired=" + credentialsNonExpired +
                 ", enabled=" + enabled +
-                ", lastLogin=" + lastLogin +
+                ", lastLogin=" + lastLoginDate +
                 '}';
     }
 }
