@@ -20,7 +20,7 @@ import java.nio.file.Files;
 @Component
 public class FirebaseManager {
 
-    private static final String JSON_PATH = System.getProperty("user.dir") + "\\src\\main\\java\\com\\akgarg\\apnagurukul\\firebase\\" +
+    private static final String JSON_PATH = System.getProperty("user.dir") + "/src/main/java/com/akgarg/apnagurukul/firebase/" +
             "apnagurukul-35230-firebase-adminsdk-n4vfa-1a06e6cb8a.json";
 
 
