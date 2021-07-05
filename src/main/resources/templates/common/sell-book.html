@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+          integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/sell-book.css}"/>
+    <link rel="stylesheet" th:href="@{/css/footer.css}"/>
+    <script type="text/javascript" th:src="@{/js/jquery.js}"></script>
+    <title>ApnaGurukul -Home</title>
+</head>
+
+<body>
+<section th:insert="navbar :: navbar" style="display: flex;flex-direction: column;"></section>
+
+
+<div class="sl-bk-cntr">
+
+    <div class="sl-bk-div">
+        <h2>Sell Book</h2>
+        <hr style="border-color: #123456; margin-bottom: 0.5rem; border-width: 1px;">
+
+        <form th:action="@{/gnrttkn-csrf}" method="post" style="display: none"></form>
+
+        <div class="book-input-data">
+            <span><strong>Enter Book Details</strong></span>
+
+            <div class="bid-ip">
+                <input type="text" id="book-title" name="book-title" required/>
+                <label for="book-title">Book title</label>
+            </div>
+            <p id="bk-ttlerr" class="color-error">Please enter book title</p>
+
+            <div class="bid-ip">
+                <input type="text" id="book-author" name="book-author" required/>
+                <label for="book-author">Book author</label>
+            </div>
+
+            <div class="bid-ip">
+                <input type="text" id="book-publisher" name="book-publisher" required/>
+                <label for="book-publisher">Book publisher</label>
+            </div>
+
+            <select name="book-class" id="select-book-class" onchange="classSelect()">
+                <option value="null">---Select Class---</option>
+                <option value="first">1st</option>
+                <option value="second">2nd</option>
+                <option value="third">3rd</option>
+                <option value="fourth">4th</option>
+                <option value="fifth">5th</option>
+                <option value="sixth">6th</option>
+                <option value="seventh">7th</option>
+                <option value="eighth">8th</option>
+                <option value="nineth">9th</option>
+                <option value="tenth">10th</option>
+                <option value="eleventh">11th</option>
+                <option value="twelfth">12th</option>
+                <option value="UG">Undergraduate</option>
+                <option value="PG">Postgraduate</option>
+            </select>
+            <p id="bk-clserr" class="color-error">Please select class</p>
+
+            <select name="book-class-stream" id="select-book-stream">
+                <option value="null">---Select stream---</option>
+                <option value="commerce">Commerce</option>
+                <option value="arts">Arts/Humanities</option>
+                <option value="science">Science</option>
+            </select>
+            <p id="bk-strmerr" class="color-error">Please select stream</p>
+
+            <div class="bid-ip abi" id="bid-ip-abi">
+                <input type="text" id="book-add-info" name="book-add-info" required/>
+                <label for="book-add-info">Enter additional book information</label>
+            </div>
+            <p id="bk-abierr" class="color-error">Please enter book information</p>
+
+            <div class="dnt-bk-div">
+                <span>Wanna donate book?</span>
+                <div>
+                    <input type="radio" name="donate-book" value="false" id="dntbk-rdbtn-false"
+                           onclick="donateBook(false)" checked>
+                    <label for="dntbk-rdbtn-false">&ensp;No</label>
+                </div>
+                <div>
+                    <input type="radio" name="donate-book" value="true" id="dntbk-rdbtn-true"
+                           onclick="donateBook(true)">
+                    <label for="dntbk-rdbtn-true">&ensp;Yes</label>
+                </div>
+            </div>
+            <p id="bk-dntbkmsg" class="color-info">Donating book means you are selling your book at free of cost</p>
+
+            <div id="dnt-bk-opsp-div">
+                <div class="bid-ip" id="book-op-div">
+                    <input type="number" id="book-op" name="book-op" required/>
+                    <label for="book-op">Book Original Price</label>
+                </div>
+                <p id="bk-operr" class="color-error">Please enter original price of book</p>
+
+                <div class="bid-ip" id="book-sp-div">
+                    <input type="number" id="book-sp" name="book-sp" required/>
+                    <label for="book-sp">Book Selling Price</label>
+                </div>
+                <p id="bk-sperr" class="color-error">Please enter selling price of book</p>
+            </div>
+            <p id="bk-wrgperr" class="color-error">You can't sell book at more than original price</p>
+
+            <select name="book-condition" id="select-book-quality">
+                <option value="null">---Select Book quality---</option>
+                <option value="veryGoodCondition">Very Good</option>
+                <option value="goodCondition">Good</option>
+                <option value="fairCondition">Fair</option>
+            </select>
+            <p id="bk-qltyerr" class="color-error">Please select book quality</p>
+
+            <div class="book-photo">
+                <label for="book-photo-file">Upload Book Photo</label>
+                <input type="file" accept="image/png, image/jpeg" name="bookPhoto" id="book-photo-file">
+            </div>
+            <p id="bk-bkphterr" class="color-error">Please select book photo</p>
+            <p id="bk-bkphtszerr" class="color-error">Please upload photo less than 1MB</p>
+
+            <div class="sbt-bkad-btn">
+                <button onclick="validateBookInformation()">Submit</button>
+            </div>
+        </div>
+
+    </div>
+
+    <hr class="sec-div-hr">
+
+    <div class="sl-bk-inst-div">
+        <h3>Instructions</h3>
+        <ul>
+            <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
+            <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
+            <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
+            <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
+        </ul>
+        <br>
+        <span><a href="#">Contact us</a>&nbsp;for more info</span>
+    </div>
+</div>
+
+
+<div class="footer">
+    <div class="footer-content">
+        <h3>Lorem ipsum</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus in excepturi aut dicta perferendis
+            voluptate at optio, magnam blanditiis doloremque neque ad. Voluptas, earum tempora.</p>
+    </div>
+
+    <ul class="social-links">
+        <li><a href="https://www.facebook.com" target="_blank">Facebook</a></li>
+        <li><a href="https://www.instagram.com" target="_blank">Instagram</a></li>
+        <li><a href="https://www.twitter.com" target="_blank">Twitter</a></li>
+        <li><a href="https://www.discord.com" target="_blank">Discord</a></li>
+    </ul>
+
+    <ul class="other-links">
+        <li><a href="/terms-and-conditions" target="_blank">Terms & Conditions</a></li>
+        <li><a href="/about-us" target="_blank">About us</a></li>
+        <li><a href="/contact-us" target="_blank">Contact us</a></li>
+    </ul>
+</div>
+
+<div th:if="${userNotLogin} != null">
+    <script>
+        swal('Attention', 'Please login to use this feature', 'info');
+    </script>
+</div>
+
+<script type="text/javascript" th:src="@{/js/navbar.js}"></script>
+<script type="text/javascript" th:src="@{/js/sell-book.js}"></script>
+</body>
+
+</html>
