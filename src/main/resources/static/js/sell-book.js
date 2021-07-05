@@ -1,3 +1,5 @@
+// noinspection JSUnresolvedVariable
+
 $(document).ready(() => {
     hideAllErrors();
 })
@@ -135,11 +137,19 @@ async function validateBookInformation() {
             if (resp.severity === 'high') {
                 swal("Error", resp.message, "error");
             } else {
-                swal("Congratulations", "Book successfully listed", "success");
+                swal({
+                    title: "Congratulations",
+                    text: "Book successfully listed for selling",
+                    type: "success"
+                }).then(() => {
+                    window.location = '/';
+                });
             }
         })
         .fail(() => {
-            swal("Error", 'Something wrong happen, please try again later', "error");
+            swal({title: "Error", text: 'Something wrong happen, please try again later', type: "error"}).then(() => {
+                window.location = '/sell-book';
+            });
         });
 }
 
@@ -150,6 +160,7 @@ const fileToBase64 = async (file) =>
         reader.onload = () => resolve(reader.result)
         reader.onerror = (e) => reject(e)
     })
+
 
 
 

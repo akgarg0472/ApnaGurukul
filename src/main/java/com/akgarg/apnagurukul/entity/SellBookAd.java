@@ -27,7 +27,7 @@ public class SellBookAd {
     private String bookStream;
     private String additionalBookInfo;
     private String bookQuality;
-    private boolean donateBoook;
+    private boolean donateBook;
     private int originalPrice;
     private int sellingPrice;
     private String bookPhoto;
@@ -55,7 +55,7 @@ public class SellBookAd {
                       String bookStream,
                       String additionalBookInfo,
                       String bookQuality,
-                      boolean donateBoook,
+                      boolean donateBook,
                       int originalPrice,
                       int sellingPrice,
                       String bookPhoto,
@@ -72,7 +72,7 @@ public class SellBookAd {
         this.bookStream = bookStream;
         this.additionalBookInfo = additionalBookInfo;
         this.bookQuality = bookQuality;
-        this.donateBoook = donateBoook;
+        this.donateBook = donateBook;
         this.originalPrice = originalPrice;
         this.sellingPrice = sellingPrice;
         this.bookPhoto = bookPhoto;
@@ -148,12 +148,12 @@ public class SellBookAd {
         this.bookQuality = bookQuality;
     }
 
-    public boolean isDonateBoook() {
-        return donateBoook;
+    public boolean isDonateBook() {
+        return donateBook;
     }
 
-    public void setDonateBoook(boolean donateBoook) {
-        this.donateBoook = donateBoook;
+    public void setDonateBook(boolean donateBoook) {
+        this.donateBook = donateBoook;
     }
 
     public int getOriginalPrice() {
@@ -267,7 +267,7 @@ public class SellBookAd {
                 ", bookStream='" + bookStream + '\'' +
                 ", additionalBookInfo='" + additionalBookInfo + '\'' +
                 ", bookQuality='" + bookQuality + '\'' +
-                ", donateBoook=" + donateBoook +
+                ", donateBoook=" + donateBook +
                 ", originalPrice=" + originalPrice +
                 ", sellingPrice=" + sellingPrice +
                 ", bookPhoto='" + bookPhoto + '\'' +

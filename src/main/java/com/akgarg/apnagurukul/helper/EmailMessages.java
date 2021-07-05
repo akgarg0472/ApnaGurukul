@@ -88,20 +88,19 @@ public class EmailMessages {
                     "<br><br>" +
                     "Congratulations!" +
                     "<br>" +
-                    "Your book titled '" + bookTitle + "' is " +
-                    "successfully listed for selling. You have chose to donate your book for free of cost. " +
+                    "Your book is successfully listed for selling. You have chose to donate your book for free of cost. " +
                     "You will receive email notification if someone queries or wish to purchase your book." +
                     "<br><br>" +
                     "Details of your listing is: " +
+                    "<br>" +
                     "<strong>Listing id: </strong>" + id +
                     "<br>" +
                     "<strong>Title: </strong>" + bookTitle +
                     "<br>" +
-                    "<strong>Title: </strong>" + bookTitle +
+                    "<strong>Listing Date: </strong>" + publishingDate +
                     "<br>" +
-                    "<strong>Publihsing Date: </strong>" + publishingDate +
-                    "<br>" +
-                    "<strong>Selling Price: </strong>" + 0 + "\u20B9" +
+                    "<strong>Selling Price: </strong>" + 0 + " rs" +
+                    "<br><br>" +
                     "We here at ApnaGurukul wish you good luck for your bright future." +
                     "<br><br>" +
                     "Regards" +
@@ -117,19 +116,18 @@ public class EmailMessages {
                     "<br><br>" +
                     "Congratulations!" +
                     "<br>" +
-                    "Your book titled '" + bookTitle + "' is " +
-                    "successfully listed for selling. You will receive email notification if someone queries or wish to purchase your book." +
+                    "Your book is successfully listed for selling. You will receive email notification if someone " +
+                    "queries or wish to purchase your book." +
                     "<br><br>" +
                     "Details of your listing is: " +
+                    "<br>" +
                     "<strong>Listing id: </strong>" + id +
                     "<br>" +
                     "<strong>Title: </strong>" + bookTitle +
                     "<br>" +
-                    "<strong>Title: </strong>" + bookTitle +
+                    "<strong>Listing Date: </strong>" + publishingDate +
                     "<br>" +
-                    "<strong>Publihsing Date: </strong>" + publishingDate +
-                    "<br>" +
-                    "<strong>Selling Price: </strong>" + sellingPrice + "\u20B9" +
+                    "<strong>Selling Price: </strong>" + sellingPrice + " rs" +
                     "<br><br>" +
                     "Regards" +
                     "<br>" +

@@ -1,14 +1,14 @@
 package com.akgarg.apnagurukul.model;
 
-public class ErrorMessage {
+public class ResponseMessage {
 
     private String message;
     private String severity;
 
-    public ErrorMessage() {
+    public ResponseMessage() {
     }
 
-    public ErrorMessage(String message, String severity) {
+    public ResponseMessage(String message, String severity) {
         this.message = message;
         this.severity = severity;
     }
