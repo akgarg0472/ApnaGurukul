@@ -69,7 +69,6 @@ public class ForgotPasswordController {
 
         if (fpEmail != null && !fpEmail.equals("")) {
             int generatedOtp = this.otpGenerator.getOtp(fpEmail);
-            Users user = this.usersRepository.getUserByUsername(fpEmail);
 
             if (generatedOtp == 0) {
                 return "OTP_EXPIRED";

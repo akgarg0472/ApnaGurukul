@@ -30,7 +30,8 @@ public class BuyBookController {
 
     @RequestMapping(value = "/process-buy-book-req", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseMessage processBuyBookRequest(@RequestParam("id") String id, @ModelAttribute BuyBookRequest buyBookRequest) {
+    public ResponseMessage processBuyBookRequest(@RequestParam("id") String id,
+                                                 @ModelAttribute BuyBookRequest buyBookRequest) {
         Optional<SellBookAd> byId = this.sellBookAdRepository.findById(Integer.parseInt(id));
         SellBookAd sellBookAd = byId.orElse(null);
 

@@ -19,12 +19,14 @@ public class StudentController {
             session.removeAttribute("sellBookLogin");
             return "redirect:/sell-book";
         }
-        
+
         return "student/dashboard";
     }
 
+
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String studentLogout() {
+        //noinspection SpringMVCViewInspection
         return "redirect:/logout";
     }
 }

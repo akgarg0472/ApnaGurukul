@@ -91,7 +91,9 @@ public class BookSellHelper {
 
 
     // method to check if there is any unwanted error or non login user trying to sell book
-    public static ResponseMessage checkForErrors(Principal principal, String image, SellBookAd sellBookAd) {
+    public static ResponseMessage checkForErrors(Principal principal,
+                                                 String image,
+                                                 SellBookAd sellBookAd) {
         if (principal == null) {
             return new ResponseMessage("You must login to perform this operation", "high");
         }

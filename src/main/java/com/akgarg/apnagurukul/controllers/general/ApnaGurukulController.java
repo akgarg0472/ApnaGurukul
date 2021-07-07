@@ -35,6 +35,7 @@ public class ApnaGurukulController {
     }
 
 
+    @SuppressWarnings("CommentedOutCode")
     @RequestMapping(value = {"/", "/home"}, method = RequestMethod.GET)
     public String home(Model model) {
         int totalusers = 154868;

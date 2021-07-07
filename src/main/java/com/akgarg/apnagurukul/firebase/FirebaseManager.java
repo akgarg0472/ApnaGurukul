@@ -17,6 +17,7 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 
+@SuppressWarnings("unused")
 @Component
 public class FirebaseManager {
 
@@ -35,6 +36,7 @@ public class FirebaseManager {
         return String.format("https:\\firebasestorage.googleapis.com/v0/b/apnagurukul-35230.appspot.com/o/%s?alt=media"
                 , URLEncoder.encode(fileName, String.valueOf(StandardCharsets.UTF_8)));
     }
+
 
     private File convertToFile(MultipartFile multipartFile, String fileName) throws IOException {
         File tempFile = new File(fileName);
@@ -59,6 +61,7 @@ public class FirebaseManager {
         }
     }
 
+
     // takes byte array as input data and uploads it to cloud after converting to image
     // and returns url of image after successful upload else returns error
     public String upload(byte[] fileByteArray, String fileName) {
@@ -81,10 +84,10 @@ public class FirebaseManager {
         }
     }
 
-    public boolean delete(String url) {
-        boolean result = false;
 
+    public boolean delete(String url) {
         String fileName = url.substring(url.lastIndexOf('/') + 1, url.lastIndexOf('?'));
+        boolean result = false;
 
         try {
             Credentials credentials = GoogleCredentials.fromStream(new FileInputStream(JSON_PATH));

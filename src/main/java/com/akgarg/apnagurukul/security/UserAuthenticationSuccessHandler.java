@@ -21,6 +21,7 @@ public class UserAuthenticationSuccessHandler implements AuthenticationSuccessHa
 
     private final RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
+    @SuppressWarnings("SpringJavaAutowiredFieldsWarningInspection")
     @Autowired
     private UsersRepository usersRepository;
 
@@ -34,6 +35,7 @@ public class UserAuthenticationSuccessHandler implements AuthenticationSuccessHa
 
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         for (GrantedAuthority grantedAuthority : authorities) {
+            //noinspection IfCanBeSwitch
             if (grantedAuthority.getAuthority().equals("ROLE_ADMIN")) {
                 hasAdminRole = true;
                 break;

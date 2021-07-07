@@ -15,6 +15,7 @@ public class DateAndTimeMethods {
         return df.format(date);
     }
 
+
     public static String getCurrentTime() {
         Date date = new Date();
         DateFormat df = new SimpleDateFormat("HH:mm:ss");

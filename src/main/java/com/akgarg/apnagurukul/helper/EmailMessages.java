@@ -202,5 +202,4 @@ public class EmailMessages {
 
         return email;
     }
-
 }

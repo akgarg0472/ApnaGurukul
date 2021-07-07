@@ -1,5 +1,6 @@
 package com.akgarg.apnagurukul.model;
 
+@SuppressWarnings("unused")
 public class ResponseMessage {
 
     private String message;
@@ -8,7 +9,8 @@ public class ResponseMessage {
     public ResponseMessage() {
     }
 
-    public ResponseMessage(String message, String severity) {
+    public ResponseMessage(String message,
+                           String severity) {
         this.message = message;
         this.severity = severity;
     }
@@ -27,5 +29,13 @@ public class ResponseMessage {
 
     public void setSeverity(String severity) {
         this.severity = severity;
+    }
+
+    @Override
+    public String toString() {
+        return "ResponseMessage{" +
+                "message='" + message + '\'' +
+                ", severity='" + severity + '\'' +
+                '}';
     }
 }

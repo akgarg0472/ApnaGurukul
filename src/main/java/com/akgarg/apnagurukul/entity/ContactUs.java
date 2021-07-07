@@ -10,6 +10,7 @@ import javax.persistence.Id;
  * GitHub: https://github.com/akgarg0472
  */
 
+@SuppressWarnings("unused")
 @Entity
 public class ContactUs {
 
@@ -22,7 +23,11 @@ public class ContactUs {
     private String email;
     private String description;
 
-    public ContactUs(String firstName, String lastName, String email, String description) {
+
+    public ContactUs(String firstName,
+                     String lastName,
+                     String email,
+                     String description) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -31,6 +36,14 @@ public class ContactUs {
 
     public ContactUs() {
 
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getFirstName() {

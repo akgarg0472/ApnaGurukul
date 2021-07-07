@@ -62,6 +62,7 @@ public class RegistrationController {
 
         user.setPassword(this.bCryptPasswordEncoder.encode(user.getPassword()));
         user.setProfilePicture(MyConstants.DEFAULT_PROFILE_PICTURE);
+
         if (user.getRole().equals("faculty")) {
             user.setRole("ROLE_FACULTY");
         } else if (user.getRole().equals("student")) {

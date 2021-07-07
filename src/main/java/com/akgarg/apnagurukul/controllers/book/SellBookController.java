@@ -42,10 +42,12 @@ public class SellBookController {
         this.standardPasswordEncoder = standardPasswordEncoder;
     }
 
-
+    
     @RequestMapping(value = "/process-sell-book", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseMessage processSellBook(Principal principal, @ModelAttribute SellBookAd sellBookAd, @RequestParam("image") String image) {
+    public ResponseMessage processSellBook(Principal principal,
+                                           @ModelAttribute SellBookAd sellBookAd,
+                                           @RequestParam("image") String image) {
         ResponseMessage responseMessage = BookSellHelper.checkForErrors(principal, image, sellBookAd);
         if (responseMessage != null) {
             return responseMessage;

@@ -21,13 +21,15 @@ public class FacultyController {
             session.removeAttribute("sellBookLogin");
             return "redirect:/sell-book";
         }
-        
+
         return "This is the faculty dashboard";
     }
+
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String facultyLogout() {
         System.out.println("faculty logout called");
+        //noinspection SpringMVCViewInspection
         return "redirect:/logout";
     }
 }

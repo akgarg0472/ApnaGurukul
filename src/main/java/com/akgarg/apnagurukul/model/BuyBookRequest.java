@@ -16,6 +16,25 @@ public class BuyBookRequest {
     private String pincode;
     private String message;
 
+
+    public BuyBookRequest(String name,
+                          String email,
+                          String phone,
+                          String city,
+                          String state,
+                          String country,
+                          String pincode,
+                          String message) {
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.city = city;
+        this.state = state;
+        this.country = country;
+        this.pincode = pincode;
+        this.message = message;
+    }
+
     public BuyBookRequest() {
     }
 

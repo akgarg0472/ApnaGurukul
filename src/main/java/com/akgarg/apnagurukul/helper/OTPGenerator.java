@@ -25,12 +25,14 @@ public class OTPGenerator {
                 });
     }
 
+
     public int generateOTP(String key) {
         Random random = new Random();
         int otp = 100000 + random.nextInt(900000);
         otpCache.put(key, otp);
         return otp;
     }
+
 
     public int getOtp(String key) {
         try {
@@ -40,6 +42,7 @@ public class OTPGenerator {
             return -1;
         }
     }
+
 
     public void deleteOTP(String key) {
         otpCache.invalidate(key);

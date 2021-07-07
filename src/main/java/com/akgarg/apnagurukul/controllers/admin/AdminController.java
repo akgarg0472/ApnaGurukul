@@ -15,9 +15,11 @@ public class AdminController {
         return "This is the admin dashboard";
     }
 
+
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String adminLogout() {
         System.out.println("admin logout called");
+        //noinspection SpringMVCViewInspection
         return "redirect:/logout";
     }
 }

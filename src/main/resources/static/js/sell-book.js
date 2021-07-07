@@ -163,8 +163,4 @@ const fileToBase64 = async (file) =>
         reader.readAsDataURL(file)
         reader.onload = () => resolve(reader.result)
         reader.onerror = (e) => reject(e)
-    })
-
-
-
-
+    });
