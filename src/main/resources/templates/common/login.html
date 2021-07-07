@@ -56,6 +56,12 @@
     </script>
 </div>
 
+<div th:if="${logoutSuccess}!=null">
+    <script>
+        swal("", "Successfully logged out", "success");
+    </script>
+</div>
+
 <div th:if="${param.invalid_credentials}">
     <script>
         $("#inv-cred").show();

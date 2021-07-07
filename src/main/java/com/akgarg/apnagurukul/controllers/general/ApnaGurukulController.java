@@ -1,8 +1,10 @@
 package com.akgarg.apnagurukul.controllers.general;
 
 import com.akgarg.apnagurukul.entity.ContactUs;
+import com.akgarg.apnagurukul.entity.SellBookAd;
 import com.akgarg.apnagurukul.entity.Users;
 import com.akgarg.apnagurukul.repository.ContactUsRepository;
+import com.akgarg.apnagurukul.repository.SellBookAdRepository;
 import com.akgarg.apnagurukul.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,17 +16,22 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 public class ApnaGurukulController {
 
     private final UsersRepository usersRepository;
     private final ContactUsRepository contactUsRepository;
+    private final SellBookAdRepository sellBookAdRepository;
 
     @Autowired
-    public ApnaGurukulController(UsersRepository usersRepository, ContactUsRepository contactUsRepository) {
+    public ApnaGurukulController(UsersRepository usersRepository,
+                                 ContactUsRepository contactUsRepository,
+                                 SellBookAdRepository sellBookAdRepository) {
         this.usersRepository = usersRepository;
         this.contactUsRepository = contactUsRepository;
+        this.sellBookAdRepository = sellBookAdRepository;
     }
 
 
@@ -44,7 +51,9 @@ public class ApnaGurukulController {
 
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login(Principal principal) {
+    public String login(Principal principal,
+                        HttpSession session,
+                        Model model) {
         if (principal != null) {
             Users users = this.usersRepository.getUserByUsername(principal.getName());
 
@@ -63,13 +72,18 @@ public class ApnaGurukulController {
                 }
             }
         }
+        if (session.getAttribute("logoutSuccess") != null) {
+            session.removeAttribute("logoutSuccess");
+            model.addAttribute("logoutSuccess", true);
+        }
 
         return "common/login";
     }
 
 
     @RequestMapping(value = "/signup", method = RequestMethod.GET)
-    public String register(Model model, Principal principal) {
+    public String register(Principal principal,
+                           Model model) {
         if (principal != null) {
             Users users = this.usersRepository.getUserByUsername(principal.getName());
 
@@ -95,11 +109,31 @@ public class ApnaGurukulController {
 
 
     @RequestMapping(value = "/sell-book", method = RequestMethod.GET)
-    public String sellBook(Principal principal, Model model) {
+    public String sellBook(Principal principal,
+                           HttpSession session,
+                           Model model) {
         if (principal == null) {
+            session.setAttribute("sellBookLogin", true);
             model.addAttribute("userNotLogin", "userNotLogin");
         }
         return "common/sell-book";
+    }
+
+
+    @RequestMapping(value = "/buy-book", method = RequestMethod.GET)
+    public String buyBook(Principal principal,
+                          HttpSession session,
+                          Model model) {
+        if (principal == null) {
+            session.setAttribute("buyBookLogin", true);
+            model.addAttribute("userNotLogin", "userNotLogin");
+        } else {
+            Users loggedInUser = this.usersRepository.getUserByUsername(principal.getName());
+            model.addAttribute("user", loggedInUser);
+            List<SellBookAd> books = this.sellBookAdRepository.findAll();
+            model.addAttribute("books", books);
+        }
+        return "common/buy-book";
     }
 
 
@@ -123,6 +157,14 @@ public class ApnaGurukulController {
 
     @RequestMapping(value = "/logout-success", method = RequestMethod.GET)
     public String logout(HttpSession session) {
+        if (session.getAttribute("sellBookLogin") != null) {
+            session.removeAttribute("sellBookLogin");
+        }
+        if (session.getAttribute("buyBookLogin") != null) {
+            session.removeAttribute("buyBookLogin");
+        }
+
+        session.setAttribute("logoutSuccess", true);
         return "redirect:/login";
     }
 

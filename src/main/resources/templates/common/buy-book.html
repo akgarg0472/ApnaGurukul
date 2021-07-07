@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<!--suppress HtmlFormInputWithoutLabel -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+          integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/buy-book.css}"/>
+    <link rel="stylesheet" th:href="@{/css/footer.css}"/>
+    <script type="text/javascript" th:src="@{/js/jquery.js}"></script>
+    <title>Buy Book - ApnaGurukul</title>
+</head>
+
+<body>
+<section th:insert="navbar :: navbar" style="display: flex;flex-direction: column;"></section>
+
+
+<!--  -->
+<!--  -->
+<div class="rdr-alrt-nt" id="rdr-alrt-nt">
+    <span class="alrt-cls-btn" onclick="closeAlertDialog()">&times;</span>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque voluptatum voluptatibus ex.</p>
+</div>
+
+<!--  -->
+<!--  -->
+
+
+<div class="bbk-sec">
+    <div class="srch-optns">
+        <h2>Customize Search</h2>
+
+        <div class="srch-bk-cls-div">
+            <label for="srch-bk-cls">Select book class</label>
+            <select id="srch-bk-cls" class="srch-bk-cls">
+                <option value="# ">Select book class</option>
+                <option value="# ">#</option>
+                <option value="# ">#</option>
+                <option value="# ">#</option>
+                <option value="# ">#</option>
+                <option value="# ">#</option>
+                <option value="# ">#</option>
+                <option value="# ">#</option>
+                <option value="# ">#</option>
+                <option value="# ">#</option>
+                <option value="# ">#</option>
+                <option value="# ">#</option>
+            </select>
+        </div>
+
+
+        <div class="srch-bk-price-rng-div">
+            <label for="srch-bk-price-rng" id="srch-bk-price-rng-lbl">Book price (Min: 1, Max: 251)</label>
+            <input type="range" min="1" max="9999" value="501" step="251" name="book-price" class="srch-bk-price-rng"
+                   id="srch-bk-price-rng" oninput="changePriceRange(this)">
+        </div>
+
+
+        <div class="srch-bk-cndtn-div">
+            <label for="srch-bk-cndtn">Book condition</label>
+            <select name="book-condition" class="srch-bk-cndtn" id="srch-bk-cndtn">
+                <option value="# ">Select book condition</option>
+                <option value="# ">Very Good</option>
+                <option value="# ">Good</option>
+                <option value="# ">Fair</option>
+            </select>
+        </div>
+
+        <div class="srch-bk-free-div">
+            <label for="free-bk-chbx">Free books&ensp;</label>
+            <input type="checkbox" name="free-book" id="free-bk-chbx">
+        </div>
+
+        <div class="cs-srch-btn-div">
+            <button>Search</button>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="srch-rslt-sec ">
+        <div class="srch-bk-ip-div">
+            <input type="search" name="srahc-input" id="" placeholder="Search book...">&ensp;
+            <i class="fas fa-search"></i>
+        </div>
+
+        <div class="srch-bk-qry-rslt-div">
+            <div th:if="${books!=null && books.size()==0}">
+                <span>No book found</span>
+            </div>
+
+            <th:block th:if="${books!=null && books.size()>0}">
+                <div th:each="book : ${books}">
+                    <div class="srch-bk-qry-card">
+                        <div class="bk-esntl-info">
+                            <div class="bk-info">
+                                <strong th:text="${book.bookTitle}"></strong>
+                                <span th:text="'Class: ' + ${book.bookClass}"></span>
+                                <span th:text="'Condition: ' + ${book.bookQuality}"></span>
+                                <span th:text="'Price: ' + ${book.sellingPrice}"></span>
+                                <span th:text="'Seller Name: ' + ${book.sellerName}"></span>
+                            </div>
+                        </div>
+                        <div class="bk-btns">
+                            <button class="btn-mr-info"
+                                    th:data-bookname="${book.bookTitle}"
+                                    th:data-bookPhotoUrl="${book.bookPhoto}"
+                                    th:data-bookPublisher="${book.bookPublisher}"
+                                    th:data-bookAuthor="${book.bookAuthor}"
+                                    th:data-bookClass="${book.bookClass}"
+                                    th:data-bookPrice="${book.sellingPrice}"
+                                    th:data-bookCondition="${book.bookQuality}"
+                                    th:data-sellerName="${book.sellerName}"
+                                    th:data-sellerCity="${book.sellerCity}"
+                                    th:data-sellerState="${book.sellerState}"
+                                    th:data-sellerCountry="${book.sellerCountry}"
+                                    onclick="setMoreInfoModalData(
+                                            this.getAttribute('data-bookname'),
+                                            this.getAttribute('data-bookPhotoUrl'),
+                                            this.getAttribute('data-bookPublisher'),
+                                            this.getAttribute('data-bookAuthor'),
+                                            this.getAttribute('data-bookClass'),
+                                            this.getAttribute('data-bookPrice'),
+                                            this.getAttribute('data-bookCondition'),
+                                            this.getAttribute('data-sellerName'),
+                                            this.getAttribute('data-sellerCity'),
+                                            this.getAttribute('data-sellerState'),
+                                            this.getAttribute('data-sellerCountry')
+                                        )">
+                                More info
+                            </button>
+                            <button class="btn-enq"
+                                    th:data-id="${book.id}"
+                                    th:data-name="${user.name}"
+                                    th:data-email="${user.username}"
+                                    th:data-city="${user.city}"
+                                    th:data-state="${user.state}"
+                                    th:data-country="${user.country}"
+                                    th:data-pincode="${user.pincode}"
+                                    onclick="setContactSellerModalData(
+                                        this.getAttribute('data-id'),
+                                        this.getAttribute('data-name'),
+                                        this.getAttribute('data-email'),
+                                        this.getAttribute('data-city'),
+                                        this.getAttribute('data-state'),
+                                        this.getAttribute('data-country'),
+                                        this.getAttribute('data-pincode')
+                                    )" style="margin-top: 8px;">Contact
+                                seller
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </th:block>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="moreInfoModal" tabindex="-1" aria-hidden="true" role="dialog"></div>
+<div class="modal fade" id="contactSellerModal" tabindex="-1" aria-hidden="true" role="dialog"></div>
+
+<div class="footer">
+    <div class="footer-content">
+        <h3>Lorem ipsum</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus in excepturi aut dicta perferendis
+            voluptate at optio</p>
+    </div>
+
+    <ul class="social-links">
+        <li><a href="https://www.facebook.com" target="_blank">Facebook</a></li>
+        <li><a href="https://www.instagram.com" target="_blank">Instagram</a></li>
+        <li><a href="https://www.twitter.com" target="_blank">Twitter</a></li>
+        <li><a href="https://www.discord.com" target="_blank">Discord</a></li>
+    </ul>
+
+    <ul class="other-links">
+        <li><a href="/terms-and-conditions" target="_blank">Terms & Conditions</a></li>
+        <li><a href="/about-us" target="_blank">About us</a></li>
+        <li><a href="/contact-us" target="_blank">Contact us</a></li>
+    </ul>
+</div>
+
+<div class="loader-div" id="loader-div">
+    <div class="loader"></div>
+</div>
+
+<div th:if="${userNotLogin} != null">
+    <script>
+        swal('Attention', 'You need to login to use this feature', 'info').then(() => {
+            window.location = '/login';
+        });
+    </script>
+</div>
+
+<script type="text/javascript" th:src="@{/js/navbar.js}"></script>
+<script type="text/javascript" th:src="@{/js/buy-book.js}"></script>
+</body>
+
+</html>
