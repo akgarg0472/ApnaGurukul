@@ -1,4 +1,4 @@
-// noinspection JSUnresolvedFunction,JSUnresolvedVariable
+// noinspection JSUnresolvedFunction,JSUnresolvedVariable,JSUnusedGlobalSymbols
 
 $(document).ready(() => {
     $("#loader-div").hide();

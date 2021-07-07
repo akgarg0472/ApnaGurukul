@@ -80,10 +80,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    margin-top: 8px;
-    margin-left: 16px;
-    margin-right: 16px;
-    margin-bottom: 8px;
+    margin: 8px 16px;
     height: auto;
     width: 100%;
     border-radius: 8px;
@@ -151,7 +148,7 @@
     }
 
     .abtus-ortm .ortm-cards {
-        margin-top: 0px;
+        margin-top: 0;
     }
 
     .abtus-ortm .ortm-hd {
