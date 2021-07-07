@@ -33,6 +33,7 @@ public class SellBookAd {
     private String bookPhoto;
     private boolean isBookSold;
 
+    private String sellerEmail;
     private String sellerName;
     private String sellerCity;
     private String sellerState;
@@ -59,6 +60,7 @@ public class SellBookAd {
                       int originalPrice,
                       int sellingPrice,
                       String bookPhoto,
+                      String sellerEmail,
                       String sellerName,
                       String sellerCity,
                       String sellerState,
@@ -76,6 +78,7 @@ public class SellBookAd {
         this.originalPrice = originalPrice;
         this.sellingPrice = sellingPrice;
         this.bookPhoto = bookPhoto;
+        this.sellerEmail = sellerEmail;
         this.sellerName = sellerName;
         this.sellerCity = sellerCity;
         this.sellerState = sellerState;
@@ -180,6 +183,14 @@ public class SellBookAd {
         this.bookPhoto = bookPhoto;
     }
 
+    public String getSellerEmail() {
+        return sellerEmail;
+    }
+
+    public void setSellerEmail(String sellerEmail) {
+        this.sellerEmail = sellerEmail;
+    }
+
     public String getSellerName() {
         return sellerName;
     }
@@ -244,17 +255,20 @@ public class SellBookAd {
         this.sellDate = DateAndTimeMethods.getCurrentDate();
     }
 
-    public void setSellerInformation(String sellerName,
+    public void setSellerInformation(String sellerEmail,
+                                     String sellerName,
                                      String sellerCity,
                                      String sellerState,
                                      String sellerCountry,
                                      String sellerPincode) {
+        this.sellerEmail = sellerEmail;
         this.sellerName = sellerName;
         this.sellerCity = sellerCity;
         this.sellerState = sellerState;
         this.sellerCountry = sellerCountry;
         this.sellerPincode = sellerPincode;
     }
+
 
     @Override
     public String toString() {
@@ -267,16 +281,19 @@ public class SellBookAd {
                 ", bookStream='" + bookStream + '\'' +
                 ", additionalBookInfo='" + additionalBookInfo + '\'' +
                 ", bookQuality='" + bookQuality + '\'' +
-                ", donateBoook=" + donateBook +
+                ", donateBook=" + donateBook +
                 ", originalPrice=" + originalPrice +
                 ", sellingPrice=" + sellingPrice +
                 ", bookPhoto='" + bookPhoto + '\'' +
                 ", isBookSold=" + isBookSold +
+                ", sellerEmail='" + sellerEmail + '\'' +
                 ", sellerName='" + sellerName + '\'' +
                 ", sellerCity='" + sellerCity + '\'' +
                 ", sellerState='" + sellerState + '\'' +
                 ", sellerCountry='" + sellerCountry + '\'' +
                 ", sellerPincode='" + sellerPincode + '\'' +
+                ", publishingDate='" + publishingDate + '\'' +
+                ", sellDate='" + sellDate + '\'' +
                 '}';
     }
 }

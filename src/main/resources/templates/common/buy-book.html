@@ -25,17 +25,10 @@
 <body>
 <section th:insert="navbar :: navbar" style="display: flex;flex-direction: column;"></section>
 
-
-<!--  -->
-<!--  -->
 <div class="rdr-alrt-nt" id="rdr-alrt-nt">
     <span class="alrt-cls-btn" onclick="closeAlertDialog()">&times;</span>
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque voluptatum voluptatibus ex.</p>
 </div>
-
-<!--  -->
-<!--  -->
-
 
 <div class="bbk-sec">
     <div class="srch-optns">
@@ -93,6 +86,7 @@
         <div class="srch-bk-ip-div">
             <input type="search" name="srahc-input" id="" placeholder="Search book...">&ensp;
             <i class="fas fa-search"></i>
+            <form th:action="@{/generate-csrf}" method="post" style="display: none"></form>
         </div>
 
         <div class="srch-bk-qry-rslt-div">
@@ -144,6 +138,7 @@
                                     th:data-id="${book.id}"
                                     th:data-name="${user.name}"
                                     th:data-email="${user.username}"
+                                    th:data-phone="${user.phone}"
                                     th:data-city="${user.city}"
                                     th:data-state="${user.state}"
                                     th:data-country="${user.country}"
@@ -152,6 +147,7 @@
                                         this.getAttribute('data-id'),
                                         this.getAttribute('data-name'),
                                         this.getAttribute('data-email'),
+                                        this.getAttribute('data-phone'),
                                         this.getAttribute('data-city'),
                                         this.getAttribute('data-state'),
                                         this.getAttribute('data-country'),

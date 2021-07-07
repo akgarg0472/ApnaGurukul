@@ -21,10 +21,10 @@ function hideAllErrors() {
 function classSelect() {
     const selected = $("#select-book-class").children("option:selected").val();
 
-    if (selected === 'UG' || selected === 'PG') {
+    if (selected === 'Undergraduate' || selected === 'Postgraduate') {
         $("#bid-ip-abi").show();
         $("#select-book-stream").hide();
-    } else if (selected === 'eleventh' || selected === 'twelfth') {
+    } else if (selected === '11th' || selected === '12th') {
         $("#select-book-stream").show();
         $("#bid-ip-abi").hide();
     } else {
@@ -68,14 +68,14 @@ async function validateBookInformation() {
         return;
     }
 
-    if (bookClass.val() === 'eleventh' || bookClass.val() === 'twelfth') {
+    if (bookClass.val() === '11th' || bookClass.val() === '12th') {
         if (bookStream == null || bookStream.val() === 'null') {
             $("#bk-strmerr").show();
             return;
         }
     }
 
-    if (bookClass.val() === 'UG' || bookClass.val() === 'PG') {
+    if (bookClass.val() === 'Undergraduate' || bookClass.val() === 'Postgraduate') {
         if (additionalBookInfo == null || additionalBookInfo.val().trim() === '') {
             $("#bk-abierr").show();
             return;

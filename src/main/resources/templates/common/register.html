@@ -41,7 +41,7 @@
         <div class="signup-form-field">
             <input type="text" id="name" name="name" placeholder="Enter name" class="signup-form-input" required
                    oninvalid="this.setCustomValidity('Name can\'t be empty')" oninput="this.setCustomValidity('')"
-                   onfocusout="validateName()" onkeyup="validateName()" value="akhil">
+                   onfocusout="validateName()" onkeyup="validateName()" value="Akhilesh Garg">
             <p id="name-error" class="color-error">Please enter correct name</p>
             <div th:if="${session.Name_Error}">
                 <p class="color-error" th:text="${session.Name_Error}"></p>
@@ -76,7 +76,7 @@
 
         <div class="signup-form-field">
             <input type="tel" class="signup-form-input" id="phone" name="phone" placeholder="Enter 10 digit phone"
-                   onfocusout="validatePhone()" value="1234567890">
+                   onfocusout="validatePhone()" value="9876543210">
             <p id="phone-error" class="color-error">Please enter 10 digit phone number</p>
             <div th:if="${session.Phone_Error}">
                 <p class="color-error" th:text="${session.Phone_Error}"></p>
@@ -92,7 +92,7 @@
 
         <div class="signup-form-field">
             <input type="text" class="signup-form-input" name="address" id="address" placeholder="Enter address"
-                   onfocusout="validateAddress()" value="address" required>
+                   onfocusout="validateAddress()" value="House No. 123/4" required>
             <p class="color-error" id="address-error">Please enter correct address</p>
             <div th:if="${session.Address_Error}">
                 <p class="color-error" th:text="${session.Address_Error}"></p>
@@ -102,7 +102,7 @@
 
         <div class="signup-form-field">
             <input type="text" class="signup-form-input" name="city" id="city" placeholder="Enter city"
-                   onfocusout="validateCity()" value="city" required>
+                   onfocusout="validateCity()" value="Gurugram" required>
             <p class="color-error" id="city-error">Please enter city</p>
             <div th:if="${session.City_Error}">
                 <p class="color-error" th:text="${session.City_Error}"></p>
@@ -132,7 +132,7 @@
 
         <div class="signup-form-field">
             <input type="text" class="signup-form-input" name="pincode" id="pincode" placeholder="Enter pincode"
-                   required onfocusout="validatePincode()" onkeyup="validatePincode()" value="123456">
+                   required onfocusout="validatePincode()" onkeyup="validatePincode()" value="122001">
             <p class="color-error" id="pincode-error">Please enter valid pincode</p>
             <div th:if="${session.Pincode_Error}">
                 <p class="color-error" th:text="${session.Pincode_Error}"></p>

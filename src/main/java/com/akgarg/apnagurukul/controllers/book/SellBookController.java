@@ -66,6 +66,7 @@ public class SellBookController {
         }
 
         sellBookAd.setBookPhoto(bookPhotoUrl);
+        sellBookAd.setSellerEmail(loggedInUser.getUsername());
         sellBookAd.setSellerName(loggedInUser.getName());
         sellBookAd.setSellerCity(loggedInUser.getCity());
         sellBookAd.setSellerState(loggedInUser.getState());

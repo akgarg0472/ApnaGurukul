@@ -1,8 +1,9 @@
-// noinspection JSUnresolvedFunction
+// noinspection JSUnresolvedFunction,JSUnresolvedVariable
 
 $(document).ready(() => {
     $("#loader-div").hide();
 });
+
 
 const closeAlertDialog = () => {
     let alertDialog = $("#rdr-alrt-nt");
@@ -13,11 +14,13 @@ const closeAlertDialog = () => {
     }, 200);
 };
 
+
 const changePriceRange = (rangeSlider) => {
     const val = $(rangeSlider).val();
     const label = $("#srch-bk-price-rng-lbl");
     label.text(`Book price (Min: 1, Max: ${val})`);
 };
+
 
 const setMoreInfoModalData = (bookname, bookPhotoUrl, bookPublisher, bookAuthor, bookClass, bookPrice, bookCondition,
                               sellerName, sellerCity, sellerState, sellerCountry) => {
@@ -64,7 +67,7 @@ const setMoreInfoModalData = (bookname, bookPhotoUrl, bookPublisher, bookAuthor,
 };
 
 
-const setContactSellerModalData = (id) => {
+const setContactSellerModalData = (id, name, email, phone, city, state, country, pincode) => {
     const modalData =
         `<div class="modal-dialog">
             <div class="modal-content">
@@ -79,25 +82,25 @@ const setContactSellerModalData = (id) => {
                     <form class="cntc-slr-form" id="cntc-slr-form" action="#" method="post ">
                         <input type="text" class="form-control mb-1" placeholder="Ad listing id" value="${id}" style="display: none;" id="cs-id">
 
-                        <input type="text " class="form-control mb-1" placeholder="Enter name " id="cs-name">
+                        <input type="text " class="form-control mb-1" placeholder="Enter name " id="cs-name" value="${name}">
                         <span class="color-error" id="name-error" style="display: none">Please enter your name</span>
                         
-                        <input type="email " class="form-control mb-1 mt-1" placeholder="Enter email-id " id="cs-email">
+                        <input type="email " class="form-control mb-1 mt-1" placeholder="Enter email-id " id="cs-email" value="${email}" readonly>
                         <span class="color-error" id="email-error" style="display: none">Please enter valid email</span>
 
-                        <input type="number " class="form-control mb-1 mt-1" placeholder="Enter contact number" id="cs-contact">
+                        <input type="number " class="form-control mb-1 mt-1" placeholder="Enter contact number" id="cs-contact" value="${phone}">
                         <span class="color-error" id="phone-error" style="display: none">Please enter valid phone number</span>
                         
-                        <input type="text " class="form-control mb-1 mt-1" placeholder="Enter city" id="cs-city">
+                        <input type="text " class="form-control mb-1 mt-1" placeholder="Enter city" id="cs-city" value="${city}">
                         <span class="color-error" id="city-error" style="display: none">Please enter valid city</span>
                         
-                        <input type="text " class="form-control mb-1 mt-1" placeholder="Enter state" id="cs-state">
+                        <input type="text " class="form-control mb-1 mt-1" placeholder="Enter state" id="cs-state" value="${state}">
                         <span class="color-error" id="state-error" style="display: none">Please enter valid state</span>
 
-                        <input type="number" class="form-control mb-1 mt-1" placeholder="Enter pincode" id="cs-pincode">
+                        <input type="number" class="form-control mb-1 mt-1" placeholder="Enter pincode" id="cs-pincode" value="${pincode}">
                         <span class="color-error" id="pincode-error" style="display: none">Please enter valid pincode</span>
                         
-                        <input type="text " class="form-control mb-1 mt-1" placeholder="Enter country" id="cs-country">
+                        <input type="text " class="form-control mb-1 mt-1" placeholder="Enter country" id="cs-country" value="${country}">
                         <span class="color-error" id="country-error" style="display: none">Please enter valid country</span>
                         
                         <textarea class="form-control mt-1" rows="4" placeholder="Enter additional message (if any)" id="cs-add-msg"></textarea>
@@ -113,7 +116,9 @@ const setContactSellerModalData = (id) => {
 
     $("#contactSellerModal").html(modalData);
     const modal = new bootstrap.Modal(document.getElementById("contactSellerModal"));
-    modal.show();
+    swal("One Request", "Please give respect to other side person", "warning").then(() => {
+        modal.show();
+    })
 };
 
 
@@ -204,6 +209,7 @@ const validateCountry = (country) => {
     }
 };
 
+
 const validateContactSellerForm = () => {
     $('.color-error').hide();
 
@@ -247,32 +253,24 @@ const validateContactSellerForm = () => {
 
     // everything verified and validated, now show loader that something is under progress
     const _csrf = $("input[name=_csrf]").val();
-    const formData = `&id=${id}&name=${name}&email=${email}&contact=${contact}&city=${city}&state=${state}&pincode=${pincode}&country=${country}&message=${message}`;
-    const url = `/process-book-request`;
+    const formData = `&id=${id}&name=${name}&email=${email}&phone=${contact}&city=${city}&state=${state}&pincode=${pincode}&country=${country}&message=${message}`;
+    const url = `/process-buy-book-req`;
     const loader = $("#loader-div");
 
     loader.show();
     $('#contactSellerModal').modal('hide');
-    
+
     $.post(url, `_csrf=${_csrf}${formData}`)
         .done((resp) => {
             loader.hide();
             if (resp.severity === 'high') {
                 swal("Error", resp.message, "error");
             } else {
-                swal({
-                    title: "Congratulations",
-                    text: "Request sent to seller successfully",
-                    type: "success"
-                }).then(() => {
-                    window.location = '/';
-                });
+                swal("Congratulations", "Request sent to seller successfully", "success");
             }
         })
         .fail(() => {
             loader.hide();
-            swal({title: "Error", text: 'Something wrong happen, please try again later', type: "error"}).then(() => {
-                window.location = '/buy-book';
-            });
+            swal('Error', 'Something wrong happen, please try again later', 'info')
         });
 }

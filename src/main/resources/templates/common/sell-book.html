@@ -50,28 +50,28 @@
 
             <select name="book-class" id="select-book-class" onchange="classSelect()">
                 <option value="null">---Select Class---</option>
-                <option value="first">1st</option>
-                <option value="second">2nd</option>
-                <option value="third">3rd</option>
-                <option value="fourth">4th</option>
-                <option value="fifth">5th</option>
-                <option value="sixth">6th</option>
-                <option value="seventh">7th</option>
-                <option value="eighth">8th</option>
-                <option value="nineth">9th</option>
-                <option value="tenth">10th</option>
-                <option value="eleventh">11th</option>
-                <option value="twelfth">12th</option>
-                <option value="UG">Undergraduate</option>
-                <option value="PG">Postgraduate</option>
+                <option value="1st">1st</option>
+                <option value="2nd">2nd</option>
+                <option value="3rd">3rd</option>
+                <option value="4th">4th</option>
+                <option value="5th">5th</option>
+                <option value="6th">6th</option>
+                <option value="7th">7th</option>
+                <option value="8th">8th</option>
+                <option value="9th">9th</option>
+                <option value="10th">10th</option>
+                <option value="11th">11th</option>
+                <option value="12th">12th</option>
+                <option value="Undergraduate">Undergraduate</option>
+                <option value="Postgraduate">Postgraduate</option>
             </select>
             <p id="bk-clserr" class="color-error">Please select class</p>
 
             <select name="book-class-stream" id="select-book-stream">
                 <option value="null">---Select stream---</option>
-                <option value="commerce">Commerce</option>
-                <option value="arts">Arts/Humanities</option>
-                <option value="science">Science</option>
+                <option value="Commerce">Commerce</option>
+                <option value="Arts">Arts/Humanities</option>
+                <option value="Science">Science</option>
             </select>
             <p id="bk-strmerr" class="color-error">Please select stream</p>
 
@@ -113,9 +113,9 @@
 
             <select name="book-condition" id="select-book-quality">
                 <option value="null">---Select Book quality---</option>
-                <option value="veryGoodCondition">Very Good</option>
-                <option value="goodCondition">Good</option>
-                <option value="fairCondition">Fair</option>
+                <option value="Very Good Condition">Very Good</option>
+                <option value="Good Condition">Good</option>
+                <option value="Fair Condition">Fair</option>
             </select>
             <p id="bk-qltyerr" class="color-error">Please select book quality</p>
 
@@ -176,7 +176,9 @@
 
 <div th:if="${userNotLogin} != null">
     <script>
-        swal('Attention', 'Please login to use this feature', 'info');
+        swal('Attention', 'You need to login to use this feature', 'info').then(() => {
+            window.location = '/login';
+        });
     </script>
 </div>
 
