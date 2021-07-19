@@ -99,11 +99,8 @@ const logout = (type) => {
         case 'student':
             window.location = '/student/logout';
             break;
-        case 'admin':
-            window.location = '/admin/logout';
-            break;
-        case 'teacher':
-            window.location = '/faculty/logout';
+        case 'user':
+            window.location = '/user/logout';
             break;
     }
 }

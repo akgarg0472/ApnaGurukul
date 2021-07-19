@@ -15,7 +15,7 @@
                 <ul class="dropdown-content" id="dropdown-content">
                     <li id="nvbr-dd-link" onclick="swal('not implemented')">Find teacher</li>
                     <li id="nvbr-dd-link" onclick="swal('not implemented')">Find student</li>
-                    <li id="nvbr-dd-link" onclick="swal('not implemented')">Buy books</li>
+                    <li id="nvbr-dd-link" onclick="window.location.assign('/buy-book')">Buy books</li>
                     <li id="nvbr-dd-link" onclick="window.location.assign('/sell-book');">Sell books</li>
                 </ul>
             </li>
@@ -60,11 +60,8 @@
                 <li id="nvbr-dd-link" th:if="${#authentication.getPrincipal().getRole() == 'ROLE_ADMIN'}"
                     onclick="logout(`admin`)">Logout
                 </li>
-                <li id="nvbr-dd-link" th:if="${#authentication.getPrincipal().getRole() == 'ROLE_FACULTY'}"
-                    onclick="logout(`teacher`)">Logout
-                </li>
-                <li id="nvbr-dd-link" th:if="${#authentication.getPrincipal().getRole() == 'ROLE_STUDENT'}"
-                    onclick="logout(`student`)">Logout
+                <li id="nvbr-dd-link" th:if="${#authentication.getPrincipal().getRole() == 'ROLE_USER'}"
+                    onclick="logout(`user`)">Logout
                 </li>
             </ul>
         </div>

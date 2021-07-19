@@ -166,13 +166,13 @@ const validateUserPersonalInformation = async () => {
     loader.hide();
 
     if (!isEmailRegistered) {
-        let isRoleValidated = validateRole();
+
         let isNameValidated = validateName();
         let isEmailValidated = validateEmail();
         let isPasswordValidated = validatePassword();
         let isPhoneValidated = validatePhone();
 
-        if (isNameValidated && isRoleValidated && isEmailValidated && isPasswordValidated && isPhoneValidated) {
+        if (isNameValidated && isEmailValidated && isPasswordValidated && isPhoneValidated) {
             // proceed application to address info
             pib.hide();
             aib.show();
@@ -208,6 +208,8 @@ const submitSignupForm = async () => {
                 // todo later
             });
         loader.hide();
+
+        console.log(response)
 
         if (response === "ERRORS" || response === "null") {
             window.location = "/signup";

@@ -65,11 +65,8 @@ public class ApnaGurukulController {
                     case "ROLE_ADMIN":
                         return "redirect:/admin/dashboard";
 
-                    case "ROLE_FACULTY":
-                        return "redirect:/faculty/dashboard";
-
-                    case "ROLE_STUDENT":
-                        return "redirect:/student/dashboard";
+                    case "ROLE_USER":
+                        return "redirect:/user/dashboard";
                 }
             }
         }
@@ -95,11 +92,8 @@ public class ApnaGurukulController {
                     case "ROLE_ADMIN":
                         return "redirect:/admin/dashboard";
 
-                    case "ROLE_FACULTY":
-                        return "redirect:/faculty/dashboard";
-
-                    case "ROLE_STUDENT":
-                        return "redirect:/student/dashboard";
+                    case "ROLE_USER":
+                        return "redirect:/user/dashboard";
                 }
             }
         }

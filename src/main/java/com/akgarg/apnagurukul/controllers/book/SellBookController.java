@@ -42,7 +42,7 @@ public class SellBookController {
         this.standardPasswordEncoder = standardPasswordEncoder;
     }
 
-    
+
     @RequestMapping(value = "/process-sell-book", method = RequestMethod.POST)
     @ResponseBody
     public ResponseMessage processSellBook(Principal principal,
@@ -76,7 +76,7 @@ public class SellBookController {
         sellBookAd.setSellerPincode(loggedInUser.getPincode());
         this.sellBookAdRepository.save(sellBookAd);
 
-        EmailSender.sendEmail(loggedInUser.getUsername(), "Book successfully published for sale",
+        EmailSender.sendEmail(loggedInUser.getUsername(), "Book successfully listed for sale",
                 EmailMessages.bookSellListSuccessMessage(
                         loggedInUser.getName(),
                         sellBookAd.getId(),

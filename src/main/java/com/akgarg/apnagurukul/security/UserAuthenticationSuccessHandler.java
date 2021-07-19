@@ -30,8 +30,7 @@ public class UserAuthenticationSuccessHandler implements AuthenticationSuccessHa
                                         HttpServletResponse httpServletResponse,
                                         Authentication authentication) throws IOException {
         boolean hasAdminRole = false;
-        boolean hasTeacherRole = false;
-        boolean hasStudentRole = false;
+        boolean hasUserRole = false;
 
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         for (GrantedAuthority grantedAuthority : authorities) {
@@ -39,11 +38,9 @@ public class UserAuthenticationSuccessHandler implements AuthenticationSuccessHa
             if (grantedAuthority.getAuthority().equals("ROLE_ADMIN")) {
                 hasAdminRole = true;
                 break;
-            } else if (grantedAuthority.getAuthority().equals("ROLE_FACULTY")) {
-                hasTeacherRole = true;
+            } else if (grantedAuthority.getAuthority().equals("ROLE_USER")) {
+                hasUserRole = true;
                 break;
-            } else if (grantedAuthority.getAuthority().equals("ROLE_STUDENT")) {
-                hasStudentRole = true;
             }
         }
 
@@ -55,10 +52,8 @@ public class UserAuthenticationSuccessHandler implements AuthenticationSuccessHa
 
         if (hasAdminRole) {
             redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "/admin/dashboard");
-        } else if (hasTeacherRole) {
-            redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "/faculty/dashboard");
-        } else if (hasStudentRole) {
-            redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "/student/dashboard");
+        } else if (hasUserRole) {
+            redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "/user/dashboard");
         } else {
             throw new IllegalStateException("User is not a valid ApnaGurukul user");
         }

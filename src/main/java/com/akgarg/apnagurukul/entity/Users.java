@@ -1,9 +1,12 @@
 package com.akgarg.apnagurukul.entity;
 
 import com.akgarg.apnagurukul.helper.DateAndTimeMethods;
-import org.hibernate.annotations.Cascade;
+import org.springframework.beans.factory.annotation.Value;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -58,22 +61,12 @@ public class Users {
     @NotNull(message = "Country can't be null")
     private String country;
 
-    @ElementCollection
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
-    private List<String> subjectsTeach;
-
-    @ElementCollection
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
-    private List<Integer> classesTeach;
-
     private String profilePicture;
     private String joinDate;
     private String lastLoginDate;
 
     @Column(name = "user_role")
-    @NotBlank(message = "Role can't be empty")
-    @NotNull(message = "Role can't be null")
-
+    @Value("ROLE_USER")
     private String role;
 
     @Column(name = "is_account_non_expired")
@@ -149,8 +142,6 @@ public class Users {
         this.state = state;
         this.pincode = pincode;
         this.country = country;
-        this.subjectsTeach = subjectsTeach;
-        this.classesTeach = classesTeach;
         this.profilePicture = profilePicture;
         this.role = role;
         this.accountNonExpired = accountNonExpired;
@@ -231,22 +222,6 @@ public class Users {
         this.country = country;
     }
 
-    public List<String> getSubjectsTeach() {
-        return subjectsTeach;
-    }
-
-    public void setSubjectsTeach(List<String> subjectsTeach) {
-        this.subjectsTeach = subjectsTeach;
-    }
-
-    public List<Integer> getClassesTeach() {
-        return classesTeach;
-    }
-
-    public void setClassesTeach(List<Integer> classesTeach) {
-        this.classesTeach = classesTeach;
-    }
-
     public String getProfilePicture() {
         return profilePicture;
     }
@@ -313,26 +288,24 @@ public class Users {
 
     @Override
     public String toString() {
-        return "User{" +
-                "email='" + username + '\'' +
+        return "Users{" +
+                "username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", name='" + name + '\'' +
                 ", phone='" + phone + '\'' +
                 ", address='" + address + '\'' +
                 ", city='" + city + '\'' +
                 ", state='" + state + '\'' +
-                ", pinCode='" + pincode + '\'' +
+                ", pincode='" + pincode + '\'' +
                 ", country='" + country + '\'' +
-                ", subjectsTeach=" + subjectsTeach +
-                ", classesTeach=" + classesTeach +
                 ", profilePicture='" + profilePicture + '\'' +
-                ", joinDate=" + joinDate +
+                ", joinDate='" + joinDate + '\'' +
+                ", lastLoginDate='" + lastLoginDate + '\'' +
                 ", role='" + role + '\'' +
                 ", accountNonExpired=" + accountNonExpired +
                 ", accountNonLocked=" + accountNonLocked +
                 ", credentialsNonExpired=" + credentialsNonExpired +
                 ", enabled=" + enabled +
-                ", lastLogin=" + lastLoginDate +
                 '}';
     }
 }

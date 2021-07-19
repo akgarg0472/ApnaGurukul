@@ -40,7 +40,6 @@ public class RegistrationController {
         }
 
         boolean isBindingResultHasErrors = false;
-        boolean isRoleInvalid = false;
 
         if (bindingResult.hasErrors()) {
             isBindingResultHasErrors = true;
@@ -51,23 +50,14 @@ public class RegistrationController {
             });
         }
 
-        if (user.getRole().equals("default")) {
-            session.setAttribute("Role_Error", "Please select your role");
-            isRoleInvalid = true;
-        }
 
-        if (isBindingResultHasErrors || isRoleInvalid) {
+        if (isBindingResultHasErrors) {
             return "ERRORS";
         }
 
         user.setPassword(this.bCryptPasswordEncoder.encode(user.getPassword()));
         user.setProfilePicture(MyConstants.DEFAULT_PROFILE_PICTURE);
-
-        if (user.getRole().equals("faculty")) {
-            user.setRole("ROLE_FACULTY");
-        } else if (user.getRole().equals("student")) {
-            user.setRole("ROLE_STUDENT");
-        }
+        user.setRole("ROLE_USER");
 
         int otp = otpGenerator.generateOTP(user.getUsername());
         boolean sendEmail = EmailSender.sendEmail(user.getUsername(), "Registration OTP", EmailMessages.registrationOTPMessage(user.getUsername(), user.getName(), otp));
@@ -97,6 +87,7 @@ public class RegistrationController {
         Users user = (Users) session.getAttribute("newUserRegistration");
 
         if (user != null) {
+            System.out.println(user.getRole());
             int generatedOtp = this.otpGenerator.getOtp(user.getUsername());
 
             if (generatedOtp == 0) {

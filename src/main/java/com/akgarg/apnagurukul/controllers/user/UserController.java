@@ -1,17 +1,15 @@
-package com.akgarg.apnagurukul.controllers.faculty;
+package com.akgarg.apnagurukul.controllers.user;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping("/faculty")
-public class FacultyController {
+@RequestMapping("/user")
+public class UserController {
 
-    @ResponseBody
     @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
     public String dashboard(HttpSession session) {
         if (session.getAttribute("buyBookLogin") != null) {
@@ -22,13 +20,13 @@ public class FacultyController {
             return "redirect:/sell-book";
         }
 
-        return "This is the faculty dashboard";
+        return "user/dashboard";
     }
 
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String facultyLogout() {
-        System.out.println("faculty logout called");
+        System.out.println("user logout called");
         //noinspection SpringMVCViewInspection
         return "redirect:/logout";
     }
