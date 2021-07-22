@@ -1,10 +1,9 @@
 package com.akgarg.apnagurukul.controllers.general;
 
 import com.akgarg.apnagurukul.entity.Users;
-import com.akgarg.apnagurukul.helper.*;
 import com.akgarg.apnagurukul.repository.UsersRepository;
+import com.akgarg.apnagurukul.service.UserRegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -16,17 +15,15 @@ import javax.validation.Valid;
 @Controller
 public class RegistrationController {
 
+    private final UserRegistrationService userRegistrationService;
     private final UsersRepository usersRepository;
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
-    private final OTPGenerator otpGenerator;
+
 
     @Autowired
-    public RegistrationController(UsersRepository usersRepository,
-                                  BCryptPasswordEncoder bCryptPasswordEncoder,
-                                  OTPGenerator otpGenerator) {
+    public RegistrationController(UserRegistrationService userRegistrationService,
+                                  UsersRepository usersRepository) {
+        this.userRegistrationService = userRegistrationService;
         this.usersRepository = usersRepository;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-        this.otpGenerator = otpGenerator;
     }
 
 
@@ -44,39 +41,18 @@ public class RegistrationController {
         if (bindingResult.hasErrors()) {
             isBindingResultHasErrors = true;
             bindingResult.getAllErrors().forEach(error -> {
-                String errorName = error.getDefaultMessage() != null ? error.getDefaultMessage().split(" ")[0] : "null";
+                String errorName = error.getDefaultMessage() != null ?
+                        error.getDefaultMessage().split(" ")[0] : "null";
                 String errorMessage = error.getDefaultMessage();
                 session.setAttribute(errorName + "_Error", errorMessage);
             });
         }
 
-
         if (isBindingResultHasErrors) {
             return "ERRORS";
         }
 
-        user.setPassword(this.bCryptPasswordEncoder.encode(user.getPassword()));
-        user.setProfilePicture(MyConstants.DEFAULT_PROFILE_PICTURE);
-        user.setRole("ROLE_USER");
-
-        int otp = otpGenerator.generateOTP(user.getUsername());
-        boolean sendEmail = EmailSender.sendEmail(user.getUsername(), "Registration OTP", EmailMessages.registrationOTPMessage(user.getUsername(), user.getName(), otp));
-
-        if (sendEmail) {
-            if (session.getAttribute("forgotPasswordRequest") != null) {
-                session.removeAttribute("forgotPasswordRequest");
-            }
-
-            if (session.getAttribute("fpEmail") != null) {
-                session.removeAttribute("fpEmail");
-            }
-
-            session.setAttribute("newUserRegistration", user);
-            return "SUCCESS";
-        } else {
-            this.otpGenerator.deleteOTP(user.getUsername());
-            return "FAIL";
-        }
+        return this.userRegistrationService.processRegistrationInformation(user, session);
     }
 
 
@@ -84,29 +60,7 @@ public class RegistrationController {
     @RequestMapping(value = "process-otp-verification", method = RequestMethod.POST)
     public String processOtpVerification(HttpSession session,
                                          @RequestParam("otp") int otp) {
-        Users user = (Users) session.getAttribute("newUserRegistration");
-
-        if (user != null) {
-            System.out.println(user.getRole());
-            int generatedOtp = this.otpGenerator.getOtp(user.getUsername());
-
-            if (generatedOtp == 0) {
-                return "OTP_EXPIRED";
-            }
-
-            if (generatedOtp == otp) {
-                session.removeAttribute("newUserRegistration");
-                this.otpGenerator.deleteOTP(user.getUsername());
-                user.setJoinDate(DateAndTimeMethods.getCurrentDate());
-                this.usersRepository.save(user);
-                EmailSender.sendEmail(user.getUsername(), "Registration successful", EmailMessages.registrationSuccessMessage(user.getUsername(), user.getName()));
-                session.setAttribute("registrationSuccessful", "Registration successful");
-                return "REGISTRATION_SUCCESSFUL";
-            } else {
-                return "OTP_MISMATCHED";
-            }
-        }
-        return "UNAUTHORIZED_ACCESS";
+        return this.userRegistrationService.processOtpVerification(session, otp);
     }
 
 
@@ -121,12 +75,6 @@ public class RegistrationController {
             user = this.usersRepository.getUserByUsername((String) session.getAttribute("fpEmail"));
         }
 
-        if (user != null) {
-            this.otpGenerator.deleteOTP(user.getUsername());
-            int otp = this.otpGenerator.generateOTP(user.getUsername());
-            return EmailSender.sendEmail(user.getUsername(), "OTP for registration confirmation", EmailMessages.registrationOTPMessage(user.getUsername(), user.getName(), otp));
-        }
-
-        return false;
+        return this.userRegistrationService.resendRegistrationVerificationOtp(user);
     }
 }

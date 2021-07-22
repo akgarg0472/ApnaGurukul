@@ -24,10 +24,10 @@ public class UserController {
     }
 
 
+    @SuppressWarnings("SpringMVCViewInspection")
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String facultyLogout() {
         System.out.println("user logout called");
-        //noinspection SpringMVCViewInspection
         return "redirect:/logout";
     }
 }

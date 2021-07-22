@@ -166,7 +166,8 @@ public class ApnaGurukulController {
 
     @RequestMapping(value = "/verify-otp", method = RequestMethod.GET)
     public String verifyOtp(HttpSession session) {
-        if (session.getAttribute("newUserRegistration") != null || session.getAttribute("forgotPasswordRequest") != null) {
+        if (session.getAttribute("newUserRegistration") != null ||
+                session.getAttribute("forgotPasswordRequest") != null) {
             return "common/verify-otp";
         } else {
             return "redirect:/login";
@@ -188,7 +189,12 @@ public class ApnaGurukulController {
                                   @RequestParam("lname") String lastName,
                                   @RequestParam("email") String email,
                                   @RequestParam("desc") String description) {
-        if (lastName != null && !lastName.trim().equals("") && email != null && !email.trim().equals("") && description != null && !description.trim().equals("")) {
+        if (lastName != null
+                && !lastName.trim().equals("")
+                && email != null
+                && !email.trim().equals("")
+                && description != null
+                && !description.trim().equals("")) {
             ContactUs contactUs = new ContactUs(firstName, lastName, email, description);
             this.contactUsRepository.save(contactUs);
             return true;
