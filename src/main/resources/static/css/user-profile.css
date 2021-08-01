@@ -1,0 +1,564 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,800");
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@200&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap");
+
+:root {
+    --myFontFamily: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    --myRed: #f93154;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.up-body {
+    display: flex;
+    height: 100%;
+    position: relative;
+    top: 8vh;
+}
+
+.up-body .content {
+    display: flex;
+    width: 78%;
+    height: auto;
+    margin-left: 22%;
+    margin-right: 2%;
+    margin-top: 1rem;
+}
+
+.up-body .content .left-section {
+    display: flex;
+    flex-direction: column;
+    margin-right: 2%;
+    width: 100%;
+}
+
+.up-body .content .left-section .welcome-banner {
+    display: flex;
+    flex-direction: column;
+    border-radius: 1rem;
+    padding: 24px 48px 24px 48px;
+    color: #fff;
+    background-color: orange;
+}
+
+.up-body .content .left-section .welcome-banner .wun {
+    font-family: var(--myFontFamily);
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.up-body .content .left-section .welcome-banner .wgmsg {
+    font-family: var(--myFontFamily);
+    font-size: 0.9rem;
+}
+
+.up-body .content .resp-icons {
+    display: none;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.up-body .content .hmbg-mnicn,
+.up-body .content .cross-mnicn {
+    display: none;
+}
+
+.up-body .content .hmbg-mnicn:hover,
+.up-body .content .cross-mnicn:hover {
+    cursor: pointer;
+}
+
+.up-body .content .upper-last-login {
+    display: none;
+}
+
+.up-body .content .left-section .statistics {
+    display: flex;
+    flex-direction: column;
+}
+
+.up-body .content .left-section .statistics .stats-section,
+.up-body .content .left-section .statistics .act-section {
+    margin-top: 2rem;
+}
+
+.up-body .content .left-section .statistics .stats-head,
+.up-body .content .left-section .statistics .rec-act-head {
+    font-family: "Josefin Sans", sans-serif;
+    margin-top: 3rem;
+    font-size: 1.5rem;
+    color: #5a5b5c;
+}
+
+.up-body .content .left-section .statistics .stats-cards,
+.up-body .content .left-section .statistics .act-cards,
+.up-body .content .right-section .services .services-cards {
+    display: flex;
+    align-items: center;
+    margin-top: 0.5rem;
+    gap: 0.5rem;
+}
+
+.up-body .content .left-section .statistics .stats-cards .card,
+.up-body .content .left-section .statistics .act-cards .card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 150px;
+    width: 150px;
+    border-radius: 1rem;
+    padding: 1rem;
+    color: #fff;
+    font-size: 1.25rem;
+    font-family: var(--myFontFamily);
+    letter-spacing: 1px;
+    font-weight: 500;
+}
+
+.up-body .content .left-section .statistics .stats-cards div:nth-child(1) {
+    background-color: #f93154;
+}
+
+.up-body .content .left-section .statistics .stats-cards div:nth-child(2) {
+    background-color: #3fd3a9;
+}
+
+.up-body .content .left-section .statistics .stats-cards div:nth-child(3) {
+    background-color: #12b0e8;
+}
+
+.up-body .content .left-section .statistics .act-cards div:nth-child(1) {
+    background-color: #55e6c1;
+    background-color: rgba(24, 44, 97, 0.7);
+}
+
+.up-body .content .left-section .statistics .act-cards div:nth-child(2) {
+    background-color: #fea47f;
+}
+
+.up-body .content .left-section .statistics .act-cards div:nth-child(3) {
+    background-color: #758283;
+    background-color: rgba(31, 33, 37, 0.75);
+}
+
+.up-body .content .left-section .statistics .stats-cards a,
+.up-body .content .left-section .statistics .act-cards a {
+    text-decoration: none;
+    color: #000;
+    width: 50px;
+}
+
+.up-body .content .left-section .statistics .stats-cards .fa-chevron-right,
+.up-body .content .left-section .statistics .act-cards .fa-chevron-right {
+    margin-left: 4px;
+}
+
+.up-body .content .right-section {
+    display: flex;
+    flex-direction: column;
+    margin-left: 2%;
+}
+
+.up-body .content .right-section .last-login,
+.up-body .content .upper-last-login {
+    font-family: var(--myFontFamily);
+    text-align: right;
+    margin-top: 1rem;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+.up-body .content .right-section .services {
+    margin-top: 2rem;
+    text-align: center;
+    background-color: rgba(26, 188, 156, 0.1);
+    border-radius: 1rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.up-body .content .right-section .services .services-head {
+    font-family: "Josefin Sans", sans-serif;
+    font-size: 1.5rem;
+    color: #5a5b5c;
+    margin-bottom: 1rem;
+}
+
+.up-body .content .right-section .services .services-cards {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+    gap: 40px 20px;
+}
+
+.up-body .content .right-section .services .services-cards .card {
+    display: flex;
+    flex-direction: column;
+    width: 125px;
+    height: 100px;
+    border-radius: 0.75rem;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+}
+
+.up-body .content .right-section .services .services-cards .card .head {
+    height: 40px;
+    border: 1rem;
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #cd7f63;
+    color: #fff;
+}
+
+.up-body .content .right-section .services .services-cards .card .body {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    border-radius: 0.75rem;
+}
+
+.up-body .content .right-section .services .explore-btn {
+    height: 40px;
+    width: 225px;
+    border-radius: 2rem;
+    margin-top: 3rem;
+    outline: none;
+    border: none;
+    color: #fff;
+    background-color: rgba(52, 73, 94, 0.5);
+}
+
+.up-body .content .right-section .services .explore-btn:hover {
+    cursor: pointer;
+}
+
+/* Media queries */
+@media only screen and (max-width: 1150px) {
+    .up-body .content {
+        margin-left: 24%;
+    }
+
+    .up-body .content {
+        margin-top: 1rem;
+    }
+
+    .up-body .content .left-section .statistics .stats-head,
+    .up-body .content .left-section .statistics .rec-act-head,
+    .up-body .content .right-section .services .services-head {
+        font-size: 1.25rem;
+    }
+
+    .up-body .content .left-section .statistics .stats-cards .card,
+    .up-body .content .left-section .statistics .act-cards .card {
+        height: 125px;
+        width: 125px;
+        font-size: 1.2rem;
+    }
+
+    .up-body .content .left-section .statistics .stats-head,
+    .up-body .content .left-section .statistics .rec-act-head {
+        margin-top: 2rem;
+    }
+
+    .up-body .content .right-section .last-login {
+        font-size: 0.95rem;
+    }
+
+    .up-body .content .right-section .services {
+        padding: 1rem;
+    }
+
+    .up-body .content .right-section .services .explore-btn {
+        margin-top: 1.5rem;
+        width: 175px;
+        height: 35px;
+    }
+
+    .up-body .content .right-section .services .services-cards .card {
+        width: 115px;
+        height: 90px;
+    }
+}
+
+@media only screen and (max-width: 1050px) {
+    .up-body .content .left-section .statistics .stats-head,
+    .up-body .content .left-section .statistics .rec-act-head,
+    .up-body .content .right-section .services .services-head {
+        font-size: 1.2rem;
+    }
+
+    .up-body .content .left-section .statistics .stats-cards .card,
+    .up-body .content .left-section .statistics .act-cards .card {
+        height: 110px;
+        width: 110px;
+        font-size: 1.15rem;
+    }
+
+    .up-body .content .right-section .last-login {
+        font-size: 0.9rem;
+    }
+
+    .up-body .content .right-section .services {
+        padding: 1.5rem;
+    }
+
+    .up-body .content .right-section .services .services-cards .card {
+        width: 110px;
+        height: 90px;
+        font-size: 0.9rem;
+    }
+}
+
+@media only screen and (max-width: 925px) {
+    .up-body .content .left-section .welcome-banner {
+        padding: 20px 40px 20px 40px;
+    }
+
+    .up-body .content .left-section .welcome-banner .wun {
+        font-size: 1.25rem;
+    }
+
+    .up-body .content .left-section .statistics .stats-head,
+    .up-body .content .left-section .statistics .rec-act-head,
+    .up-body .content .right-section .services .services-head {
+        font-size: 1.1rem;
+        text-align: center;
+    }
+
+    .up-body .content .left-section .statistics .stats-cards .card,
+    .up-body .content .left-section .statistics .act-cards .card {
+        height: 100px;
+        width: 100px;
+        font-size: 1.1rem;
+    }
+
+    .up-body .content .right-section .last-login {
+        font-size: 0.9rem;
+    }
+
+    .up-body .content .right-section .services {
+        padding: 1rem;
+    }
+
+    .up-body .content .right-section .services .services-cards .card {
+        width: 100px;
+        height: 80px;
+        font-size: 0.9rem;
+    }
+
+    .up-body .content .left-section .statistics {
+        flex-direction: row;
+        justify-content: space-around;
+        gap: 12px 12px;
+    }
+
+    .up-body .content .left-section .statistics .stats-cards,
+    .up-body .content .left-section .statistics .act-cards {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .up-body .content {
+        margin-left: 27%;
+    }
+
+    .up-body .content {
+        flex-direction: column;
+    }
+
+    .up-body .content .upper-last-login {
+        display: block;
+        margin-top: 0;
+        margin-bottom: 1rem;
+        font-size: 0.8rem;
+        color: #5a5b5c;
+    }
+
+    .up-body .content .left-section .welcome-banner {
+        padding: 24px 48px;
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
+
+    .up-body .content .left-section .welcome-banner .wun {
+        font-size: 1.4rem;
+    }
+
+    .up-body .content .left-section .welcome-banner .wgmsg {
+        font-size: 1rem;
+    }
+
+    .up-body .content .left-section .statistics {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .up-body .content .left-section .statistics .stats-section .stats-cards,
+    .up-body .content .left-section .statistics .act-section .act-cards {
+        flex-direction: row;
+    }
+
+    .up-body .content .right-section {
+        margin-right: 1rem;
+        justify-content: center;
+    }
+
+    .up-body .content .right-section {
+        flex-direction: column-reverse;
+        margin-bottom: 1rem;
+    }
+
+    .up-body .content .right-section .last-login {
+        display: none;
+    }
+
+    .up-body .content .right-section .services .services-cards .card {
+        width: 125px;
+        height: 100px;
+        font-size: 0.9rem;
+    }
+}
+
+@media only screen and (max-width: 625px) {
+    .up-body .content .left-section .welcome-banner .wun {
+        font-size: 1.15rem;
+    }
+
+    .up-body .content .left-section .welcome-banner {
+        padding: 20px 40px;
+    }
+
+    .up-body .content .left-section .statistics .stats-cards .card,
+    .up-body .content .left-section .statistics .act-cards .card {
+        height: 90px;
+        width: 90px;
+    }
+
+    .up-body .content .right-section .services .services-cards .card {
+        width: 110px;
+        height: 90px;
+        font-size: 0.9rem;
+    }
+}
+
+@media only screen and (max-width: 550px) {
+    .up-body .content .left-section .statistics .stats-cards .card,
+    .up-body .content .left-section .statistics .act-cards .card {
+        height: 80px;
+        width: 80px;
+        font-size: 1rem;
+    }
+}
+
+@media only screen and (max-width: 449px) {
+    .up-body .content {
+        margin-left: 0;
+        width: auto;
+    }
+
+    .up-body .content .resp-icons {
+        display: flex;
+        align-items: center;
+    }
+
+    .up-body .content .hmbg-mnicn,
+    .up-body .content .cross-mnicn {
+        display: flex;
+        margin-left: 1rem;
+        font-size: 24px;
+        z-index: 999;
+    }
+
+    .up-body .content .cross-mnicn {
+        color: rgba(0, 0, 0, 0.8);
+        display: none;
+    }
+
+    .up-body .content .left-section .welcome-banner {
+        padding: 16px 32px;
+        margin-left: 2rem;
+        margin-right: 1rem;
+    }
+
+    .up-body .content .left-section .welcome-banner .wun {
+        font-size: 1.25rem;
+    }
+
+    .up-body .content .left-section .statistics {
+        flex-direction: column;
+    }
+
+    .up-body .content .left-section .statistics .stats-section .stats-cards,
+    .up-body .content .left-section .statistics .act-section .act-cards {
+        flex-direction: row;
+    }
+
+    .up-body .content .upper-last-login {
+        margin-right: 0.5rem;
+    }
+
+    .up-body .content .right-section {
+        margin-left: 1rem;
+    }
+
+    .up-body .content .right-section {
+        flex-direction: column-reverse;
+        margin-bottom: 1rem;
+    }
+}
+
+@media only screen and (max-width: 375px) {
+    .up-body .content .left-section .statistics .stats-cards .card,
+    .up-body .content .left-section .statistics .act-cards .card {
+        height: 70px;
+        width: 70px;
+        font-size: 0.9rem;
+    }
+
+    .up-body .content .right-section {
+        margin-left: 1rem;
+    }
+
+    .up-body .content .right-section {
+        flex-direction: column-reverse;
+        margin-bottom: 1rem;
+    }
+}
+
+@media only screen and (max-width: 325px) {
+    .up-body .content .left-section .statistics .stats-cards .card,
+    .up-body .content .left-section .statistics .act-cards .card {
+        height: 60px;
+        width: 60px;
+        font-size: 0.8rem;
+    }
+
+    .up-body .content .left-section .welcome-banner .wun {
+        font-size: 1rem;
+    }
+
+    .up-body .content .left-section .welcome-banner .wgmsg {
+        font-size: 0.8rem;
+    }
+}

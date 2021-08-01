@@ -1,0 +1,108 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,800");
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@200&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap");
+
+:root {
+    --myFontFamily: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    --myRed: #f93154;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.up-navbar {
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0;
+    z-index: 99;
+    background-color: #fff;
+    border-bottom: 1px solid #d1d3d6;
+    width: 100%;
+}
+
+.up-navbar .logo {
+    margin-left: 1rem;
+}
+
+.up-navbar .logo img {
+    height: 8vh;
+}
+
+.up-navbar .logo img:hover {
+    cursor: pointer;
+}
+
+.up-navbar .links {
+    margin-right: 1rem;
+}
+
+.up-navbar ul {
+    display: flex;
+    list-style: none;
+}
+
+.up-navbar ul li {
+    margin-right: 3rem;
+}
+
+.up-navbar ul li a {
+    text-decoration: none;
+    color: #6b7280;
+    font-family: var(--myFontFamily);
+    font-weight: 500;
+}
+
+.up-navbar ul li a i {
+    margin-left: 0.5rem;
+}
+
+@media only screen and (max-width: 550px) {
+    .up-navbar .links {
+        margin-right: 0 !important;
+    }
+
+    .up-navbar ul li {
+        margin-right: 2rem !important;
+    }
+}
+
+@media only screen and (max-width: 449px) {
+    .up-navbar ul li {
+        margin-right: 1rem !important;
+    }
+
+    .up-navbar ul li a {
+        font-size: 0.9rem;
+    }
+
+    .up-navbar ul li a i {
+        margin-left: 0.25rem !important;
+    }
+}
+
+@media only screen and (max-width: 375px) {
+    .up-navbar ul li {
+        margin-right: 0.8rem !important;
+    }
+
+    .up-navbar ul li a {
+        font-size: 0.8rem;
+    }
+}
+
+@media only screen and (max-width: 325px) {
+    .up-navbar ul li {
+        margin-right: 0.75rem !important;
+    }
+
+    .up-navbar ul li a {
+        font-size: 0.75rem;
+    }
+}
