@@ -18,10 +18,9 @@ public class DateAndTimeMethods {
 
     public static String getCurrentTime() {
         Date date = new Date();
-        DateFormat df = new SimpleDateFormat("HH:mm:ss");
+        DateFormat df = new SimpleDateFormat("HH:mm");
         df.setTimeZone(TimeZone.getTimeZone("Asia/Calcutta"));
-        String time = df.format(date);
 
-        return time + " IST";
+        return df.format(date);
     }
 }

@@ -64,6 +64,7 @@ public class Users {
     private String profilePicture;
     private String joinDate;
     private String lastLoginDate;
+    private String lastLoginTime;
 
     @Column(name = "user_role")
     @Value("ROLE_USER")
@@ -286,6 +287,14 @@ public class Users {
         this.lastLoginDate = lastLogin;
     }
 
+    public String getLastLoginTime() {
+        return lastLoginTime;
+    }
+
+    public void setLastLoginTime(String lastLoginTime) {
+        this.lastLoginTime = lastLoginTime;
+    }
+
     @Override
     public String toString() {
         return "Users{" +
@@ -301,6 +310,7 @@ public class Users {
                 ", profilePicture='" + profilePicture + '\'' +
                 ", joinDate='" + joinDate + '\'' +
                 ", lastLoginDate='" + lastLoginDate + '\'' +
+                ", lastLoginTime='" + lastLoginTime + '\'' +
                 ", role='" + role + '\'' +
                 ", accountNonExpired=" + accountNonExpired +
                 ", accountNonLocked=" + accountNonLocked +

@@ -46,7 +46,8 @@ public class UserAuthenticationSuccessHandler implements AuthenticationSuccessHa
 
         Users user = this.usersRepository.getUserByUsername(authentication.getName());
         if (user != null) {
-            user.setLastLoginDate(DateAndTimeMethods.getCurrentTime());
+            user.setLastLoginDate(DateAndTimeMethods.getCurrentDate());
+            user.setLastLoginTime(DateAndTimeMethods.getCurrentTime());
             this.usersRepository.save(user);
         }
 

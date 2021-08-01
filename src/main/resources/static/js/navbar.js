@@ -96,8 +96,8 @@ $(window).on("click", (e) => {
 
 const logout = (type) => {
     switch (type) {
-        case 'student':
-            window.location = '/student/logout';
+        case 'admin':
+            window.location = '/admin/logout';
             break;
         case 'user':
             window.location = '/user/logout';
