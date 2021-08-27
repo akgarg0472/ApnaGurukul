@@ -1,16 +1,16 @@
 package com.akgarg.apnagurukul.entity;
 
 import com.akgarg.apnagurukul.helper.DateAndTimeMethods;
+import com.akgarg.apnagurukul.model.Notification;
+import com.akgarg.apnagurukul.model.RecentActivity;
 import org.springframework.beans.factory.annotation.Value;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.LinkedList;
 import java.util.List;
 
 @SuppressWarnings({"FieldCanBeLocal", "JpaDataSourceORMInspection", "unused"})
@@ -61,6 +61,16 @@ public class Users {
     @NotNull(message = "Country can't be null")
     private String country;
 
+    @ElementCollection
+    @CollectionTable(name = "notifications", joinColumns = @JoinColumn(name = "username"))
+    @Column(name = "username")
+    private List<Notification> notifications;
+
+    @ElementCollection
+    @CollectionTable(name = "activities", joinColumns = @JoinColumn(name = "username"))
+    @Column(name = "username")
+    private List<RecentActivity> activities;
+
     private String profilePicture;
     private String joinDate;
     private String lastLoginDate;
@@ -82,9 +92,10 @@ public class Users {
     @Column(name = "is_user_enabled")
     private boolean enabled;
 
-
     public Users() {
         this.joinDate = DateAndTimeMethods.getCurrentDate();
+        this.notifications = new LinkedList<>();
+        this.activities = new LinkedList<>();
         this.setAccountNonExpired(true);
         this.setAccountNonLocked(true);
         this.setEnabled(true);
@@ -245,6 +256,14 @@ public class Users {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public List<Notification> getNotifications() {
+        return notifications;
+    }
+
+    public void setNotifications(List<Notification> notifications) {
+        this.notifications = notifications;
     }
 
     public boolean isAccountNonExpired() {

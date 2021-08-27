@@ -38,15 +38,19 @@
     <div class="sidebar" id="sidebar">
         <ul>
             <span class="sb-menu">Welcome back</span>
-            <li class="sb-link dashboard" onclick="swal('Dashboad clicked')"><a href="#">Dashboard</a></li>
-            <li class="sb-link rec-act" onclick="swal('Recent activities clicked')"><a href="#">Recent activities</a>
+            <li class="sb-link dashboard" onclick="window.location='/user/dashboard'"
+                style="border-left: 4px solid var(--myRed);"><a href="/user/dashboard">Dashboard</a></li>
+            <li class="sb-link rec-act" onclick="window.location='/user/recent-activities'"><a
+                    href="/user/recent-activities">Recent activities</a>
             </li>
-            <li class="sb-link my-noti" onclick="swal('My Notifications clicked')"><a href="#">My Notifications</a>
+            <li class="sb-link my-noti" onclick="window.location='/user/notifications'"><a href="/user/notifications">My
+                Notifications</a>
             </li>
-            <li class="sb-link profile" onclick="swal('My profile clicked')"><a href="#">My profile</a></li>
-            <li class="sb-link updt-prfl" onclick="swal('Update profile clicked')"><a href="#">Update profile</a></li>
-            <li class="sb-link logout" onclick="logout()"><a
-                    href="#">Logout</a></li>
+            <li class="sb-link profile" onclick="window.location='/user/profile'"><a href="/user/profile">My profile</a>
+            </li>
+            <li class="sb-link updt-prfl" onclick="window.location='/user/update-profile'"><a
+                    href="/user/update-profile">Update profile</a></li>
+            <li class="sb-link logout" onclick="logout()"><a href="#">Logout</a></li>
         </ul>
     </div>
 

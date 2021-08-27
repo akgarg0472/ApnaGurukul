@@ -1,6 +1,7 @@
 package com.akgarg.apnagurukul.controllers.user;
 
 import com.akgarg.apnagurukul.entity.Users;
+import com.akgarg.apnagurukul.repository.UsersRepository;
 import com.akgarg.apnagurukul.service.GetUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,10 +17,13 @@ import java.security.Principal;
 public class UserController {
 
     private final GetUserService getUserInformation;
+    private final UsersRepository usersRepository;
 
     @Autowired
-    public UserController(GetUserService getUserInformation) {
+    public UserController(GetUserService getUserInformation,
+                          UsersRepository usersRepository) {
         this.getUserInformation = getUserInformation;
+        this.usersRepository = usersRepository;
     }
 
 
@@ -42,6 +46,66 @@ public class UserController {
                 model.addAttribute("lastLoginDate", user.getLastLoginDate());
                 model.addAttribute("lastLoginTime", user.getLastLoginTime());
                 return "user/dashboard";
+            }
+        }
+        return "redirect:/login";
+    }
+
+
+    @RequestMapping(value = "/profile", method = RequestMethod.GET)
+    public String myProfile(Principal principal, Model model) {
+        if (principal != null) {
+            Users user = getUserInformation.getUser(principal.getName());
+            if (user == null) {
+                return "redirect:/login";
+            } else {
+                model.addAttribute("user", user);
+                return "user/my-profile";
+            }
+        }
+        return "redirect:/login";
+    }
+
+
+    @RequestMapping(value = "/update-profile", method = RequestMethod.GET)
+    public String updateProfile(Principal principal, Model model) {
+        if (principal != null) {
+            Users user = getUserInformation.getUser(principal.getName());
+            if (user == null) {
+                return "redirect:/login";
+            } else {
+                model.addAttribute("user", user);
+                return "user/update-profile";
+            }
+        }
+        return "redirect:/login";
+    }
+
+
+    @RequestMapping(value = "/notifications", method = RequestMethod.GET)
+    public String myNotifications(Principal principal, Model model) {
+        if (principal != null) {
+            Users user = getUserInformation.getUser(principal.getName());
+            if (user == null) {
+                return "redirect:/login";
+            } else {
+                model.addAttribute("notifications", user.getNotifications());
+                return "user/my-notifications";
+            }
+        }
+        return "redirect:/login";
+    }
+
+
+    @RequestMapping(value = "/recent-activities", method = RequestMethod.GET)
+    public String recentActivities(Principal principal, Model model) {
+        if (principal != null) {
+            Users user = getUserInformation.getUser(principal.getName());
+            if (user == null) {
+                return "redirect:/login";
+            } else {
+                model.addAttribute("user", user);
+                return "user/recent-activities";
             }
         }
         return "redirect:/login";
