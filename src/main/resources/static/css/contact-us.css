@@ -8,9 +8,9 @@
     margin-right: 25%;
     padding-top: 28px;
     padding-bottom: 28px;
-    -moz-box-shadow: 0 0 10px rgba(41, 121, 255, 0.25);
-    -webkit-box-shadow: 0 0 10px rgba(41, 121, 255, 0.25);
-    box-shadow: 0 0 10px rgba(41, 121, 255, 0.25);
+    -moz-box-shadow: 0 0 10px rgba(249, 49, 84, 1);
+    -webkit-box-shadow: 0 0 10px rgba(249, 49, 84, 1);
+    box-shadow: 0 0 10px rgba(249, 49, 84, 1);
     border-radius: 16px;
 }
 
@@ -19,7 +19,7 @@
     font-size: 2rem;
     letter-spacing: 1px;
     font-weight: 500;
-    color: #0f66fc;
+    color: #f93154;
 }
 
 .cntus-fm .form {
@@ -49,15 +49,15 @@
     text-align: center;
     border-radius: 0;
     outline: none;
-    border-bottom: 1px solid #2979ff;
+    border-bottom: 1px solid #f93154;
     transition: all 0.3s ease-in-out;
 }
 
 .cntus-fm .form .name input:hover,
 .cntus-fm .form .name input:focus {
-    -moz-box-shadow: 0 12px 10px -10px rgba(41, 121, 255, 0.5);
-    -webkit-box-shadow: 0 12px 10px -10px rgba(41, 121, 255, 0.5);
-    box-shadow: 0 12px 10px -10px rgba(41, 121, 255, 0.5);
+    -moz-box-shadow: 0 12px 10px -10px rgba(249, 49, 84, 1);
+    -webkit-box-shadow: 0 12px 10px -10px rgba(249, 49, 84, 1);
+    box-shadow: 0 12px 10px -10px rgba(249, 49, 84, 1);
     width: 45%;
     transition: all 0.3s ease-in-out;
 }
@@ -70,7 +70,7 @@
     height: 24px;
     border-radius: 32px;
     padding: 12px;
-    border: 1px solid #2979ff;
+    border: 1px solid #f93154;
     outline: none;
 }
 
@@ -81,7 +81,7 @@
     border-radius: 28px;
     padding: 12px;
     font-size: 1rem;
-    border: 1px solid #2979ff;
+    border: 1px solid #f93154;
     outline: none;
 }
 
@@ -92,13 +92,13 @@
     border-radius: 40px;
     outline: none;
     border: none;
-    background-color: #2979ff;
+    background-color: #f93154;
     color: #fff;
 }
 
 .cntus-fm .form button:hover,
 .cntus-fm .form button:focus {
-    background-color: #0a61f8;
+    background-color: #f93154;
     cursor: pointer;
 }
 

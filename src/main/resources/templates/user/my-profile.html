@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" th:href="@{/css/user-profile.css}"/>
+    <link rel="stylesheet" th:href="@{/css/up-navbar.css}"/>
+    <link rel="stylesheet" th:href="@{/css/up-sidebar.css}"/>
+    <link rel="stylesheet" th:href="@{/css/my-profile.css}"/>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <title th:text="'My profile - ' + ${user.name}">My Profile</title>
+</head>
+
+<body>
+<div class="up-navbar">
+    <div class="logo">
+        <img
+                th:src="@{/images/aglogo.png}"
+                alt="ApnaGurukul logo"
+                onclick="window.location='/'"
+                src=""/>
+    </div>
+
+    <div class="links">
+        <ul class="up-nvul">
+            <li>
+                <a href="/">Home</a>
+            </li>
+
+            <li onclick="logout()">
+                <a href="#" onclick="logout()">Logout<i class="fa fa-caret-down"></i></a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="up-body">
+    <div class="sidebar" id="sidebar">
+        <ul>
+            <span class="sb-menu">Welcome back</span>
+            <li class="sb-link dashboard" onclick="window.location='/user/dashboard'">
+                <a href="/user/dashboard">Dashboard</a>
+            </li>
+
+            <li
+                    class="sb-link rec-act"
+                    onclick="window.location = '/user/recent-activities'"
+            >
+                <a href="/user/recent-activities">Recent activities</a>
+            </li>
+
+            <li
+                    class="sb-link my-noti"
+                    onclick="window.location='/user/notifications'"
+            >
+                <a href="/user/notifications">My Notifications</a>
+            </li>
+
+            <li
+                    class="sb-link profile"
+                    onclick="window.location='/user/profile'"
+                    style="border-left: 4px solid var(--myRed)"
+            >
+                <a href="/user/profile">My profile</a>
+            </li>
+
+            <li
+                    class="sb-link updt-prfl"
+                    onclick="window.location='/user/update-profile'"
+            >
+                <a href="/user/update-profile">Update profile</a>
+            </li>
+
+            <li class="sb-link logout" onclick="logout()">
+                <a href="#">Logout</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="content">
+        <div class="resp-icons" id="resp-icons">
+            <i
+                    class="fas fa-bars hmbg-mnicn"
+                    id="hmbg-mnicn"
+                    onclick="showSidemenu()"
+            ></i>
+            <i
+                    class="fas fa-times cross-mnicn"
+                    id="cross-mnicn"
+                    onclick="hideSidemenu()"
+            ></i>
+        </div>
+
+        <div class="mp-info">
+            <div class="p-info">
+                <img
+                        class="user-dp"
+                        th:src="${user.profilePicture}"
+                        alt="User profile image"
+                        src=""/>
+
+                <div class="user-info">
+                    <h1 class="name" th:text="${user.name}"></h1>
+                    <p class="role" th:text="${user.role.substring(5)}"></p>
+                </div>
+            </div>
+
+            <div class="uo-info">
+                <div class="uo-info-item">
+                    <span>Email: </span>
+                    <span class="info" th:text="${user.username}"></span>
+                </div>
+                <div class="uo-info-item">
+                    <span>Phone: </span>
+                    <span class="info" th:text="'+91 ' + ${user.phone}"></span>
+                </div>
+                <div class="uo-info-item">
+                    <span>Address: </span>
+                    <span class="info" th:text="${user.address}"></span>
+                </div>
+                <div class="uo-info-item">
+                    <span>City: </span>
+                    <span class="info" th:text="${user.city}"></span>
+                </div>
+                <div class="uo-info-item">
+                    <span>State: </span>
+                    <span class="info" th:text="${user.state}"></span>
+                </div>
+                <div class="uo-info-item">
+                    <span>Country: </span>
+                    <span class="info" th:text="${user.country}"></span>
+                </div>
+                <div class="uo-info-item">
+                    <span>Pincode: </span>
+                    <span class="info" th:text="${user.pincode}"></span>
+                </div>
+                <div class="uo-info-item">
+                    <span>Last Login: </span>
+                    <span class="info" th:text="${user.lastLoginDate} + ', ' + ${user.lastLoginTime}"></span>
+                </div>
+                <div class="uo-info-item">
+                    <span>Join Date: </span>
+                    <span class="info" th:text="${user.joinDate}"></span>
+                </div>
+            </div>
+
+            <div class="btn">
+                <button class="up-btn" onclick="window.location='/user/update-profile'">Update Profile</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<noscript>Please enable JavaScript to view this page</noscript>
+<script th:src="@{/js/user-profile.js}"></script>
+</body>
+</html>

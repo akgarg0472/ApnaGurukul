@@ -21,14 +21,14 @@
 <!--navbar-->
 <div class="up-navbar">
     <div class="logo">
-        <a href="/"> <img th:src="@{/images/aglogo.png}" alt="ApnaGurukul logo" src="#"></a>
+        <a href="/"> <img th:src="@{/images/aglogo.png}" alt="ApnaGurukul logo" onclick="window.location='/'"
+                          src="#"></a>
     </div>
 
     <div class="links">
         <ul class="up-nvul">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Notifications<i class="fa fa-caret-down"></i></a></li>
-            <li onclick="logout()"><a href="#">Logout<i class="fa fa-caret-down"></i></a></li>
+            <li><a href="/">Home</a></li>
+            <li onclick="logout()"><a href="#" onclick="logout()">Logout<i class="fa fa-caret-down"></i></a></li>
         </ul>
     </div>
 </div>

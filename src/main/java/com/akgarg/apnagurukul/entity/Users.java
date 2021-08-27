@@ -266,6 +266,14 @@ public class Users {
         this.notifications = notifications;
     }
 
+    public List<RecentActivity> getActivities() {
+        return activities;
+    }
+
+    public void setActivities(List<RecentActivity> activities) {
+        this.activities = activities;
+    }
+
     public boolean isAccountNonExpired() {
         return accountNonExpired;
     }

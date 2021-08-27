@@ -341,11 +341,12 @@
     }
 
     .hm-osts .osts-cards .osts-card {
-        height: 200px;
+        height: 175px;
+        margin: 20px 8px 20px 8px;
     }
 
     .hm-osts .osts-cards .osts-card .stats {
-        font-size: 1.75rem;
+        font-size: 1.5rem;
     }
 }
 
@@ -365,7 +366,7 @@
     }
 
     .hm-srvscnt .serv-cards .serv-card {
-        width: 125px;
+        width: 175px;
         height: 150px;
     }
 

@@ -1,0 +1,170 @@
+* {
+    box-sizing: border-box;
+}
+
+.content {
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+.mp-info {
+    width: 66%;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    padding: 1.5rem 1.5rem 0 1.5rem;
+    border: 1px solid green;
+    border-radius: 1.5rem;
+}
+
+.mp-info:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 128, 0, 0.1),
+    0 6px 20px 0 rgba(0, 128, 0, 0.1);
+}
+
+.p-info {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-info {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.user-info .name {
+    font-size: 2rem;
+}
+
+.user-info .role {
+    text-align: center;
+    margin-top: 8px;
+}
+
+.user-dp {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+.uo-info {
+    display: flex;
+    margin-top: 1rem;
+    flex-direction: column;
+}
+
+.uo-info-item {
+    display: flex;
+    padding: 0.5rem;
+}
+
+.uo-info-item span:nth-child(1) {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-right: 8px;
+    flex: 0.3;
+    text-align: right;
+    font-family: var(--myFontFamily);
+}
+
+.uo-info-item span:nth-child(2) {
+    flex: 0.7;
+    font-size: 1rem;
+    font-family: var(--myFontFamily);
+}
+
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn .up-btn {
+    margin: 2rem;
+    width: 40%;
+    height: 36px;
+    border-radius: 1rem;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background-color: #edbf69;
+    background-color: #f4be2c;
+}
+
+.btn .up-btn:hover {
+    -moz-box-shadow: 0 0 5px #f4be2c;
+    -webkit-box-shadow: 0 0 5px #f4be2c;
+    box-shadow: 0 0 5px #f4be2c;
+    transition: all 200ms ease-in-out;
+}
+
+@media only screen and (max-width: 900px) {
+    .mp-info {
+        width: 75%;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .mp-info {
+        width: 90%;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .user-dp {
+        width: 125px;
+        height: 125px;
+    }
+
+    .user-info .name {
+        font-size: 1.75rem;
+    }
+
+    .user-info .role {
+        font-size: 0.9rem;
+    }
+
+    .uo-info-item span:nth-child(1),
+    .uo-info-item span:nth-child(2) {
+        font-size: 0.9rem;
+    }
+
+    .btn .up-btn {
+        margin: 1.5rem;
+        width: 66%;
+    }
+}
+
+@media only screen and (max-width: 449px) {
+    .mp-info {
+        width: 90vw;
+        margin-top: 1rem;
+        margin-left: 1.5rem;
+    }
+}
+
+@media only screen and (max-width: 350px) {
+    .mp-info {
+        width: 90vw;
+        margin-top: 1rem;
+        margin-left: 1.2rem;
+    }
+
+    .user-dp {
+        height: 100px;
+        width: 100px;
+    }
+
+    .user-info .name {
+        font-size: 1.5rem;
+    }
+
+    .uo-info-item span:nth-child(1),
+    .uo-info-item span:nth-child(2) {
+        font-size: 0.8rem;
+    }
+}

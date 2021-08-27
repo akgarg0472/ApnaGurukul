@@ -1,6 +1,9 @@
 package com.akgarg.apnagurukul.controllers.user;
 
 import com.akgarg.apnagurukul.entity.Users;
+import com.akgarg.apnagurukul.helper.DateAndTimeMethods;
+import com.akgarg.apnagurukul.model.Notification;
+import com.akgarg.apnagurukul.model.RecentActivity;
 import com.akgarg.apnagurukul.repository.UsersRepository;
 import com.akgarg.apnagurukul.service.GetUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
 import java.security.Principal;
+import java.util.LinkedList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/user")
@@ -89,7 +94,13 @@ public class UserController {
             if (user == null) {
                 return "redirect:/login";
             } else {
-                model.addAttribute("notifications", user.getNotifications());
+                model.addAttribute("name", user.getName());
+                // model.addAttribute("notifications", user.getNotifications());
+                List<Notification> notifications = new LinkedList<>();
+                for (int i = 0; i < 12; i++) {
+                    notifications.add(new Notification("This is the demo notification generated on server", DateAndTimeMethods.getCurrentDate(), DateAndTimeMethods.getCurrentTime()));
+                }
+                model.addAttribute("notifications", notifications);
                 return "user/my-notifications";
             }
         }
@@ -104,7 +115,14 @@ public class UserController {
             if (user == null) {
                 return "redirect:/login";
             } else {
-                model.addAttribute("user", user);
+                model.addAttribute("name", user.getName());
+                // model.addAttribute("activities", user.getActivities());
+
+                List<RecentActivity> recentActivities = new LinkedList<>();
+                for (int i = 0; i < 12; i++) {
+                    recentActivities.add(new RecentActivity("This is the demo recent activity generated on server", DateAndTimeMethods.getCurrentDate(), DateAndTimeMethods.getCurrentTime()));
+                }
+                model.addAttribute("activities", recentActivities);
                 return "user/recent-activities";
             }
         }
