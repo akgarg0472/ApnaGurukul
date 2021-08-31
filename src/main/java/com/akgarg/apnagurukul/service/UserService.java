@@ -48,7 +48,7 @@ public class UserService {
         }
 
         if (user.getPhone() != null && !user.getPhone().equals("")) {
-            dbUser.setPhone(user.getPhone().substring(4));
+            dbUser.setPhone(user.getPhone());
         }
 
         if (user.getAddress() != null && !user.getAddress().equals("")) {

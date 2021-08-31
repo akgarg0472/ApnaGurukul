@@ -137,7 +137,7 @@
                     <div class="uo-info-item">
                         <span>Phone: </span>
                         <span class="info">
-                            <input type="tel" name="phone" id="phone" th:value="'+91 ' + ${user.phone}"/>
+                            <input type="tel" name="phone" id="phone" th:value="${user.phone}"/>
                         </span>
                     </div>
 
@@ -182,7 +182,7 @@
                     </div>
 
                     <p class="error" id="nm-err">Name field is invalid</p>
-                    <p class="error" id="ph-err">Phone should be of format +91 XXXXXXXXXX</p>
+                    <p class="error" id="ph-err">Phone should be of format XXXXXXXXXX</p>
                     <p class="error" id="add-err">Address field is invalid</p>
                     <p class="error" id="ct-err">City field is invalid</p>
                     <p class="error" id="st-err">State field is invalid</p>

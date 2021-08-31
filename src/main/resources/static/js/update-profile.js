@@ -56,7 +56,7 @@ const validateInput = () => {
         return false;
     }
 
-    if (phone === null || phone.val().trim() === "" || phoneValidator.test(phone.val().substring(4))) {
+    if (phone === null || phone.val().trim() === "" || !phoneValidator.test(phone.val())) {
         $(".error").hide();
         $("#ph-err").show();
         return false;
@@ -122,7 +122,7 @@ const validateUpdateForm = async () => {
             imageData = encodeURIComponent(imageData.substring(imageData.indexOf(",") + 1));
         }
 
-        let profileData = `&email=${email.text().toString()}&name=${name.val()}&phone=${phone.val().substring(4)}&city=${city.val()}` +
+        let profileData = `&email=${email.text().toString()}&name=${name.val()}&phone=${phone.val()}&city=${city.val()}` +
             `&address=${address.val()}&state=${state.val()}&country=${country.val()}&pincode=${pincode.val()}`;
 
         if (image) {
