@@ -48,6 +48,11 @@
     font-family: var(--myFontFamily);
 }
 
+.no-act-head, .no-not-head {
+    margin: 0 1rem;
+    text-align: center;
+}
+
 @media only screen and (max-width: 640px) {
     .notification {
         font-size: 0.95rem;
@@ -57,5 +62,10 @@
     .notification .time {
         font-size: 0.9rem;
         margin-left: 0;
+    }
+
+    .no-act-head, .no-not-head {
+        line-height: 1.66rem;
+        font-size: 1.25rem;
     }
 }

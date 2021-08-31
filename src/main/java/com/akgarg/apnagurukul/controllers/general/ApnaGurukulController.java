@@ -3,6 +3,8 @@ package com.akgarg.apnagurukul.controllers.general;
 import com.akgarg.apnagurukul.entity.ContactUs;
 import com.akgarg.apnagurukul.entity.SellBookAd;
 import com.akgarg.apnagurukul.entity.Users;
+import com.akgarg.apnagurukul.helper.EmailMessages;
+import com.akgarg.apnagurukul.helper.EmailSender;
 import com.akgarg.apnagurukul.repository.ContactUsRepository;
 import com.akgarg.apnagurukul.repository.SellBookAdRepository;
 import com.akgarg.apnagurukul.repository.UsersRepository;
@@ -197,6 +199,12 @@ public class ApnaGurukulController {
                 && !description.trim().equals("")) {
             ContactUs contactUs = new ContactUs(firstName, lastName, email, description);
             this.contactUsRepository.save(contactUs);
+
+            EmailSender.sendEmail("akgarg0472@gmail.com", "New contact us query",
+                    EmailMessages.contactQueryMessage(contactUs));
+            EmailSender.sendEmail(contactUs.getEmail(), "Thanks for contacting ApnaGurukul",
+                    EmailMessages.contactConfirmMessage(contactUs.getFirstName() + " " + contactUs.getLastName()));
+
             return true;
         } else {
             return false;

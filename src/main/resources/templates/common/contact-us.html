@@ -12,7 +12,6 @@
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="stylesheet" th:href="@{/css/navbar.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
-    <link rel="stylesheet" th:href="@{/css/style.css}"/>
     <link rel="stylesheet" th:href="@{/css/contact-us.css}"/>
     <link rel="stylesheet" th:href="@{/css/footer.css}"/>
     <script type="text/javascript" th:src="@{/js/jquery.js}"></script>
@@ -29,20 +28,20 @@
     <p>Contact&ensp;us</p>
 
     <div class="form">
-        <form th:action="@{/cont-us-query}" method="post"></form>
+        <form th:action="@{/cont-us-query}" method="post" onsubmit="return false;">
+            <div class="name">
+                <input type="text" id="cnus_fname" placeholder="First name">
+                <input type="text" id="cnus_lname" placeholder="Last name">
+            </div>
+            <p class="cntus-error" id="cnus_lname_error">Last name is mandatory field</p>
 
-        <div class="name">
-            <input type="text" id="cnus_fname" placeholder="First name">
-            <input type="text" id="cnus_lname" placeholder="Last name">
-        </div>
-        <p class="cntus-error" id="cnus_lname_error">Last name is mandatory field</p>
+            <input type="email" id="cnus_email" placeholder="Enter email">
+            <p class="cntus-error" id="cnus_email_error">Please enter valid email</p>
 
-        <input type="email" id="cnus_email" placeholder="Enter email">
-        <p class="cntus-error" id="cnus_email_error">Please enter valid email</p>
-
-        <textarea name="" id="cnus_desc" rows="8" placeholder="Enter your query"></textarea>
-        <p class="cntus-error" id="cnus_desc_error">Please enter description</p>
-        <button onclick="submit()">Submit</button>
+            <textarea name="" id="cnus_desc" rows="8" placeholder="Enter query"></textarea>
+            <p class="cntus-error" id="cnus_desc_error">Query field can't be blank</p>
+            <button type="button" id="cu-sbm-btn" onclick="submitCUF()">Submit</button>
+        </form>
     </div>
 </div>
 
@@ -67,8 +66,12 @@
     </ul>
 </div>
 
+<div class="loader-div" id="loader-div">
+    <div class="loader"></div>
+</div>
+
 <script type="text/javascript" th:src="@{/js/navbar.js}"></script>
-<script type="text/javascript" th:src="@{/js/about-us.js}"></script>
+<script type="text/javascript" th:src="@{/js/contact-us.js}"></script>
 </body>
 
 </html>

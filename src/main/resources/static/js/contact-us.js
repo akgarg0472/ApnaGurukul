@@ -4,7 +4,7 @@ $(document).ready(() => {
     $("#cnus_desc_error").hide();
 });
 
-const submit = async () => {
+const submitCUF = async () => {
     const fname = $("#cnus_fname").val();
     const lname = $("#cnus_lname").val();
     const email = $("#cnus_email").val();
@@ -35,17 +35,26 @@ const submit = async () => {
 
     //  all good here, proceed further
     const _csrf = $("input[name=_csrf]").val();
+    $("#cu-sbm-btn").prop('disabled', true);
+    const loader = $("#loader-div");
+    loader.show();
 
     await $.post("/cont-us-query", `_csrf=${_csrf}&fname=${fname}&lname=${lname}&email=${email}&desc=${desc}`)
         .done((resp) => {
             if (resp === true) {
-                alert("Thank you for your query");
-                $("#cnus_fname").val("");
-                $("#cnus_lname").val("");
-                $("#cnus_email").val("");
-                $("#cnus_desc").val("");
+                loader.hide();
+                swal("Thanks for your query ☺").then(() => {
+                    $("#cu-sbm-btn").prop('disabled', false);
+                    $("#cnus_fname").val("");
+                    $("#cnus_lname").val("");
+                    $("#cnus_email").val("");
+                    $("#cnus_desc").val("");
+                });
             } else {
-                alert("Error submitting query");
+                loader.hide();
+                swal("Error submitting query").then(() => {
+                    $("#cu-sbm-btn").prop('disabled', false);
+                });
             }
         })
         .fail((resp) => {
