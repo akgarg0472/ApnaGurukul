@@ -182,14 +182,15 @@
                     </div>
 
                     <p class="error" id="nm-err">Name field is invalid</p>
-                    <p class="error" id="ph-err">Phone field is invalid</p>
+                    <p class="error" id="ph-err">Phone should be of format +91 XXXXXXXXXX</p>
                     <p class="error" id="add-err">Address field is invalid</p>
                     <p class="error" id="ct-err">City field is invalid</p>
                     <p class="error" id="st-err">State field is invalid</p>
                     <p class="error" id="pc-err">Pincode field is invalid</p>
 
                     <div class="btns">
-                        <button type="button" class="up-cncl-btn">Cancel</button>
+                        <button type="button" class="up-cncl-btn" onclick="location.location='/user/dashboard'">Cancel
+                        </button>
                         <button type="button" class="up-sbmt-btn" onclick="validateUpdateForm()">Update</button>
                     </div>
                 </div>
@@ -197,6 +198,10 @@
 
         </form>
     </div>
+</div>
+
+<div class="loader-div" id="loader-div">
+    <div class="loader"></div>
 </div>
 
 <noscript>Please enable JavaScript to view this page</noscript>
