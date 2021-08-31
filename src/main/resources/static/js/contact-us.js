@@ -35,7 +35,6 @@ const submitCUF = async () => {
 
     //  all good here, proceed further
     const _csrf = $("input[name=_csrf]").val();
-    $("#cu-sbm-btn").prop('disabled', true);
     const loader = $("#loader-div");
     loader.show();
 
@@ -43,8 +42,7 @@ const submitCUF = async () => {
         .done((resp) => {
             if (resp === true) {
                 loader.hide();
-                swal("Thanks for your query ☺").then(() => {
-                    $("#cu-sbm-btn").prop('disabled', false);
+                swal("Thanks for your query!!").then(() => {
                     $("#cnus_fname").val("");
                     $("#cnus_lname").val("");
                     $("#cnus_email").val("");
@@ -52,9 +50,7 @@ const submitCUF = async () => {
                 });
             } else {
                 loader.hide();
-                swal("Error submitting query").then(() => {
-                    $("#cu-sbm-btn").prop('disabled', false);
-                });
+                swal("Error submitting query");
             }
         })
         .fail((resp) => {

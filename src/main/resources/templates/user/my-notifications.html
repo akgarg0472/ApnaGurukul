@@ -8,11 +8,11 @@
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     />
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" th:href="@{/css/user-profile.css}"/>
     <link rel="stylesheet" th:href="@{/css/up-navbar.css}"/>
     <link rel="stylesheet" th:href="@{/css/up-sidebar.css}"/>
     <link rel="stylesheet" th:href="@{/css/notifications.css}"/>
+    <script type="text/javascript" th:src="@{/js/jquery.js}"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <title th:text="'My Notifications - ' + ${name}"></title>
 </head>
@@ -75,6 +75,13 @@
                     onclick="window.location='/user/update-profile'"
             >
                 <a href="/user/update-profile">Update profile</a>
+            </li>
+
+            <li
+                    class="sb-link updt-prfl"
+                    onclick="window.location='/user/change-password'"
+            >
+                <a href="/user/change-profile">Change Password</a>
             </li>
 
             <li class="sb-link logout" onclick="logout()">

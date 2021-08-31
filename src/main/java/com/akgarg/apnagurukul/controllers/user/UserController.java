@@ -1,15 +1,13 @@
 package com.akgarg.apnagurukul.controllers.user;
 
 import com.akgarg.apnagurukul.entity.Users;
+import com.akgarg.apnagurukul.model.ResponseMessage;
 import com.akgarg.apnagurukul.model.UpdateProfileUser;
 import com.akgarg.apnagurukul.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -111,6 +109,26 @@ public class UserController {
             }
         }
         return "redirect:/login";
+    }
+
+
+    @RequestMapping(value = "/change-password", method = RequestMethod.GET)
+    public String changePassword() {
+        return "/user/change-password";
+    }
+
+
+    @RequestMapping(value = "/process-upwd", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseMessage updatePassword(Principal principal,
+                                          @RequestParam("oldPass") String oldPassword,
+                                          @RequestParam("newPass") String newPassword,
+                                          @RequestParam("cNewPass") String confirmNewPassword) {
+        if (principal != null) {
+            return this.userService.updatePassword(principal.getName(), oldPassword, newPassword, confirmNewPassword);
+        }
+
+        return new ResponseMessage("Something went wrong, Please try again", "High");
     }
 
 

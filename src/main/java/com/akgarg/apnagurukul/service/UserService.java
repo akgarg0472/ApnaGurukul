@@ -5,9 +5,11 @@ import com.akgarg.apnagurukul.firebase.FirebaseManager;
 import com.akgarg.apnagurukul.helper.EmailMessages;
 import com.akgarg.apnagurukul.helper.EmailSender;
 import com.akgarg.apnagurukul.helper.MyConstants;
+import com.akgarg.apnagurukul.model.ResponseMessage;
 import com.akgarg.apnagurukul.model.UpdateProfileUser;
 import com.akgarg.apnagurukul.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -21,14 +23,17 @@ public class UserService {
     private final UsersRepository usersRepository;
     private final FirebaseManager firebaseManager;
     private final StandardPasswordEncoder standardPasswordEncoder;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     public UserService(UsersRepository usersRepository,
                        FirebaseManager firebaseManager,
-                       StandardPasswordEncoder standardPasswordEncoder) {
+                       StandardPasswordEncoder standardPasswordEncoder,
+                       BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.usersRepository = usersRepository;
         this.firebaseManager = firebaseManager;
         this.standardPasswordEncoder = standardPasswordEncoder;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
 
@@ -91,5 +96,34 @@ public class UserService {
                 EmailMessages.profileUpdatedMessage(loggedInUsername, dbUser.getName()))).start();
 
         return true;
+    }
+
+
+    public ResponseMessage updatePassword(String email, String oldPassword, String newPassword, String confirmNewPassword) {
+        Users loggedInUser = this.usersRepository.findById(email).orElse(null);
+
+        if (loggedInUser == null) {
+            return new ResponseMessage("User not found. Try again.", "Severe");
+        }
+
+        if (oldPassword == null || newPassword == null || confirmNewPassword == null
+                || oldPassword.equals("") || newPassword.equals("") || confirmNewPassword.equals("")) {
+            return new ResponseMessage("One of the password is blank", "Severe");
+        }
+
+        if (!newPassword.equals(confirmNewPassword)) {
+            return new ResponseMessage("New password and confirm new passwords didn't match.", "High");
+        }
+
+        if (!this.bCryptPasswordEncoder.matches(oldPassword, loggedInUser.getPassword())) {
+            return new ResponseMessage("Old password is invalid", "High");
+        }
+
+        loggedInUser.setPassword(this.bCryptPasswordEncoder.encode(newPassword));
+        this.usersRepository.save(loggedInUser);
+        EmailSender.sendEmail(email, "Password changed successfully",
+                EmailMessages.passwordSuccessfullyChangedMessage(email, loggedInUser.getName()));
+
+        return new ResponseMessage("Password changed successfully", "none");
     }
 }

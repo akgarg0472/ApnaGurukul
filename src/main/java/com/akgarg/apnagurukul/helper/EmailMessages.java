@@ -238,10 +238,10 @@ public class EmailMessages {
 
     public static String contactConfirmMessage(String name) {
         return "Dear " + "<strong>" + name + "</strong>," +
-                "<br><br>" +
+                "<br>" +
                 "Greetings from team ApnaGurukul!!" +
                 "<br><br>" +
-                "Thank you for having your query. We will reach back to you as soon as possible. Until then take care and have a nice day ☺." +
+                "Thank you for your query. We will reach back to you as soon as possible. Until then take care and have a nice day." +
                 "<br><br>" +
                 "Thanks" +
                 "<br>" +

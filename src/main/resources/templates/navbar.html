@@ -54,9 +54,28 @@
                     #authentication.getPrincipal().getName().substring(0,21) : #authentication.getPrincipal().getName()}">
                     Welcome user
                 </li>
-                <li id="nvbr-dd-link" onclick="window.location='/user/dashboard'">My Account</li>
-                <li id="nvbr-dd-link" onclick="window.location='/user/update-profile'">Update Profile</li>
-                <li id="nvbr-dd-link">Change Password</li>
+
+                <li id="nvbr-dd-link" th:if="${#authentication.getPrincipal().getRole() == 'ROLE_USER'}"
+                    onclick="window.location='/user/dashboard'">My Account
+                </li>
+                <li id="nvbr-dd-link" th:if="${#authentication.getPrincipal().getRole() == 'ROLE_ADMIN'}"
+                    onclick="window.location='/admin/dashboard'">My Account
+                </li>
+
+                <li id="nvbr-dd-link" th:if="${#authentication.getPrincipal().getRole() == 'ROLE_USER'}"
+                    onclick="window.location='/user/update-profile'">Update Profile
+                </li>
+                <li id="nvbr-dd-link" th:if="${#authentication.getPrincipal().getRole() == 'ROLE_ADMIN'}"
+                    onclick="window.location='/admin/update-profile'">Update Profile
+                </li>
+
+                <li id="nvbr-dd-link" th:if="${#authentication.getPrincipal().getRole() == 'ROLE_USER'}"
+                    onclick="window.location='/user/change-password'">Change Password
+                </li>
+                <li id="nvbr-dd-link" th:if="${#authentication.getPrincipal().getRole() == 'ROLE_ADMIN'}"
+                    onclick="window.location='/user/change-password'">Change Password
+                </li>
+
                 <li id="nvbr-dd-link" th:if="${#authentication.getPrincipal().getRole() == 'ROLE_ADMIN'}"
                     onclick="logout(`admin`)">Logout
                 </li>
