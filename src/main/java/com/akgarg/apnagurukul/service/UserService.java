@@ -2,9 +2,12 @@ package com.akgarg.apnagurukul.service;
 
 import com.akgarg.apnagurukul.entity.Users;
 import com.akgarg.apnagurukul.firebase.FirebaseManager;
+import com.akgarg.apnagurukul.helper.DateAndTimeMethods;
 import com.akgarg.apnagurukul.helper.EmailMessages;
 import com.akgarg.apnagurukul.helper.EmailSender;
 import com.akgarg.apnagurukul.helper.MyConstants;
+import com.akgarg.apnagurukul.model.Notification;
+import com.akgarg.apnagurukul.model.RecentActivity;
 import com.akgarg.apnagurukul.model.ResponseMessage;
 import com.akgarg.apnagurukul.model.UpdateProfileUser;
 import com.akgarg.apnagurukul.repository.UsersRepository;
@@ -15,15 +18,16 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Base64;
+import java.util.List;
 
 @SuppressWarnings("deprecation")
 @Service
 public class UserService {
-
     private final UsersRepository usersRepository;
     private final FirebaseManager firebaseManager;
     private final StandardPasswordEncoder standardPasswordEncoder;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+
 
     @Autowired
     public UserService(UsersRepository usersRepository,
@@ -42,7 +46,9 @@ public class UserService {
     }
 
 
-    public boolean updateUser(String loggedInUsername, HttpServletRequest request, UpdateProfileUser user) {
+    public boolean updateUser(String loggedInUsername,
+                              HttpServletRequest request,
+                              UpdateProfileUser user) {
         Users dbUser = this.usersRepository.findById(loggedInUsername).orElse(null);
         if (dbUser == null || user == null || !user.getEmail().equals(dbUser.getUsername())) {
             return false;
@@ -91,6 +97,9 @@ public class UserService {
             }
         }
 
+        List<RecentActivity> activities = dbUser.getActivities();
+        activities.add(new RecentActivity("User profile details was updated", DateAndTimeMethods.getCurrentDate(), DateAndTimeMethods.getCurrentTime()));
+        dbUser.setActivities(activities);
         this.usersRepository.save(dbUser);
         new Thread(() -> EmailSender.sendEmail(loggedInUsername, "Profile updated successfully",
                 EmailMessages.profileUpdatedMessage(loggedInUsername, dbUser.getName()))).start();
@@ -99,7 +108,10 @@ public class UserService {
     }
 
 
-    public ResponseMessage updatePassword(String email, String oldPassword, String newPassword, String confirmNewPassword) {
+    public ResponseMessage updatePassword(String email,
+                                          String oldPassword,
+                                          String newPassword,
+                                          String confirmNewPassword) {
         Users loggedInUser = this.usersRepository.findById(email).orElse(null);
 
         if (loggedInUser == null) {
@@ -120,10 +132,38 @@ public class UserService {
         }
 
         loggedInUser.setPassword(this.bCryptPasswordEncoder.encode(newPassword));
+        List<RecentActivity> activities = loggedInUser.getActivities();
+        activities.add(new RecentActivity("Password of your account was changed",
+                DateAndTimeMethods.getCurrentDate(), DateAndTimeMethods.getCurrentTime()));
+        loggedInUser.setActivities(activities);
         this.usersRepository.save(loggedInUser);
         EmailSender.sendEmail(email, "Password changed successfully",
                 EmailMessages.passwordSuccessfullyChangedMessage(email, loggedInUser.getName()));
 
         return new ResponseMessage("Password changed successfully", "none");
+    }
+
+
+    public void cleanRecentActivities(Users user) {
+        List<RecentActivity> activities = user.getActivities();
+
+        if (activities.size() > 15) {
+            this.usersRepository.deleteUserActivities(user.getUsername());
+            activities.remove(0);
+            user.setActivities(activities);
+            this.usersRepository.save(user);
+        }
+    }
+
+
+    public void cleanRecentNotifications(Users user) {
+        List<Notification> notifications = user.getNotifications();
+
+        if (notifications.size() > 15) {
+            this.usersRepository.deleteUserNotifications(user.getUsername());
+            notifications.remove(0);
+            user.setNotifications(notifications);
+            this.usersRepository.save(user);
+        }
     }
 }

@@ -4,9 +4,12 @@ import com.akgarg.apnagurukul.entity.SellBookAd;
 import com.akgarg.apnagurukul.entity.Users;
 import com.akgarg.apnagurukul.firebase.FirebaseManager;
 import com.akgarg.apnagurukul.helper.BookSellHelper;
+import com.akgarg.apnagurukul.helper.DateAndTimeMethods;
 import com.akgarg.apnagurukul.helper.EmailMessages;
 import com.akgarg.apnagurukul.helper.EmailSender;
 import com.akgarg.apnagurukul.model.BuyBookRequest;
+import com.akgarg.apnagurukul.model.Notification;
+import com.akgarg.apnagurukul.model.RecentActivity;
 import com.akgarg.apnagurukul.model.ResponseMessage;
 import com.akgarg.apnagurukul.repository.SellBookAdRepository;
 import com.akgarg.apnagurukul.repository.UsersRepository;
@@ -15,6 +18,7 @@ import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
+import java.util.List;
 import java.util.Optional;
 
 @SuppressWarnings("deprecation")
@@ -37,25 +41,44 @@ public class BookService {
         this.standardPasswordEncoder = standardPasswordEncoder;
     }
 
-    public ResponseMessage processBuyBook(String id, BuyBookRequest buyBookRequest) {
+    public ResponseMessage processBuyBook(Principal principal, String id, BuyBookRequest buyBookRequest) {
         Optional<SellBookAd> byId = this.sellBookAdRepository.findById(Integer.parseInt(id));
         SellBookAd sellBookAd = byId.orElse(null);
+        Users loggedInUser = this.usersRepository.findById(principal.getName()).orElse(null);
 
-        if (sellBookAd == null) {
-            return new ResponseMessage("Something wrong happen, please try again later", "high");
+        if (loggedInUser != null) {
+            if (sellBookAd == null) {
+                return new ResponseMessage("Something wrong happen, please try again later", "high");
+            }
+
+            if (sellBookAd.getSellerEmail().equals(buyBookRequest.getEmail())) {
+                return new ResponseMessage("Sorry, You can't purchase your own book.", "high");
+            }
+
+            Users seller = this.usersRepository.findById(sellBookAd.getSellerEmail()).orElse(null);
+            if (seller != null) {
+                List<Notification> notifications = seller.getNotifications();
+                notifications.add(new Notification(loggedInUser.getName() + " enquired for your sell book with id " + sellBookAd.getId(),
+                        DateAndTimeMethods.getCurrentDate(), DateAndTimeMethods.getCurrentTime()));
+                seller.setNotifications(notifications);
+                this.usersRepository.save(seller);
+            }
+
+            List<RecentActivity> activities = loggedInUser.getActivities();
+            activities.add(new RecentActivity("You enquired for book ad posted by " + sellBookAd.getSellerName() + " having id " + sellBookAd.getId(),
+                    DateAndTimeMethods.getCurrentDate(), DateAndTimeMethods.getCurrentTime()));
+            loggedInUser.setActivities(activities);
+            this.usersRepository.save(loggedInUser);
+
+            EmailSender.sendEmail(sellBookAd.getSellerEmail(), "Update on your book sell Id#" + id,
+                    EmailMessages.sellBookQueryMessage(sellBookAd.getSellerName(),
+                            sellBookAd.getBookTitle(),
+                            sellBookAd.getId(),
+                            buyBookRequest));
+
+            return new ResponseMessage("", "none");
         }
-
-        if (sellBookAd.getSellerEmail().equals(buyBookRequest.getEmail())) {
-            return new ResponseMessage("Sorry, You can't purchase your own book.", "high");
-        }
-
-        EmailSender.sendEmail(sellBookAd.getSellerEmail(), "Update on your book sell Id#" + id,
-                EmailMessages.sellBookQueryMessage(sellBookAd.getSellerName(),
-                        sellBookAd.getBookTitle(),
-                        sellBookAd.getId(),
-                        buyBookRequest));
-
-        return new ResponseMessage("", "none");
+        return new ResponseMessage("Something wrong happened. Try again later", "high");
     }
 
 
@@ -86,7 +109,12 @@ public class BookService {
         sellBookAd.setSellerState(loggedInUser.getState());
         sellBookAd.setSellerCountry(loggedInUser.getCountry());
         sellBookAd.setSellerPincode(loggedInUser.getPincode());
+
         this.sellBookAdRepository.save(sellBookAd);
+        List<RecentActivity> activities = loggedInUser.getActivities();
+        activities.add(new RecentActivity("New book listed for sale with id " + sellBookAd.getId() + ".", DateAndTimeMethods.getCurrentDate(), DateAndTimeMethods.getCurrentTime()));
+        loggedInUser.setActivities(activities);
+        this.usersRepository.save(loggedInUser);
 
         EmailSender.sendEmail(loggedInUser.getUsername(), "Book successfully listed for sale",
                 EmailMessages.bookSellListSuccessMessage(

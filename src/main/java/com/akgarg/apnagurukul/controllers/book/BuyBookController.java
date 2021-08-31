@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
+
 /**
  * Author: Akhilesh Garg
  * GitHub: https://github.com/akgarg0472
@@ -24,8 +26,9 @@ public class BuyBookController {
 
     @RequestMapping(value = "/process-buy-book-req", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseMessage processBuyBookRequest(@RequestParam("id") String id,
+    public ResponseMessage processBuyBookRequest(Principal principal,
+                                                 @RequestParam("id") String id,
                                                  @ModelAttribute BuyBookRequest buyBookRequest) {
-        return this.bookService.processBuyBook(id, buyBookRequest);
+        return this.bookService.processBuyBook(principal, id, buyBookRequest);
     }
 }

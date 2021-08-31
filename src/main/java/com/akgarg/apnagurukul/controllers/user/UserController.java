@@ -26,7 +26,9 @@ public class UserController {
 
 
     @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
-    public String dashboard(HttpSession session, Principal principal, Model model) {
+    public String dashboard(HttpSession session,
+                            Principal principal,
+                            Model model) {
         if (session.getAttribute("buyBookLogin") != null) {
             session.removeAttribute("buyBookLogin");
             return "redirect:/buy-book";
@@ -51,7 +53,8 @@ public class UserController {
 
 
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
-    public String myProfile(Principal principal, Model model) {
+    public String myProfile(Principal principal,
+                            Model model) {
         if (principal != null) {
             Users user = this.userService.getUser(principal.getName());
             if (user == null) {
@@ -66,7 +69,8 @@ public class UserController {
 
 
     @RequestMapping(value = "/update-profile", method = RequestMethod.GET)
-    public String updateProfile(Principal principal, Model model) {
+    public String updateProfile(Principal principal,
+                                Model model) {
         if (principal != null) {
             Users user = this.userService.getUser(principal.getName());
             if (user == null) {
@@ -81,12 +85,14 @@ public class UserController {
 
 
     @RequestMapping(value = "/notifications", method = RequestMethod.GET)
-    public String myNotifications(Principal principal, Model model) {
+    public String myNotifications(Principal principal,
+                                  Model model) {
         if (principal != null) {
             Users user = this.userService.getUser(principal.getName());
             if (user == null) {
                 return "redirect:/login";
             } else {
+                this.userService.cleanRecentNotifications(user);
                 model.addAttribute("name", user.getName());
                 model.addAttribute("notifications", user.getNotifications());
                 return "user/my-notifications";
@@ -97,12 +103,14 @@ public class UserController {
 
 
     @RequestMapping(value = "/recent-activities", method = RequestMethod.GET)
-    public String recentActivities(Principal principal, Model model) {
+    public String recentActivities(Principal principal,
+                                   Model model) {
         if (principal != null) {
             Users user = this.userService.getUser(principal.getName());
             if (user == null) {
                 return "redirect:/login";
             } else {
+                this.userService.cleanRecentActivities(user);
                 model.addAttribute("name", user.getName());
                 model.addAttribute("activities", user.getActivities());
                 return "user/recent-activities";
@@ -134,7 +142,9 @@ public class UserController {
 
     @RequestMapping(value = "/process-up", method = RequestMethod.POST)
     @ResponseBody
-    public boolean updateProfile(Principal principal, HttpServletRequest request, @ModelAttribute UpdateProfileUser user) {
+    public boolean updateProfile(Principal principal,
+                                 HttpServletRequest request,
+                                 @ModelAttribute UpdateProfileUser user) {
         if (principal != null) {
             return this.userService.updateUser(principal.getName(), request, user);
         } else {
@@ -145,7 +155,7 @@ public class UserController {
 
     @SuppressWarnings("SpringMVCViewInspection")
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public String facultyLogout() {
+    public String userLogout() {
         return "redirect:/logout";
     }
 }
