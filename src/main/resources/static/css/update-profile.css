@@ -1,0 +1,238 @@
+* {
+    box-sizing: border-box;
+}
+
+.content {
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+.up-form {
+    box-shadow: 0 0 2px #f93154;
+    border: none;
+    outline: none;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.up-form .up-info {
+    padding: 1rem;
+}
+
+.up-form .up-info .p-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem;
+}
+
+.up-form .up-info .p-info img {
+    width: 175px;
+    height: 175px;
+    border-radius: 50%;
+    border: none;
+    box-shadow: 0 0 2px #000;
+    transition: all 0.25s;
+}
+
+.up-form .up-info .p-info .spp-btn {
+    margin: 1rem;
+    height: 2rem;
+    width: 2rem;
+    border-radius: 50%;
+    padding: 0.5rem;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background-color: #75b798;
+    color: #fff;
+}
+
+.up-form .up-info .p-info .spp-btn:hover {
+    box-shadow: 0 0 4px #75b798;
+}
+
+.up-form .up-info .uo-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.up-form .up-info .uo-info .uo-info-item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin: auto 1rem 1rem 1rem;
+}
+
+.up-form .up-info .uo-info .uo-info-item span:nth-child(1) {
+    width: 25%;
+    text-align: right;
+    margin-right: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.up-form .up-info .uo-info .uo-info-item span {
+    cursor: default;
+    letter-spacing: 1px;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+}
+
+.up-form .up-info .uo-info .uo-info-item input {
+    border-width: 0 0 1px 0;
+    padding: 0.25rem;
+    outline: none;
+    width: 85%;
+    letter-spacing: 1px;
+}
+
+.up-form .up-info .uo-info .uo-info-item .info {
+    width: 100%;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+}
+
+.up-form .up-info .uo-info .btns {
+    display: flex;
+    align-items: center;
+    margin: auto;
+    margin-top: 0.75rem;
+}
+
+.up-form .up-info .uo-info .btns .up-sbmt-btn,
+.up-form .up-info .uo-info .btns .up-cncl-btn {
+    width: 8rem;
+    height: 2.25rem;
+    cursor: pointer;
+    border-radius: 0.25rem;
+    padding: 0.5rem;
+    outline: none;
+    border: none;
+}
+
+.up-form .up-info .uo-info .btns button:nth-child(1) {
+    margin-right: 0.5rem;
+    background-color: #96999b;
+    color: #000;
+}
+
+.up-form .up-info .uo-info .btns button:nth-child(1):hover {
+    box-shadow: 0 0 4px #96999b;
+}
+
+.up-form .up-info .uo-info .btns button:nth-child(2) {
+    background-color: #f93154;
+    color: #fff;
+}
+
+.up-form .up-info .uo-info .btns button:nth-child(2):hover {
+    box-shadow: 0 0 4px #f93154;
+}
+
+.error {
+    margin-top: 0.75rem;
+    color: #dc3545 !important;
+    font-size: 0.875em;
+    text-align: center;
+}
+
+@media only screen and (max-width: 1100px) {
+    .up-form {
+        width: 66%;
+    }
+
+    .up-form .up-info .p-info img {
+        width: 160px;
+        height: 160px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .up-form {
+        width: 75%;
+    }
+
+    .up-form .up-info .p-info img {
+        width: 150px;
+        height: 150px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .up-form {
+        width: 95%;
+    }
+
+    .up-form .up-info .p-info img {
+        width: 125px;
+        height: 125px;
+    }
+
+    .up-form .up-info .uo-info .uo-info-item span {
+        font-size: 0.95rem;
+    }
+}
+
+@media only screen and (max-width: 448px) {
+    .up-body .content {
+        margin: auto;
+        margin-top: 0.75rem;
+        width: 100%;
+    }
+
+    .up-form {
+        margin-top: 0.5rem;
+    }
+
+    .up-form .up-info .uo-info .uo-info-item span:nth-child(1) {
+        width: 33%;
+        margin-right: 0.5rem;
+    }
+
+    .up-form .up-info .uo-info .uo-info-item input {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 325px) {
+    .up-body .content {
+        margin-bottom: 0.5rem;
+    }
+
+    .up-form .up-info {
+        padding: 0;
+    }
+
+    .up-form .up-info .p-info {
+        margin: 1rem 0 0.25rem 0;
+    }
+
+    .up-form .up-info .p-info img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .up-form .up-info .uo-info .uo-info-item {
+        margin: auto 0.75rem 1rem 0.75rem;
+    }
+
+    .up-form .up-info .uo-info .uo-info-item span {
+        font-size: 0.9rem;
+    }
+
+    .up-form .up-info .uo-info .btns {
+        margin-bottom: 0.75rem;
+    }
+
+    .up-form .up-info .uo-info .btns .up-sbmt-btn,
+    .up-form .up-info .uo-info .btns .up-cncl-btn {
+        width: 6rem;
+        height: 2rem;
+        padding: 0.25rem;
+    }
+}

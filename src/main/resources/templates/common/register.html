@@ -64,7 +64,7 @@
         <div class="signup-form-field">
             <input type="tel" class="signup-form-input" id="phone" name="phone" placeholder="Enter 10 digit phone"
                    onfocusout="validatePhone()">
-            <p id="phone-error" class="color-error">Please enter 10 digit phone number</p>
+            <p id="phone-error" class="color-error">Please enter 10-digit phone number</p>
             <div th:if="${session.Phone_Error}">
                 <p class="color-error" th:text="${session.Phone_Error}"></p>
                 <th:block th:text="${#session.removeAttribute('Phone_Error')}"/>

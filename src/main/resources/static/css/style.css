@@ -226,7 +226,7 @@ input::-webkit-inner-spin-button {
 /*login page styling*/
 .login-container {
     padding: 0;
-    margin: 2rem auto auto auto;
+    margin: 3rem auto auto auto;
     width: 55%;
     min-height: 75vh;
     display: flex;
@@ -523,6 +523,10 @@ input::-webkit-inner-spin-button {
         width: 50%;
     }
 
+    .login-container {
+        margin-top: 2rem;
+    }
+
     .login-form {
         width: 60%;
     }
@@ -603,6 +607,10 @@ input::-webkit-inner-spin-button {
         margin-left: 20%;
         margin-right: 20%;
         width: 60%;
+    }
+
+    .login-container .login-form button {
+        width: 66%;
     }
 }
 

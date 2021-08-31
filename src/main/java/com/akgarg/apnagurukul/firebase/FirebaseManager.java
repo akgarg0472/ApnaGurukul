@@ -17,7 +17,7 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "UnusedReturnValue"})
 @Component
 public class FirebaseManager {
 
@@ -38,7 +38,7 @@ public class FirebaseManager {
     }
 
 
-    private File convertToFile(MultipartFile multipartFile, String fileName) throws IOException {
+    public File convertToFile(MultipartFile multipartFile, String fileName) throws IOException {
         File tempFile = new File(fileName);
         try (FileOutputStream fos = new FileOutputStream(tempFile)) {
             fos.write(multipartFile.getBytes());

@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!--suppress HtmlFormInputWithoutLabel -->
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
@@ -8,13 +9,13 @@
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     />
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" th:href="@{/css/user-profile.css}"/>
     <link rel="stylesheet" th:href="@{/css/up-navbar.css}"/>
     <link rel="stylesheet" th:href="@{/css/up-sidebar.css}"/>
     <link rel="stylesheet" th:href="@{/css/update-profile.css}"/>
-    <title th:text="'Update Profile - ' + ${user.name}"></title>
+    <title th:text="'Update Profile - ' + ${user.name}">Update Profile</title>
 </head>
 
 <body>
@@ -97,13 +98,110 @@
             ></i>
         </div>
 
-        <div class="upd-prfl-cntr">
-            <h3>Update profile section</h3>
-        </div>
+        <form class="up-form" th:action="@{/process-up}" method="post" onsubmit="return false;">
+            <div class="up-info">
+                <div class="p-info">
+                    <img
+                            class="user-dp"
+                            id="user-dp"
+                            src="https://png.pngtree.com/png-vector/20190909/ourmid/pngtree-outline-user-icon-png-image_1727916.jpg"
+                            th:src="${user.profilePicture}"
+                            alt="User profile image"
+                    />
+                    <button type="button" class="spp-btn" onclick="$('#profile-picture').click()">
+                        <i class="fas fa-pencil-alt"></i>
+                    </button>
+
+                    <input
+                            type="file"
+                            name="profile-picture"
+                            id="profile-picture"
+                            style="display: none"
+                            onchange="showUpdatedImage(this)"
+                    />
+                </div>
+
+                <div class="uo-info">
+                    <div class="uo-info-item">
+                        <span>Email: </span>
+                        <span class="info" name="email" id="email" th:text="${user.username}"></span>
+                    </div>
+
+                    <div class="uo-info-item">
+                        <span>Name: </span>
+                        <span class="info">
+                  <input type="text" name="name" id="name" th:value="${user.name}"/>
+                </span>
+                    </div>
+
+                    <div class="uo-info-item">
+                        <span>Phone: </span>
+                        <span class="info">
+                            <input type="tel" name="phone" id="phone" th:value="'+91 ' + ${user.phone}"/>
+                        </span>
+                    </div>
+
+                    <div class="uo-info-item">
+                        <span>Address: </span>
+                        <span class="info">
+                            <input
+                                    type="text"
+                                    name="address"
+                                    id="address"
+                                    th:value="${user.address}"
+                            />
+                        </span>
+                    </div>
+
+                    <div class="uo-info-item">
+                        <span>City: </span>
+                        <span class="info">
+                  <input type="text" name="city" id="city" th:value="${user.city}"/>
+                </span>
+                    </div>
+
+                    <div class="uo-info-item">
+                        <span>State: </span>
+                        <span class="info">
+                  <input type="text" name="state" id="state" th:value="${user.state}"/>
+                </span>
+                    </div>
+
+                    <div class="uo-info-item">
+                        <span>Country: </span>
+                        <span class="info">
+                  <input type="tel" name="country" id="country" th:value="${user.country}"/>
+                </span>
+                    </div>
+
+                    <div class="uo-info-item">
+                        <span>Pincode: </span>
+                        <span class="info">
+                  <input type="text" name="pincode" id="pincode" th:value="${user.pincode}"/>
+                </span>
+                    </div>
+
+                    <p class="error" id="nm-err">Name field is invalid</p>
+                    <p class="error" id="ph-err">Phone field is invalid</p>
+                    <p class="error" id="add-err">Address field is invalid</p>
+                    <p class="error" id="ct-err">City field is invalid</p>
+                    <p class="error" id="st-err">State field is invalid</p>
+                    <p class="error" id="pc-err">Pincode field is invalid</p>
+
+                    <div class="btns">
+                        <button type="button" class="up-cncl-btn">Cancel</button>
+                        <button type="button" class="up-sbmt-btn" onclick="validateUpdateForm()">Update</button>
+                    </div>
+                </div>
+            </div>
+
+        </form>
     </div>
 </div>
 
 <noscript>Please enable JavaScript to view this page</noscript>
 <script th:src="@{/js/user-profile.js}"></script>
+<script th:src="@{/js/update-profile.js}"></script>
 </body>
+
 </html>

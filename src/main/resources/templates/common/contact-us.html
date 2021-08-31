@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!--suppress HtmlFormInputWithoutLabel -->
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
@@ -28,7 +29,7 @@
     <p>Contact&ensp;us</p>
 
     <div class="form">
-        <form th:action="@{/cont-us-query}" method="post" style="display: hidden;"></form>
+        <form th:action="@{/cont-us-query}" method="post"></form>
 
         <div class="name">
             <input type="text" id="cnus_fname" placeholder="First name">
@@ -48,9 +49,8 @@
 
 <div class="footer">
     <div class="footer-content">
-        <h3>Lorem ipsum</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus in excepturi aut dicta perferendis
-            voluptate at optio, magnam blanditiis doloremque neque ad. Voluptas, earum tempora.</p>
+        <h3>ApnaGurukul</h3>
+        <p>All copyrights© reserved to ApnaGurukul team</p>
     </div>
 
     <ul class="social-links">

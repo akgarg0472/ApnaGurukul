@@ -229,7 +229,7 @@
     .my-navbar {
         display: block;
         height: auto;
-        min-height: 10vh;
+        min-height: 8vh;
     }
 
     .logo-slogan {
@@ -284,7 +284,7 @@
 
     .rnb-hamburger {
         position: absolute;
-        top: 22px;
+        top: 16px;
         right: 0;
         font-size: 1.5rem;
         color: #6e6e6e;
