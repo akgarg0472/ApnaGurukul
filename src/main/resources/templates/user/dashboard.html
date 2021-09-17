@@ -92,11 +92,12 @@
             <i class="fas fa-times cross-mnicn" id="cross-mnicn" onclick="hideSidemenu()"></i>
         </div>
 
-        <span class="upper-last-login" th:text="${'Last login: ' + lastLoginDate + ' ' + lastLoginTime}"></span>
+        <span class="upper-last-login"
+              th:text="${'Last login: ' + user.lastLoginDate + ' ' + user.lastLoginTime}"></span>
         <div class="left-section">
             <!-- welcome messgae banner-->
             <div class="welcome-banner">
-                <span class="wun" th:text="${'Welcome, '  + username + '!'}"></span>
+                <span class="wun" th:text="${'Welcome, '  + user.name + '!'}"></span>
                 <span class="wgmsg" id="wgmsg">Hope you are doing good</span>
             </div>
 
@@ -106,16 +107,18 @@
                     <span class="stats-head">My Statistics</span>
                     <div class="stats-cards">
                         <div class="card">
-                            <span>Statistics</span>
-                            <span>1</span>
+                            <span>Total Posts</span>
+                            <span th:text="${totalAds}"></span>
                         </div>
+
                         <div class="card">
-                            <span>Statistics</span>
-                            <span>2</span>
+                            <span>Sponsored</span>
+                            <span th:text="${sponsored}"></span>
                         </div>
+
                         <div class="card">
-                            <span>Statistics</span>
-                            <span>3</span>
+                            <span>Upcoming</span>
+                            <span></span>
                         </div>
                         <!-- <a href="#">All<i class="fa fa-chevron-right"></i></a> -->
                     </div>
@@ -126,16 +129,21 @@
                     <span class="rec-act-head">Recent Activities</span>
                     <div class="act-cards">
                         <div class="card">
-                            <span>Activity</span>
-                            <span>1</span>
+                            <span th:if="${user.activities.size() >= 1}"
+                                  th:text="${user.activities.get(user.activities.size() - 1).activity}">Activity</span>
+                            <span th:unless="${user.activities.size() >= 1}">—</span>
                         </div>
+
                         <div class="card">
-                            <span>Activity</span>
-                            <span>2</span>
+                            <span th:if="${user.activities.size() >= 2}"
+                                  th:text="${user.activities.get(user.activities.size() - 2).activity}">Activity</span>
+                            <span th:unless="${user.activities.size() >= 2}">—</span>
                         </div>
+
                         <div class="card">
-                            <span>Activity</span>
-                            <span>3</span>
+                            <span th:if="${user.activities.size() >= 3}"
+                                  th:text="${user.activities.get(user.activities.size() - 3).activity}">Activity</span>
+                            <span th:unless="${user.activities.size() >= 3}">—</span>
                         </div>
                         <!-- <a href="#">All<i class="fa fa-chevron-right"></i></a> -->
                     </div>
@@ -144,38 +152,38 @@
         </div>
 
         <div class="right-section">
-            <span class="last-login" th:text="${'Last login: ' + lastLoginDate + ' ' + lastLoginTime}"></span>
+            <span class="last-login" th:text="${'Last login: ' + user.lastLoginDate + ' ' + user.lastLoginTime}"></span>
 
             <div class="services">
                 <span class="services-head">Services offered</span>
                 <div class="services-cards">
-                    <div class="card">
-                        <div class="head" style="background-color: #ff6263">Card Heading</div>
+                    <div class="card" onclick="window.location='/find-teacher'">
+                        <div class="head" style="background-color: #ff6263">Find teachers</div>
                         <div class="body">Card body</div>
                     </div>
 
-                    <div class="card">
-                        <div class="head" style="background-color: #50dbb4">Card Heading</div>
+                    <div class="card" onclick="window.location='/find-student'">
+                        <div class="head" style="background-color: #50dbb4">Find students</div>
                         <div class="body">Card body</div>
                     </div>
 
-                    <div class="card">
-                        <div class="head" style="background-color: #fcaf6d">Card Heading</div>
+                    <div class="card" onclick="window.location='/buy-book'">
+                        <div class="head" style="background-color: #fcaf6d">Buy book</div>
                         <div class="body">Card body</div>
                     </div>
 
-                    <div class="card">
-                        <div class="head" style="background-color: #51e1ed">Card Heading</div>
+                    <div class="card" onclick="window.location='/sell-book'">
+                        <div class="head" style="background-color: #51e1ed">Sell book</div>
                         <div class="body">Card body</div>
                     </div>
 
-                    <div class="card">
-                        <div class="head" style="background-color: #e8bd0d">Card Heading</div>
+                    <div class="card" onclick="window.location='/sponsor'">
+                        <div class="head" style="background-color: #e8bd0d">Sponsor</div>
                         <div class="body">Card body</div>
                     </div>
 
-                    <div class="card">
-                        <div class="head" style="background-color: #606263">Card Heading</div>
+                    <div class="card" onclick="swal('Upcoming feature')">
+                        <div class="head" style="background-color: #606263">Upcoming</div>
                         <div class="body">Card body</div>
                     </div>
                 </div>

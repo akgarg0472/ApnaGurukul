@@ -33,7 +33,7 @@ public class FirebaseManager {
         Storage storage = StorageOptions.newBuilder().setCredentials(credentials).build().getService();
         storage.create(blobInfo, Files.readAllBytes(file.toPath()));
 
-        return String.format("https:\\firebasestorage.googleapis.com/v0/b/apnagurukul-35230.appspot.com/o/%s?alt=media"
+        return String.format("https://firebasestorage.googleapis.com/v0/b/apnagurukul-35230.appspot.com/o/%s?alt=media"
                 , URLEncoder.encode(fileName, String.valueOf(StandardCharsets.UTF_8)));
     }
 

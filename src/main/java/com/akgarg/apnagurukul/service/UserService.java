@@ -10,6 +10,7 @@ import com.akgarg.apnagurukul.model.Notification;
 import com.akgarg.apnagurukul.model.RecentActivity;
 import com.akgarg.apnagurukul.model.ResponseMessage;
 import com.akgarg.apnagurukul.model.UpdateProfileUser;
+import com.akgarg.apnagurukul.repository.SellBookAdRepository;
 import com.akgarg.apnagurukul.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -24,6 +25,7 @@ import java.util.List;
 @Service
 public class UserService {
     private final UsersRepository usersRepository;
+    private final SellBookAdRepository sellBookAdRepository;
     private final FirebaseManager firebaseManager;
     private final StandardPasswordEncoder standardPasswordEncoder;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -31,10 +33,12 @@ public class UserService {
 
     @Autowired
     public UserService(UsersRepository usersRepository,
+                       SellBookAdRepository sellBookAdRepository,
                        FirebaseManager firebaseManager,
                        StandardPasswordEncoder standardPasswordEncoder,
                        BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.usersRepository = usersRepository;
+        this.sellBookAdRepository = sellBookAdRepository;
         this.firebaseManager = firebaseManager;
         this.standardPasswordEncoder = standardPasswordEncoder;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
@@ -98,7 +102,7 @@ public class UserService {
         }
 
         List<RecentActivity> activities = dbUser.getActivities();
-        activities.add(new RecentActivity("User profile details was updated", DateAndTimeMethods.getCurrentDate(), DateAndTimeMethods.getCurrentTime()));
+        activities.add(new RecentActivity("Profile updated", DateAndTimeMethods.getCurrentDate(), DateAndTimeMethods.getCurrentTime()));
         dbUser.setActivities(activities);
         this.usersRepository.save(dbUser);
         new Thread(() -> EmailSender.sendEmail(loggedInUsername, "Profile updated successfully",
@@ -133,7 +137,7 @@ public class UserService {
 
         loggedInUser.setPassword(this.bCryptPasswordEncoder.encode(newPassword));
         List<RecentActivity> activities = loggedInUser.getActivities();
-        activities.add(new RecentActivity("Password of your account was changed",
+        activities.add(new RecentActivity("Account password changed",
                 DateAndTimeMethods.getCurrentDate(), DateAndTimeMethods.getCurrentTime()));
         loggedInUser.setActivities(activities);
         this.usersRepository.save(loggedInUser);
@@ -165,5 +169,10 @@ public class UserService {
             user.setNotifications(notifications);
             this.usersRepository.save(user);
         }
+    }
+
+
+    public int getTotalBooksAdvertisements(String username) {
+        return this.sellBookAdRepository.getAllBySellerEmail(username).size();
     }
 }

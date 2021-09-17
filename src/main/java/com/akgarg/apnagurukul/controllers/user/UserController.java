@@ -1,6 +1,8 @@
 package com.akgarg.apnagurukul.controllers.user;
 
 import com.akgarg.apnagurukul.entity.Users;
+import com.akgarg.apnagurukul.model.Notification;
+import com.akgarg.apnagurukul.model.RecentActivity;
 import com.akgarg.apnagurukul.model.ResponseMessage;
 import com.akgarg.apnagurukul.model.UpdateProfileUser;
 import com.akgarg.apnagurukul.service.UserService;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.security.Principal;
+import java.util.Collections;
+import java.util.List;
 
 @Controller
 @RequestMapping("/user")
@@ -42,9 +46,10 @@ public class UserController {
             if (user == null) {
                 return "redirect:/login";
             } else {
-                model.addAttribute("username", user.getName());
-                model.addAttribute("lastLoginDate", user.getLastLoginDate());
-                model.addAttribute("lastLoginTime", user.getLastLoginTime());
+                model.addAttribute("totalAds", this.userService.getTotalBooksAdvertisements(user.getUsername()));
+                model.addAttribute("sponsored", 23);
+                model.addAttribute("", 23);
+                model.addAttribute("user", user);
                 return "user/dashboard";
             }
         }
@@ -94,7 +99,9 @@ public class UserController {
             } else {
                 this.userService.cleanRecentNotifications(user);
                 model.addAttribute("name", user.getName());
-                model.addAttribute("notifications", user.getNotifications());
+                List<Notification> notifications = user.getNotifications();
+                Collections.reverse(notifications);
+                model.addAttribute("notifications", notifications);
                 return "user/my-notifications";
             }
         }
@@ -112,7 +119,9 @@ public class UserController {
             } else {
                 this.userService.cleanRecentActivities(user);
                 model.addAttribute("name", user.getName());
-                model.addAttribute("activities", user.getActivities());
+                List<RecentActivity> activities = user.getActivities();
+                Collections.reverse(activities);
+                model.addAttribute("activities", activities);
                 return "user/recent-activities";
             }
         }
@@ -122,7 +131,7 @@ public class UserController {
 
     @RequestMapping(value = "/change-password", method = RequestMethod.GET)
     public String changePassword() {
-        return "/user/change-password";
+        return "user/change-password";
     }
 
 

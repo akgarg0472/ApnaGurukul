@@ -120,6 +120,11 @@
     font-weight: 500;
 }
 
+.up-body .content .left-section .statistics .stats-cards .card span,
+.up-body .content .left-section .statistics .act-cards .card span {
+    text-align: center;
+}
+
 .up-body .content .left-section .statistics .stats-cards div:nth-child(1) {
     background-color: #f93154;
 }
@@ -212,6 +217,7 @@
     margin: 0;
     padding: 0;
     background-color: #fff;
+    cursor: pointer;
 }
 
 .up-body .content .right-section .services .services-cards .card .head {
@@ -247,6 +253,7 @@
 
 .up-body .content .right-section .services .explore-btn:hover {
     cursor: pointer;
+    box-shadow: 0 0 4px rgba(52, 73, 94, 0.5);
 }
 
 /* Media queries */
