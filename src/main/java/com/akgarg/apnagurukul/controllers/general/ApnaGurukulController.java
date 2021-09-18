@@ -5,9 +5,11 @@ import com.akgarg.apnagurukul.entity.SellBookAd;
 import com.akgarg.apnagurukul.entity.Users;
 import com.akgarg.apnagurukul.helper.EmailMessages;
 import com.akgarg.apnagurukul.helper.EmailSender;
+import com.akgarg.apnagurukul.model.CSRFToken;
 import com.akgarg.apnagurukul.repository.ContactUsRepository;
 import com.akgarg.apnagurukul.repository.SellBookAdRepository;
 import com.akgarg.apnagurukul.repository.UsersRepository;
+import com.akgarg.apnagurukul.service.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.security.Principal;
 import java.util.List;
@@ -26,15 +29,18 @@ public class ApnaGurukulController {
     private final UsersRepository usersRepository;
     private final ContactUsRepository contactUsRepository;
     private final SellBookAdRepository sellBookAdRepository;
+    private final SecurityService securityService;
 
 
     @Autowired
     public ApnaGurukulController(UsersRepository usersRepository,
                                  ContactUsRepository contactUsRepository,
-                                 SellBookAdRepository sellBookAdRepository) {
+                                 SellBookAdRepository sellBookAdRepository,
+                                 SecurityService securityService) {
         this.usersRepository = usersRepository;
         this.contactUsRepository = contactUsRepository;
         this.sellBookAdRepository = sellBookAdRepository;
+        this.securityService = securityService;
     }
 
 
@@ -183,6 +189,14 @@ public class ApnaGurukulController {
     public boolean isUserRegistered(@RequestParam("email") String email) {
         Users user = this.usersRepository.getUsersByUsernameEquals(email);
         return user != null;
+    }
+
+
+    @RequestMapping(value = "/get-csrf", method = RequestMethod.GET)
+    @ResponseBody
+    public CSRFToken getCsrfToken(HttpServletRequest request,
+                                  Principal principal) {
+        return this.securityService.validateUserAndRetrieveCsrf(principal, request);
     }
 
 
