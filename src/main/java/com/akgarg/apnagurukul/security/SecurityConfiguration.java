@@ -88,16 +88,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/logout-success")
                 .invalidateHttpSession(true)
-                .deleteCookies("JSESSIONID")
+                .deleteCookies("JSESSIONID", "XSRF-TOKEN")
                 .and()
-                .csrf(csrf -> csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
+                .csrf().csrfTokenRepository(csrfTokenRepository())
+                .and()
                 .cors().disable();
     }
 
     private CsrfTokenRepository csrfTokenRepository() {
         CookieCsrfTokenRepository repository = new CookieCsrfTokenRepository();
         repository.setHeaderName("X_CSRF_TOKEN");
-
+        repository.setCookieHttpOnly(true); // blocks access to CSRF token at client end
         return repository;
     }
 }
