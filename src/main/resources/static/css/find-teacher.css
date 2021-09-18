@@ -1,0 +1,160 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+* {
+    box-sizing: border-box;
+}
+
+.main-heading {
+    text-align: center;
+    margin: 1.2rem;
+}
+
+/* hides the cross button of the search bar */
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+    display: none;
+}
+
+.ft-body {
+    padding: 0 1.2rem;
+    margin: 0.2rem;
+}
+
+.show-res-para {
+    text-align: center;
+    padding: 0 1.2rem;
+}
+
+.ft-body .search {
+    display: flex;
+    justify-content: center;
+    padding: 0.8rem;
+    margin-top: 0.2rem;
+}
+
+.ft-body .search input {
+    border: none;
+    outline: none;
+    border-bottom: 1.5px solid rgba(249, 49, 84, 1);
+    margin-right: 4px;
+}
+
+.ft-body .search button {
+    width: 8rem;
+    height: 1.6rem;
+    border-radius: 6px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background-color: rgba(249, 49, 84, 1);
+    color: #fff;
+}
+
+.ft-body .search button:hover {
+    box-shadow: 0 0 4px rgba(249, 49, 84, 1);
+}
+
+.ft-body .content {
+    margin-top: 1.2rem;
+    padding: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* teacher card styling */
+.ft-body .content .card {
+    width: 200px;
+    height: 200px;
+    color: white;
+    perspective: 1000px;
+    margin: 12px;
+}
+
+.ft-body .content .card .card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.5s;
+    transform-style: preserve-3d;
+}
+
+.ft-body .content .card:hover .card-inner {
+    transform: rotateY(180deg);
+}
+
+.ft-body .content .card .card-inner .card-front,
+.ft-body .content .card .card-inner .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 1.2rem;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.ft-body .content .card .card-inner .card-front {
+    background-color: rgba(249, 49, 84, 1);
+}
+
+.ft-body .content .card .card-inner .card-front .heading,
+.ft-body .content .card .card-inner .card-back .heading {
+    position: relative;
+    width: 100%;
+    height: 25%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    color: #000;
+    border: none;
+    border-radius: 1.2rem;
+    font-size: 0.95rem;
+    font-family: "Poppins", sans-serif;
+    letter-spacing: 2px;
+}
+
+.ft-body .content .card .card-inner .card-front .details,
+.ft-body .content .card .card-inner .card-back .c-info {
+    height: 75%;
+    padding: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    font-family: "Poppins", sans-serif;
+}
+
+.ft-body .content .card .card-inner .card-front .details div {
+    width: 100%;
+    padding: 2px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.ft-body .content .card .card-inner .card-back {
+    background-color: rgba(249, 49, 84, 1);
+    transform: rotateY(180deg);
+}
+
+.ft-body .content .card .card-inner .card-back .c-info button {
+    width: 90%;
+    outline: none;
+    height: 1.8rem;
+    border-radius: 8px;
+    background-color: rgba(249, 49, 84, 0.1);
+    color: #fff;
+    border: 1px solid #fff;
+}
+
+.ft-body .content .card .card-inner .card-back .c-info button:hover {
+    cursor: pointer;
+    box-shadow: 0 0 4px 1px rgba(255, 255, 255, 1);
+    font-weight: 600;
+}
