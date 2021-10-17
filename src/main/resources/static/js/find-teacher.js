@@ -11,30 +11,42 @@ $(document).ready(() => {
     } else {
         alert(`This browser is not supported`);
     }
+
+    const url = window.location.href.split('/');
+    if (url.length > 4) {
+        const city = url[url.length - 2];
+        const state = url[url.length - 1];
+        cityInput.value = city;
+        stateInput.value = state;
+        document.getElementById(
+            "show-res-para"
+        ).innerHTML = `Showing results for <strong>${city}, ${state}</strong>`;
+    }
 });
 
 const fetchLocationDetails = async (obj) => {
-    const longitude = obj.coords.longitude;
-    const latitude = obj.coords.latitude;
-    const url = `https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/reverseGeocode?f=pjson&featureTypes=&location=${longitude},${latitude}`;
+    if (window.location.href.split('/').length <= 4) {
+        const longitude = obj.coords.longitude;
+        const latitude = obj.coords.latitude;
+        const url = `https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/reverseGeocode?f=pjson&featureTypes=&location=${longitude},${latitude}`;
 
-    const address = await fetch(url)
-        .then((resp) => resp.json())
-        .then((resp) => resp.address)
-        .catch((err) => console.log(err));
+        const address = await fetch(url)
+            .then((resp) => resp.json())
+            .then((resp) => resp.address)
+            .catch((err) => console.log(err));
 
-    const state = address.Region;
-    const city = address.Subregion;
-    const postal = address.Postal;
-    const country = address.CountryCode;
+        const state = address.Region;
+        const city = address.Subregion;
+        const country = address.CountryCode;
 
-    cityInput.value = city;
-    stateInput.value = state;
-    countryInput.value = country === "IND" ? "India" : "";
+        cityInput.value = city;
+        stateInput.value = state;
+        countryInput.value = country === "IND" ? "India" : "";
 
-    document.getElementById(
-        "show-res-para"
-    ).innerHTML = `Showing results for <strong>${city}, ${state}</strong>`;
+        document.getElementById(
+            "show-res-para"
+        ).innerHTML = `Showing results for <strong>${city}, ${state}</strong>`;
+    }
 };
 
 const locationDenied = (obj) => {
@@ -42,7 +54,13 @@ const locationDenied = (obj) => {
 };
 
 const performSearch = () => {
-    document.getElementById(
-        "show-res-para"
-    ).innerHTML = `Showing results for <strong>${cityInput.value}, ${stateInput.value}</strong>`;
+    if (cityInput === null || cityInput.value.trim() === '') {
+        swal('Error', 'Please enter valid city name', 'error');
+        return;
+    } else if (stateInput === null || stateInput.value.trim() === '') {
+        swal('Error', 'Please enter valid state name', 'error');
+        return;
+    }
+
+    window.location.href = `/find-teachers/${cityInput.value}/${stateInput.value}`;
 };

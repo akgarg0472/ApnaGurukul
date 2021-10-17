@@ -1,16 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<!--suppress HtmlFormInputWithoutLabel -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link rel="stylesheet" th:href="@{/css/navbar.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
     <link rel="stylesheet" th:href="@{/css/modal.css}"/>
-    <link rel="stylesheet" th:href="@{/css/font-awesome.css}"/>
     <link rel="stylesheet" th:href="@{/css/find-teacher.css}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+          integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <script type="text/javascript" th:src="@{/js/jquery.js}"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <title>ApnaGurukul - Find teacher</title>
@@ -60,294 +62,28 @@
 
     <div class="show-res-para" id="show-res-para"></div>
     <div class="content">
-        <div class="card">
-            <div class="card-inner">
-                <div class="card-front">
-                    <div class="heading">Java Teacher</div>
-                    <div class="details">
-                        <div>Name: Abcd Pqrs</div>
-                        <div>Experience: 2-3 Years</div>
-                        <div>Mode: Offline</div>
-                    </div>
-                </div>
-                <div class="card-back">
-                    <div class="heading">Contact Info</div>
-                    <div class="c-info">
-                        <button
-                                onclick="
-                    document.getElementById('modal').style.display = 'flex';
-                    document.getElementById('modal').style.opacity = 1;
-                  "
-                        >
-                            More info
-                        </button>
-                    </div>
-                </div>
-            </div>
+
+        <div th:if="${teachers.size()==0}">
+            <p>No teacher found for requested location</p>
         </div>
 
-        <div class="card">
-            <div class="card-inner">
-                <div class="card-front">
-                    <div class="heading">Java Teacher</div>
-                    <div class="details">
-                        <div>Name: Abcd Pqrs</div>
-                        <div>Experience: 2-3 Years</div>
-                        <div>Mode: Offline</div>
+        <th:block th:if="${teachers.size()>0}">
+            <th:block th:each="teacher : ${teachers}">
+                <div class="card">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="heading" th:text="${teacher.subject} + ' Teacher'">Subject</div>
+                            <div class="details">
+                                <div th:text="${teacher.name}">Name</div>
+                                <div th:text="'Experience:' + ${teacher.experience}">Experience</div>
+                                <div th:text="'Mode: ' + ${teacher.mode}">Mode</div>
+                                <div th:text="'Email: ' + ${teacher.email}"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="card-back">
-                    <div class="heading">Contact Info</div>
-                    <div class="c-info">
-                        <button
-                                onclick="
-                    document.getElementById('modal').style.display = 'flex';
-                    document.getElementById('modal').style.opacity = 1;
-                  "
-                        >
-                            More info
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-inner">
-                <div class="card-front">
-                    <div class="heading">Java Teacher</div>
-                    <div class="details">
-                        <div>Name: Abcd Pqrs</div>
-                        <div>Experience: 2-3 Years</div>
-                        <div>Mode: Offline</div>
-                    </div>
-                </div>
-                <div class="card-back">
-                    <div class="heading">Contact Info</div>
-                    <div class="c-info">
-                        <button
-                                onclick="
-                    document.getElementById('modal').style.display = 'flex';
-                    document.getElementById('modal').style.opacity = 1;
-                  "
-                        >
-                            More info
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-inner">
-                <div class="card-front">
-                    <div class="heading">Java Teacher</div>
-                    <div class="details">
-                        <div>Name: Abcd Pqrs</div>
-                        <div>Experience: 2-3 Years</div>
-                        <div>Mode: Offline</div>
-                    </div>
-                </div>
-                <div class="card-back">
-                    <div class="heading">Contact Info</div>
-                    <div class="c-info">
-                        <button
-                                onclick="
-                    document.getElementById('modal').style.display = 'flex';
-                    document.getElementById('modal').style.opacity = 1;
-                  "
-                        >
-                            More info
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-inner">
-                <div class="card-front">
-                    <div class="heading">Java Teacher</div>
-                    <div class="details">
-                        <div>Name: Abcd Pqrs</div>
-                        <div>Experience: 2-3 Years</div>
-                        <div>Mode: Offline</div>
-                    </div>
-                </div>
-                <div class="card-back">
-                    <div class="heading">Contact Info</div>
-                    <div class="c-info">
-                        <button
-                                onclick="
-                    document.getElementById('modal').style.display = 'flex';
-                    document.getElementById('modal').style.opacity = 1;
-                  "
-                        >
-                            More info
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-inner">
-                <div class="card-front">
-                    <div class="heading">Java Teacher</div>
-                    <div class="details">
-                        <div>Name: Abcd Pqrs</div>
-                        <div>Experience: 2-3 Years</div>
-                        <div>Mode: Offline</div>
-                    </div>
-                </div>
-                <div class="card-back">
-                    <div class="heading">Contact Info</div>
-                    <div class="c-info">
-                        <button
-                                onclick="
-                    document.getElementById('modal').style.display = 'flex';
-                    document.getElementById('modal').style.opacity = 1;
-                  "
-                        >
-                            More info
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-inner">
-                <div class="card-front">
-                    <div class="heading">Java Teacher</div>
-                    <div class="details">
-                        <div>Name: Abcd Pqrs</div>
-                        <div>Experience: 2-3 Years</div>
-                        <div>Mode: Offline</div>
-                    </div>
-                </div>
-                <div class="card-back">
-                    <div class="heading">Contact Info</div>
-                    <div class="c-info">
-                        <button
-                                onclick="
-                    document.getElementById('modal').style.display = 'flex';
-                    document.getElementById('modal').style.opacity = 1;
-                  "
-                        >
-                            More info
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-inner">
-                <div class="card-front">
-                    <div class="heading">Java Teacher</div>
-                    <div class="details">
-                        <div>Name: Abcd Pqrs</div>
-                        <div>Experience: 2-3 Years</div>
-                        <div>Mode: Offline</div>
-                    </div>
-                </div>
-                <div class="card-back">
-                    <div class="heading">Contact Info</div>
-                    <div class="c-info">
-                        <button
-                                onclick="
-                    document.getElementById('modal').style.display = 'flex';
-                    document.getElementById('modal').style.opacity = 1;
-                  "
-                        >
-                            More info
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-inner">
-                <div class="card-front">
-                    <div class="heading">Java Teacher</div>
-                    <div class="details">
-                        <div>Name: Abcd Pqrs</div>
-                        <div>Experience: 2-3 Years</div>
-                        <div>Mode: Offline</div>
-                    </div>
-                </div>
-                <div class="card-back">
-                    <div class="heading">Contact Info</div>
-                    <div class="c-info">
-                        <button
-                                onclick="
-                    document.getElementById('modal').style.display = 'flex';
-                    document.getElementById('modal').style.opacity = 1;
-                  "
-                        >
-                            More info
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-inner">
-                <div class="card-front">
-                    <div class="heading">Java Teacher</div>
-                    <div class="details">
-                        <div>Name: Abcd Pqrs</div>
-                        <div>Experience: 2-3 Years</div>
-                        <div>Mode: Offline</div>
-                    </div>
-                </div>
-                <div class="card-back">
-                    <div class="heading">Contact Info</div>
-                    <div class="c-info">
-                        <button
-                                onclick="
-                    document.getElementById('modal').style.display = 'flex';
-                    document.getElementById('modal').style.opacity = 1;
-                  "
-                        >
-                            More info
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal" id="modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title">Faculty Information</h5>
-            <span class="modal-close-btn" onclick="closeModal()">&times;</span>
-        </div>
-
-        <div class="modal-body">
-            <div class="teacher__information">
-                Email: email_sample123@gmail.com
-            </div>
-            <div class="teacher__information">City: Gurugram</div>
-            <div class="teacher__information">State: Haryana</div>
-
-            <textarea
-                    name="message"
-                    id="modal__message"
-                    placeholder="Enter your message"
-            ></textarea>
-        </div>
-
-        <div class="modal-footer">
-            <div class="btns">
-                <button id="send__message__modal__button">Send Message</button>
-            </div>
-        </div>
+            </th:block>
+        </th:block>
     </div>
 </div>
 
