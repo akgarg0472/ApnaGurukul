@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/jquery.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/user-profile.css}"/>
+    <link rel="stylesheet" th:href="@{/css/up-navbar.css}"/>
+    <link rel="stylesheet" th:href="@{/css/up-sidebar.css}"/>
+    <link rel="stylesheet" th:href="@{/css/add-teacher.css}"/>
+    <title>Add Teacher - ApnaGurukul</title>
+</head>
+
+<body>
+<div class="up-navbar">
+    <div class="logo">
+        <img
+                th:src="@{/images/aglogo.png}"
+                alt="ApnaGurukul logo"
+                onclick="window.location='/'"
+                src=""/>
+    </div>
+
+    <div class="links">
+        <ul class="up-nvul">
+            <li>
+                <a href="/">Home</a>
+            </li>
+
+            <li onclick="logout()">
+                <a href="#" onclick="logout()">Logout<i class="fa fa-caret-down"></i></a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="up-body">
+    <div class="sidebar" id="sidebar">
+        <ul>
+            <li class="sb-link dashboard" onclick="window.location='/user/dashboard'">
+                <a href="/user/dashboard">Dashboard</a>
+            </li>
+
+            <li
+                    class="sb-link rec-act"
+                    onclick="window.location = '/user/recent-activities'"
+            >
+                <a href="/user/recent-activities">Recent activities</a>
+            </li>
+
+            <li
+                    class="sb-link my-noti"
+                    onclick="window.location='/user/notifications'"
+            >
+                <a href="/user/notifications">My Notifications</a>
+            </li>
+            <!---->
+            <li
+                    class="sb-link my-noti"
+                    onclick="window.location='/user/add-student'"
+            >
+                <a href="/user/add-student">Add Student</a>
+            </li>
+
+            <li
+                    class="sb-link my-noti"
+                    style="border-left: 4px solid var(--myRed)"
+                    onclick="window.location='/user/add-teacher'"
+            >
+                <a href="/user/add-teacher">Add Teacher</a>
+            </li>
+            <!--            -->
+            <li
+                    class="sb-link profile"
+                    onclick="window.location='/user/profile'"
+            >
+                <a href="/user/profile">My profile</a>
+            </li>
+
+            <li
+                    class="sb-link updt-prfl"
+                    onclick="window.location='/user/update-profile'"
+            >
+                <a href="/user/update-profile">Update profile</a>
+            </li>
+
+            <li
+                    class="sb-link updt-prfl"
+                    onclick="window.location='/user/change-password'"
+            >
+                <a href="/user/change-password">Change Password</a>
+
+            </li>
+
+            <li class="sb-link logout" onclick="logout()">
+                <a href="#">Logout</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="content">
+        <div class="resp-icons" id="resp-icons">
+            <i
+                    class="fas fa-bars hmbg-mnicn"
+                    id="hmbg-mnicn"
+                    onclick="showSidemenu()"
+            ></i>
+            <i
+                    class="fas fa-times cross-mnicn"
+                    id="cross-mnicn"
+                    onclick="hideSidemenu()"
+            ></i>
+        </div>
+
+        <!-- Add content here -->
+        <div class="at-add-form">
+            <form
+                    class="at-form"
+                    th:action="@{/add-teacher}"
+                    method="post"
+                    onsubmit="return false;"
+            >
+                <h2>Add Teacher</h2>
+                <div class="as-info">
+                    <div class="uo-info">
+                        <div class="as-info-item">
+                            <span>Name: </span>
+                            <span class="info">
+                    <input type="text" id="name" name="name"/>
+                  </span>
+                        </div>
+
+                        <div class="as-info-item">
+                            <span>Email: </span>
+                            <span class="info">
+                    <input type="email" id="email" name="email"/>
+                  </span>
+                        </div>
+
+                        <div class="as-info-item">
+                            <span>Exp: </span>
+                            <span class="info">
+                    <input type="text" id="experience" name="experience"/>
+                  </span>
+                        </div>
+
+                        <div class="as-info-item">
+                            <span>Subject: </span>
+                            <span class="info">
+                    <input type="text" name="subject" id="subject"/>
+                  </span>
+                        </div>
+
+                        <div class="as-info-item">
+                            <span>Mode: </span>
+                            <span class="info">
+                    <select name="mode" id="mode">
+                      <option value="null" selected>-- Select Mode --</option>
+                      <option value="offline">Offline</option>
+                      <option value="online">Online</option>
+                    </select>
+                  </span>
+                        </div>
+
+                        <div class="as-info-item">
+                            <span>City: </span>
+                            <span class="info">
+                    <input type="text" name="city" id="city"/>
+                  </span>
+                        </div>
+
+                        <div class="as-info-item">
+                            <span>State: </span>
+                            <span class="info">
+                    <input type="text" name="state" id="state"/>
+                  </span>
+                        </div>
+
+                        <div class="as-info-item">
+                            <span>Country: </span>
+                            <span class="info">
+                    <input type="tel" name="country" id="country"/>
+                  </span>
+                        </div>
+
+                        <div class="as-info-item">
+                            <span>Pincode: </span>
+                            <span class="info">
+                    <input type="text" name="pincode" id="pincode"/>
+                  </span>
+                        </div>
+
+                        <p class="error" id="eml-err">Invalid email address</p>
+                        <p class="error" id="exp-err">
+                            Experience field can't be empty
+                        </p>
+                        <p class="error" id="nm-err">Name field can't be empty</p>
+                        <p class="error" id="mode-err">
+                            Please select mode of teaching
+                        </p>
+                        <p class="error" id="sub-err">Subject field can't be empty</p>
+                        <p class="error" id="ct-err">City field can't be empty</p>
+                        <p class="error" id="st-err">State field can't be empty</p>
+                        <p class="error" id="cntry-err">Country field can't be empty</p>
+                        <p class="error" id="pc-err">Pincode field can't be empty</p>
+
+                        <div class="btns">
+                            <button type="reset" class="up-cncl-btn">Cancel</button>
+                            <button
+                                    type="button"
+                                    class="up-sbmt-btn"
+                                    onclick="addTeacher()"
+                            >
+                                Add
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<div class="loader-div" id="loader-div">
+    <div class="loader"></div>
+</div>
+
+<noscript>Please enable JavaScript to view this page</noscript>
+<script th:src="@{/js/user-profile.js}"></script>
+<script th:src="@{/js/add-teacher.js}"></script>
+</body>
+
+</html>

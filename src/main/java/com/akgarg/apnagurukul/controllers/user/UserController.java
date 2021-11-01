@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import java.security.Principal;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.springframework.http.HttpStatus.*;
 
@@ -120,12 +121,13 @@ public class UserController {
             } else {
                 this.userService.cleanRecentActivities(user);
                 model.addAttribute("name", user.getName());
-                List<RecentActivity> activities = user.getActivities();
+                List<RecentActivity> activities = user.getActivities().stream().limit(15).collect(Collectors.toList());
                 Collections.reverse(activities);
                 model.addAttribute("activities", activities);
                 return "user/recent-activities";
             }
         }
+
         return "redirect:/login";
     }
 
