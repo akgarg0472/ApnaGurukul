@@ -86,7 +86,8 @@ input[type="search"]::-webkit-search-results-decoration {
     transform-style: preserve-3d;
 }
 
-.ft-body .content .card .card-inner .card-front {
+.ft-body .content .card .card-inner .card-front,
+.ft-body .content .card .card-inner .card-back {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -127,10 +128,39 @@ input[type="search"]::-webkit-search-results-decoration {
     font-family: "Poppins", sans-serif;
 }
 
-.ft-body .content .card .card-inner .card-front .details div {
+.ft-body .content .card .card-inner .card-front .details p {
     width: 100%;
     padding: 2px;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+    text-align: left;
+}
+
+.ft-body .content .card:hover .card-inner {
+    transform: rotateY(180deg);
+}
+
+.ft-body .content .card .card-inner .card-back {
+    background-color: rgba(249, 49, 84, 1);
+    transform: rotateY(180deg);
+}
+
+.ft-body .content .card .card-inner .card-back .details {
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.ft-body .content .card .card-inner .card-back .details p {
+    width: 100%;
+    padding: 2px;
+    text-overflow: ellipsis;
+    text-align: justify;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
 }

@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -26,20 +25,8 @@ public class FindTeacherController {
     @RequestMapping(value = "/find-teacher", method = RequestMethod.GET)
     public String findTeacher(Model model) {
         // adding dummy data for debugging purpose
-        List<FindTeacher> teachers = new ArrayList<>();
-        FindTeacher teacher = new FindTeacher();
-        teacher.setName("name");
-        teacher.setSubject("subject");
-        teacher.setEmail("email@email.email");
-        teacher.setExperience(1.25);
-        FindTeacher teacher1 = new FindTeacher();
-        teacher1.setName("name");
-        teacher1.setSubject("subject");
-        teacher1.setExperience(1.25);
-        teacher1.setEmail("email@email.email");
+        List<FindTeacher> teachers = this.findTeacherService.find("gurugram", "haryana");
 
-        teachers.add(teacher);
-        teachers.add(teacher1);
         model.addAttribute("teachers", teachers);
 
         return "/common/find-teacher";

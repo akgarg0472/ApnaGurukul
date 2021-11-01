@@ -18,6 +18,6 @@ public class FindTeacherService {
     }
 
     public List<FindTeacher> find(String city, String state) {
-        return this.findTeacherRepository.findFindTeachersByCityAndState(city, state);
+        return this.findTeacherRepository.findFindTeachersByCityIgnoreCaseOrStateIgnoreCase(city, state);
     }
 }

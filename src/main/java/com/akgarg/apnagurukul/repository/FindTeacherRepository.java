@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface FindTeacherRepository extends JpaRepository<FindTeacher, Integer> {
 
-    List<FindTeacher> findFindTeachersByCityAndState(String city, String state);
+    List<FindTeacher> findFindTeachersByCityIgnoreCaseOrStateIgnoreCase(String city, String state);
 }

@@ -1,12 +1,11 @@
 package com.akgarg.apnagurukul.controllers.user;
 
+import com.akgarg.apnagurukul.entity.FindTeacher;
 import com.akgarg.apnagurukul.entity.Users;
-import com.akgarg.apnagurukul.model.Notification;
-import com.akgarg.apnagurukul.model.RecentActivity;
-import com.akgarg.apnagurukul.model.ResponseMessage;
-import com.akgarg.apnagurukul.model.UpdateProfileUser;
+import com.akgarg.apnagurukul.model.*;
 import com.akgarg.apnagurukul.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +15,8 @@ import javax.servlet.http.HttpSession;
 import java.security.Principal;
 import java.util.Collections;
 import java.util.List;
+
+import static org.springframework.http.HttpStatus.*;
 
 @Controller
 @RequestMapping("/user")
@@ -126,6 +127,39 @@ public class UserController {
             }
         }
         return "redirect:/login";
+    }
+
+
+    @RequestMapping(value = "/add-student", method = RequestMethod.GET)
+    public String addStudent() {
+        return "user/add-student";
+    }
+
+
+    @RequestMapping(value = "/add-teacher", method = RequestMethod.GET)
+    public String addTeacher() {
+        return "user/add-teacher";
+    }
+
+
+    @RequestMapping(value = "add-teacher", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<?> addNewTeacher(Principal principal, @ModelAttribute FindTeacher teacher) {
+        if (principal != null) {
+            boolean addTeacher = this.userService.addTeacher(principal.getName(), teacher);
+
+            return addTeacher ?
+                    ResponseEntity.status(OK).body(
+                            new AddTeacherResponse(CREATED.value(), "Teacher added successfully")
+                    )
+                    :
+                    ResponseEntity.status(OK).body(
+                            new AddTeacherResponse(BAD_REQUEST.value(), "Add teacher failed")
+                    );
+        }
+
+        return ResponseEntity.status(UNAUTHORIZED)
+                .body(new AddTeacherResponse(CREATED.value(), "Please login again!!"));
     }
 
 

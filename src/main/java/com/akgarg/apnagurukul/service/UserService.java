@@ -1,5 +1,6 @@
 package com.akgarg.apnagurukul.service;
 
+import com.akgarg.apnagurukul.entity.FindTeacher;
 import com.akgarg.apnagurukul.entity.Users;
 import com.akgarg.apnagurukul.firebase.FirebaseManager;
 import com.akgarg.apnagurukul.helper.DateAndTimeMethods;
@@ -10,6 +11,7 @@ import com.akgarg.apnagurukul.model.Notification;
 import com.akgarg.apnagurukul.model.RecentActivity;
 import com.akgarg.apnagurukul.model.ResponseMessage;
 import com.akgarg.apnagurukul.model.UpdateProfileUser;
+import com.akgarg.apnagurukul.repository.FindTeacherRepository;
 import com.akgarg.apnagurukul.repository.SellBookAdRepository;
 import com.akgarg.apnagurukul.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,7 @@ public class UserService {
     private final FirebaseManager firebaseManager;
     private final StandardPasswordEncoder standardPasswordEncoder;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final FindTeacherRepository findTeacherRepository;
 
 
     @Autowired
@@ -36,12 +39,14 @@ public class UserService {
                        SellBookAdRepository sellBookAdRepository,
                        FirebaseManager firebaseManager,
                        StandardPasswordEncoder standardPasswordEncoder,
-                       BCryptPasswordEncoder bCryptPasswordEncoder) {
+                       BCryptPasswordEncoder bCryptPasswordEncoder,
+                       FindTeacherRepository findTeacherRepository) {
         this.usersRepository = usersRepository;
         this.sellBookAdRepository = sellBookAdRepository;
         this.firebaseManager = firebaseManager;
         this.standardPasswordEncoder = standardPasswordEncoder;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.findTeacherRepository = findTeacherRepository;
     }
 
 
@@ -174,5 +179,25 @@ public class UserService {
 
     public int getTotalBooksAdvertisements(String username) {
         return this.sellBookAdRepository.getAllBySellerEmail(username).size();
+    }
+
+    public boolean addTeacher(String loggedInUsername, FindTeacher teacher) {
+        if (loggedInUsername != null && !loggedInUsername.equals("")) {
+            Users currentlyLoggedInUser = this.getUser(loggedInUsername);
+            teacher.setUserEmail(currentlyLoggedInUser.getUsername());
+            FindTeacher savedTeacher = this.findTeacherRepository.save(teacher);
+
+            if (savedTeacher.getId() != -1) {
+                List<RecentActivity> activities = currentlyLoggedInUser.getActivities();
+                activities.add(new RecentActivity("Teacher added",
+                        DateAndTimeMethods.getCurrentDate(), DateAndTimeMethods.getCurrentTime()));
+                currentlyLoggedInUser.setActivities(activities);
+                this.usersRepository.save(currentlyLoggedInUser);
+
+                return true;
+            }
+        }
+
+        return false;
     }
 }

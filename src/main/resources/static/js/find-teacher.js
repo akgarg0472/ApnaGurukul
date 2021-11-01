@@ -46,11 +46,13 @@ const fetchLocationDetails = async (obj) => {
         document.getElementById(
             "show-res-para"
         ).innerHTML = `Showing results for <strong>${city}, ${state}</strong>`;
+
+        performSearch();
     }
 };
 
 const locationDenied = (obj) => {
-    alert(`Please enable location permission!!\nError message: ${obj.message}`);
+    alert(`Please enable location permission!!\nCause: ${obj.message}`);
 };
 
 const performSearch = () => {

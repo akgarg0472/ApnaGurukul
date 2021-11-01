@@ -72,12 +72,21 @@
                 <div class="card">
                     <div class="card-inner">
                         <div class="card-front">
-                            <div class="heading" th:text="${teacher.subject} + ' Teacher'">Subject</div>
+                            <div class="heading" th:text="${teacher.subject}">Subject</div>
                             <div class="details">
-                                <div th:text="${teacher.name}">Name</div>
-                                <div th:text="'Experience:' + ${teacher.experience}">Experience</div>
-                                <div th:text="'Mode: ' + ${teacher.mode}">Mode</div>
-                                <div th:text="'Email: ' + ${teacher.email}"></div>
+                                <p th:text="'Name: ' + ${teacher.name}">Name</p>
+                                <p th:text="'Experience: ' + ${teacher.experience}">Experience</p>
+                                <p th:text="'Mode: ' + ${teacher.mode}">Mode</p>
+                                <p th:text="'Subject: ' + ${teacher.subject}"></p>
+                            </div>
+                        </div>
+
+                        <div class="card-back">
+                            <div class="details">
+                                <p th:text="'Email: ' + ${teacher.email}"></p>
+                                <p th:text="'City: ' + ${teacher.city}"></p>
+                                <p th:text="'State: ' + ${teacher.state}"></p>
+                                <p th:text="'Pincode: ' + ${teacher.pincode}"></p>
                             </div>
                         </div>
                     </div>
