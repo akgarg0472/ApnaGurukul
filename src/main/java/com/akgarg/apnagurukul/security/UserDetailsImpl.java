@@ -64,10 +64,6 @@ public class UserDetailsImpl implements UserDetails {
         return this.users.getRole();
     }
 
-    public Users getCurrentlyLoggedInUser() {
-        return this.users;
-    }
-
     @Override
     public String toString() {
         return this.users.toString();

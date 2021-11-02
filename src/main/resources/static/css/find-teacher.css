@@ -41,7 +41,7 @@ input[type="search"]::-webkit-search-results-decoration {
 .ft-body .search input {
     border: none;
     outline: none;
-    border-bottom: 1.5px solid rgba(249, 49, 84, 1);
+    border-bottom: 2px solid rgba(249, 49, 84, 1);
     margin-right: 4px;
 }
 

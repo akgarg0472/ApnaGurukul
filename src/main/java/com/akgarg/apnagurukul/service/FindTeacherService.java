@@ -17,6 +17,10 @@ public class FindTeacherService {
         this.findTeacherRepository = findTeacherRepository;
     }
 
+    public List<FindTeacher> find() {
+        return this.findTeacherRepository.findAll();
+    }
+
     public List<FindTeacher> find(String city, String state) {
         return this.findTeacherRepository.findFindTeachersByCityIgnoreCaseOrStateIgnoreCase(city, state);
     }

@@ -14,7 +14,7 @@
     <link rel="stylesheet" th:href="@{/css/up-navbar.css}"/>
     <link rel="stylesheet" th:href="@{/css/up-sidebar.css}"/>
     <link rel="stylesheet" th:href="@{/css/add-entity.css}"/>
-    <title>Add Teacher - ApnaGurukul</title>
+    <title>Add Student - ApnaGurukul</title>
 </head>
 
 <body>
@@ -63,6 +63,7 @@
             <!---->
             <li
                     class="sb-link my-noti"
+                    style="border-left: 4px solid var(--myRed)"
                     onclick="window.location='/user/add-student'"
             >
                 <a href="/user/add-student">Add Student</a>
@@ -70,7 +71,6 @@
 
             <li
                     class="sb-link my-noti"
-                    style="border-left: 4px solid var(--myRed)"
                     onclick="window.location='/user/add-teacher'"
             >
                 <a href="/user/add-teacher">Add Teacher</a>
@@ -122,11 +122,11 @@
         <div class="at-add-form">
             <form
                     class="at-form"
-                    th:action="@{/add-teacher}"
+                    th:action="@{/add-student}"
                     method="post"
                     onsubmit="return false;"
             >
-                <h2>Add Teacher</h2>
+                <h2>Add Student</h2>
                 <div class="as-info">
                     <div class="uo-info">
                         <div class="as-info-item">
@@ -144,9 +144,9 @@
                         </div>
 
                         <div class="as-info-item">
-                            <span>Exp: </span>
+                            <span>Class: </span>
                             <span class="info">
-                    <input type="text" id="experience" name="experience"/>
+                    <input type="text" id="_class" name="_class"/>
                   </span>
                         </div>
 
@@ -162,9 +162,16 @@
                             <span class="info">
                     <select name="mode" id="mode">
                       <option value="null" selected>-- Select Mode --</option>
-                      <option value="offline">Offline</option>
-                      <option value="online">Online</option>
+                      <option value="Offline">Offline</option>
+                      <option value="Online">Online</option>
                     </select>
+                  </span>
+                        </div>
+
+                        <div class="as-info-item">
+                            <span>Village: </span>
+                            <span class="info">
+                    <input type="text" name="village" id="village"/>
                   </span>
                         </div>
 
@@ -197,25 +204,21 @@
                         </div>
 
                         <p class="error" id="eml-err">Invalid email address</p>
-                        <p class="error" id="exp-err">
-                            Experience field can't be empty
-                        </p>
-                        <p class="error" id="nm-err">Name field can't be empty</p>
-                        <p class="error" id="mode-err">
-                            Please select mode of teaching
-                        </p>
+                        <p class="error" id="class-err">Invalid class</p>
+                        <p class="error" id="nm-err">Invalid name</p>
+                        <p class="error" id="mode-err">Please select mode of study</p>
                         <p class="error" id="sub-err">Subject field can't be empty</p>
                         <p class="error" id="ct-err">City field can't be empty</p>
                         <p class="error" id="st-err">State field can't be empty</p>
                         <p class="error" id="cntry-err">Country field can't be empty</p>
-                        <p class="error" id="pc-err">Pincode field can't be empty</p>
+                        <p class="error" id="pc-err">Error in pincode</p>
 
                         <div class="btns">
                             <button type="reset" class="up-cncl-btn" onclick="cancel()">Cancel</button>
                             <button
                                     type="button"
                                     class="up-sbmt-btn"
-                                    onclick="addTeacher()"
+                                    onclick="addStudent()"
                             >
                                 Add
                             </button>
@@ -224,7 +227,6 @@
                 </div>
             </form>
         </div>
-
     </div>
 </div>
 
@@ -234,7 +236,7 @@
 
 <noscript>Please enable JavaScript to view this page</noscript>
 <script th:src="@{/js/user-profile.js}"></script>
-<script th:src="@{/js/add-teacher.js}"></script>
+<script th:src="@{/js/add-student.js}"></script>
 </body>
 
 </html>

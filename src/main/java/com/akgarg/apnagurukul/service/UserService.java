@@ -1,5 +1,6 @@
 package com.akgarg.apnagurukul.service;
 
+import com.akgarg.apnagurukul.entity.FindStudent;
 import com.akgarg.apnagurukul.entity.FindTeacher;
 import com.akgarg.apnagurukul.entity.Users;
 import com.akgarg.apnagurukul.firebase.FirebaseManager;
@@ -11,6 +12,7 @@ import com.akgarg.apnagurukul.model.Notification;
 import com.akgarg.apnagurukul.model.RecentActivity;
 import com.akgarg.apnagurukul.model.ResponseMessage;
 import com.akgarg.apnagurukul.model.UpdateProfileUser;
+import com.akgarg.apnagurukul.repository.FindStudentRepository;
 import com.akgarg.apnagurukul.repository.FindTeacherRepository;
 import com.akgarg.apnagurukul.repository.SellBookAdRepository;
 import com.akgarg.apnagurukul.repository.UsersRepository;
@@ -32,6 +34,7 @@ public class UserService {
     private final StandardPasswordEncoder standardPasswordEncoder;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final FindTeacherRepository findTeacherRepository;
+    private final FindStudentRepository findStudentRepository;
 
 
     @Autowired
@@ -40,13 +43,15 @@ public class UserService {
                        FirebaseManager firebaseManager,
                        StandardPasswordEncoder standardPasswordEncoder,
                        BCryptPasswordEncoder bCryptPasswordEncoder,
-                       FindTeacherRepository findTeacherRepository) {
+                       FindTeacherRepository findTeacherRepository,
+                       FindStudentRepository findStudentRepository) {
         this.usersRepository = usersRepository;
         this.sellBookAdRepository = sellBookAdRepository;
         this.firebaseManager = firebaseManager;
         this.standardPasswordEncoder = standardPasswordEncoder;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.findTeacherRepository = findTeacherRepository;
+        this.findStudentRepository = findStudentRepository;
     }
 
 
@@ -181,6 +186,7 @@ public class UserService {
         return this.sellBookAdRepository.getAllBySellerEmail(username).size();
     }
 
+
     public boolean addTeacher(String loggedInUsername, FindTeacher teacher) {
         if (loggedInUsername != null && !loggedInUsername.equals("")) {
             Users currentlyLoggedInUser = this.getUser(loggedInUsername);
@@ -189,7 +195,7 @@ public class UserService {
 
             if (savedTeacher.getId() != -1) {
                 List<RecentActivity> activities = currentlyLoggedInUser.getActivities();
-                activities.add(new RecentActivity("Teacher added",
+                activities.add(new RecentActivity("Added teacher id: " + savedTeacher.getId(),
                         DateAndTimeMethods.getCurrentDate(), DateAndTimeMethods.getCurrentTime()));
                 currentlyLoggedInUser.setActivities(activities);
                 this.usersRepository.save(currentlyLoggedInUser);
@@ -198,6 +204,34 @@ public class UserService {
             }
         }
 
+        // something wrong happended, so return false to indicate that teacher is not saved and nothing is updated in the database
+        return false;
+    }
+
+
+    public boolean addStudent(String loggedInUsername, FindStudent student) {
+        if (loggedInUsername != null && student != null) {
+            Users currentlyLoggedInUser = this.getUser(loggedInUsername);
+
+            if (currentlyLoggedInUser != null) {
+                student.setUserEmail(currentlyLoggedInUser.getUsername());
+                FindStudent savedStudent = this.findStudentRepository.save(student);
+
+                // debugging purpose only
+                System.out.println(savedStudent);
+
+                if (savedStudent.getId() != -1) {
+                    List<RecentActivity> activities = currentlyLoggedInUser.getActivities();
+                    activities.add(new RecentActivity("Added student id: " + savedStudent.getId(), DateAndTimeMethods.getCurrentDate(), DateAndTimeMethods.getCurrentTime()));
+                    currentlyLoggedInUser.setActivities(activities);
+                    this.usersRepository.save(currentlyLoggedInUser);
+
+                    return true;
+                }
+            }
+        }
+
+        // something wrong happended, so return false to indicate that student is not saved and nothing is updated in the database
         return false;
     }
 }

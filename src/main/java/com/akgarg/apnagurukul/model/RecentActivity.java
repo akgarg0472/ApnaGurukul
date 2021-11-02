@@ -12,7 +12,9 @@ public class RecentActivity {
     public RecentActivity() {
     }
 
-    public RecentActivity(String activity, String date, String time) {
+    public RecentActivity(String activity,
+                          String date,
+                          String time) {
         this.activity = activity;
         this.date = date;
         this.time = time;

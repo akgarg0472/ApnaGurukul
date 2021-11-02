@@ -1,5 +1,6 @@
 package com.akgarg.apnagurukul.controllers.user;
 
+import com.akgarg.apnagurukul.entity.FindStudent;
 import com.akgarg.apnagurukul.entity.FindTeacher;
 import com.akgarg.apnagurukul.entity.Users;
 import com.akgarg.apnagurukul.model.*;
@@ -121,9 +122,9 @@ public class UserController {
             } else {
                 this.userService.cleanRecentActivities(user);
                 model.addAttribute("name", user.getName());
-                List<RecentActivity> activities = user.getActivities().stream().limit(15).collect(Collectors.toList());
+                List<RecentActivity> activities = user.getActivities();
                 Collections.reverse(activities);
-                model.addAttribute("activities", activities);
+                model.addAttribute("activities", activities.stream().limit(15).collect(Collectors.toList()));
                 return "user/recent-activities";
             }
         }
@@ -138,6 +139,26 @@ public class UserController {
     }
 
 
+    @RequestMapping(value = "/add-student", method = RequestMethod.POST)
+    public ResponseEntity<?> addStudent(Principal principal, @ModelAttribute FindStudent student) {
+        if (principal != null) {
+            boolean addStudent = this.userService.addStudent(principal.getName(), student);
+
+            return addStudent ?
+                    ResponseEntity.status(OK).body(
+                            new AddTeacherResponse(CREATED.value(), "Student added successfully")
+                    )
+                    :
+                    ResponseEntity.status(OK).body(
+                            new AddTeacherResponse(BAD_REQUEST.value(), "Add student failed")
+                    );
+        }
+
+        return ResponseEntity.status(UNAUTHORIZED)
+                .body(new AddTeacherResponse(UNAUTHORIZED.value(), "Please login again!!"));
+    }
+
+
     @RequestMapping(value = "/add-teacher", method = RequestMethod.GET)
     public String addTeacher() {
         return "user/add-teacher";
@@ -146,7 +167,7 @@ public class UserController {
 
     @RequestMapping(value = "add-teacher", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<?> addNewTeacher(Principal principal, @ModelAttribute FindTeacher teacher) {
+    public ResponseEntity<?> addTeacher(Principal principal, @ModelAttribute FindTeacher teacher) {
         if (principal != null) {
             boolean addTeacher = this.userService.addTeacher(principal.getName(), teacher);
 
@@ -161,7 +182,7 @@ public class UserController {
         }
 
         return ResponseEntity.status(UNAUTHORIZED)
-                .body(new AddTeacherResponse(CREATED.value(), "Please login again!!"));
+                .body(new AddTeacherResponse(UNAUTHORIZED.value(), "Please login again!!"));
     }
 
 

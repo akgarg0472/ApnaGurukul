@@ -1,8 +1,9 @@
 const name = $("#name");
 const email = $("#email");
-const experience = $("#experience");
+const _class = $("#_class");
 const subject = $("#subject");
 const mode = $("#mode");
+const village = $("#village");
 const city = $("#city");
 const state = $("#state");
 const country = $("#country");
@@ -12,13 +13,10 @@ $(document).ready(() => {
     $(".error").hide();
 });
 
-const cancel = () => {
-    window.location.href = "/user/dashboard";
-}
-
-const validateAddTeacherForm = () => {
+const validateAddStudentForm = () => {
     $(".error").hide();
-    const emailValidator = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const emailValidator =
+        /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
     if (
         name === null ||
@@ -31,14 +29,15 @@ const validateAddTeacherForm = () => {
 
     if (
         email === null ||
+        email.val().trim() === "" ||
         !emailValidator.test(email.val().trim())
     ) {
         $("#eml-err").show();
         return false;
     }
 
-    if (experience === null || experience.val().trim() === "") {
-        $("#exp-err").show();
+    if (_class === null || _class.val().trim() === "") {
+        $("#class-err").show();
         return false;
     }
 
@@ -79,13 +78,17 @@ const validateAddTeacherForm = () => {
     return true;
 };
 
-const addTeacher = () => {
-    const validationResult = validateAddTeacherForm();
+const cancel = () => {
+    window.location.href = "/user/dashboard";
+}
+
+const addStudent = () => {
+    const validationResult = validateAddStudentForm();
     if (validationResult) {
         const loader = $("#loader-div");
         loader.show();
 
-        $.post('/user/add-teacher', `_csrf=${$("input[name=_csrf]").val()}&name=${name.val().trim()}&experience=${experience.val().trim()}&email=${email.val().trim()}&subject=${subject.val().trim()}&mode=${mode.val().trim()}&city=${city.val().trim()}&state=${state.val().trim()}&country=${country.val().trim()}&pincode=${pincode.val().trim()}`)
+        $.post('/user/add-student', `_csrf=${$("input[name=_csrf]").val()}&name=${name.val().trim()}&currentClass=${_class.val().trim()}&email=${email.val().trim()}&subjects=${subject.val().trim()}&mode=${mode.val().trim()}&village=${village.val().trim()}&city=${city.val().trim()}&state=${state.val().trim()}&country=${country.val().trim()}&pincode=${pincode.val().trim()}`)
             .done((resp) => {
                 loader.hide();
 
@@ -93,9 +96,10 @@ const addTeacher = () => {
                     swal('Success', resp.message, 'success');
                     name.val('');
                     email.val('');
-                    experience.val('');
+                    _class.val('');
                     subject.val('');
                     mode.val('null');
+                    village.val('');
                     city.val('');
                     state.val('');
                     country.val('');

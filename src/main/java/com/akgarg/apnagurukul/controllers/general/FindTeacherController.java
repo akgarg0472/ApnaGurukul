@@ -19,16 +19,12 @@ public class FindTeacherController {
     @Autowired
     public FindTeacherController(FindTeacherService findTeacherService) {
         this.findTeacherService = findTeacherService;
-
     }
 
     @RequestMapping(value = "/find-teacher", method = RequestMethod.GET)
     public String findTeacher(Model model) {
-        // adding dummy data for debugging purpose
-        List<FindTeacher> teachers = this.findTeacherService.find("gurugram", "haryana");
-
+        List<FindTeacher> teachers = this.findTeacherService.find();
         model.addAttribute("teachers", teachers);
-
         return "/common/find-teacher";
     }
 

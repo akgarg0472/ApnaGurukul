@@ -196,7 +196,11 @@ const submitSignupForm = async () => {
     const isPincodeValidated = validatePincode();
     const loader = $("#loader-container");
 
-    if (isAddressValidated && isCityValidated && isCountryValidated && isStateValidated && isPincodeValidated) {
+    if (isAddressValidated
+        && isCityValidated
+        && isCountryValidated
+        && isStateValidated
+        && isPincodeValidated) {
         let response;
 
         loader.show();
@@ -208,8 +212,6 @@ const submitSignupForm = async () => {
                 // todo later
             });
         loader.hide();
-
-        console.log(response)
 
         if (response === "ERRORS" || response === "null") {
             window.location = "/signup";

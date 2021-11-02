@@ -1,5 +1,3 @@
-// noinspection JSUnusedLocalSymbols,DuplicatedCode
-
 $(document).ready(() => {
     $(".error").hide();
 });

@@ -111,8 +111,7 @@
 .at-form .as-info .uo-info .btns {
     display: flex;
     align-items: center;
-    margin: auto;
-    margin-top: 0.75rem;
+    margin: 0.75rem auto auto;
 }
 
 .at-form .as-info .uo-info .btns .up-sbmt-btn,
@@ -245,8 +244,7 @@
 
 @media only screen and (max-width: 448px) {
     .up-body .content {
-        margin: auto;
-        margin-top: 0.75rem;
+        margin: 0.75rem auto auto;
         width: 100%;
     }
 

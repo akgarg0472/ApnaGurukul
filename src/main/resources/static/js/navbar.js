@@ -84,11 +84,22 @@ $("#profile-nav-ulusb").on("click", () => {
 
 
 $(window).on("click", (e) => {
-    if (e.target.id !== "demo-link" && e.target.id !== "nvbr-dd-link" && e.target.id !== "nb-crdn" && e.target.id !== "demo" && $("#dropdown-content").css("display") === "block") {
+    if (e.target.id !== "demo-link"
+        && e.target.id !== "nvbr-dd-link"
+        && e.target.id !== "nb-crdn"
+        && e.target.id !== "demo"
+        && $("#dropdown-content").css("display") === "block") {
         toggleNavbarServicesDropDown();
     }
 
-    if (e.target.id !== "nb-up-ic" && e.target.id !== "nb-pcrdn" && e.target.id !== "profile-nav-ulusb" && e.target.id !== "rnb-pnu-sp" && e.target.id !== "nvbr-dd-link" && e.target.id !== "nvbr-dd-link-uname" && e.target.id !== 'rnb-up-div' && $("#profile-dropdown-content").css("display") === "block") {
+    if (e.target.id !== "nb-up-ic"
+        && e.target.id !== "nb-pcrdn"
+        && e.target.id !== "profile-nav-ulusb"
+        && e.target.id !== "rnb-pnu-sp"
+        && e.target.id !== "nvbr-dd-link"
+        && e.target.id !== "nvbr-dd-link-uname"
+        && e.target.id !== 'rnb-up-div'
+        && $("#profile-dropdown-content").css("display") === "block") {
         toggleUserProfileDropdown();
     }
 });

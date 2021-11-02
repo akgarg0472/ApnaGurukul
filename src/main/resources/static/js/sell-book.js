@@ -1,5 +1,3 @@
-// noinspection JSUnresolvedVariable
-
 $(document).ready(() => {
     hideAllErrors();
 })

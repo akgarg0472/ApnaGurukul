@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<!--suppress HtmlFormInputWithoutLabel -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" th:href="@{/css/modal.css}"/>
+    <link rel="stylesheet" th:href="@{/css/find-teacher.css}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+          integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <script type="text/javascript" th:src="@{/js/jquery.js}"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <title>ApnaGurukul - Find student</title>
+</head>
+
+<body>
+<!--  -->
+<!--  -->
+<!--  -->
+<!--navbar-->
+<section th:insert="navbar :: navbar" style="display: flex;flex-direction: column;"></section>
+<!--  -->
+<!--  -->
+<!--  -->
+
+<h2 class="main-heading">Find Student</h2>
+
+<div class="ft-body">
+    <div class="search">
+        <form action="@{/dummy}">
+            <div class="left-search-section">
+                <input
+                        type="search"
+                        name="search__form__city"
+                        id="search__form__city"
+                        placeholder="Enter your city"
+                />
+
+                <input
+                        type="search"
+                        name="search__form__state"
+                        id="search__form__state"
+                        placeholder="Enter your state"
+                />
+
+                <input
+                        type="search"
+                        name="search__form__country"
+                        id="search__form__country"
+                        style="display: none"
+                />
+
+                <button type="button" onclick="performSearch()">Search</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="show-res-para" id="show-res-para"></div>
+    <div class="content">
+
+        <div th:if="${students.size()==0}">
+            <p>No teacher found for requested location</p>
+        </div>
+
+        <th:block th:if="${students.size()>0}">
+            <th:block th:each="student : ${students}">
+                <div class="card">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="heading" th:text="'Sid: ' + ${student.id}">Student id</div>
+                            <div class="details">
+                                <p th:text="'Name: ' + ${student.name}">Name</p>
+                                <p th:text="'Class: ' + ${student.currentClass}">CurrentClass</p>
+                                <p th:text="'Subject: ' + ${student.subjects}"></p>
+                                <p th:text="'Mode: ' + ${student.mode}">Mode</p>
+                            </div>
+                        </div>
+
+                        <div class="card-back">
+                            <div class="details">
+                                <p th:text="'Email: ' + ${student.email}"></p>
+                                <th:block th:if="${student.village != null && !student.village.equals('')}">
+                                    <p th:text="'Village: ' + ${student.village}"></p>
+                                </th:block>
+                                <p th:text="'City: ' + ${student.city}"></p>
+                                <p th:text="'State: ' + ${student.state}"></p>
+                                <p th:text="'Pincode: ' + ${student.pincode}"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </th:block>
+        </th:block>
+    </div>
+</div>
+
+<script type="text/javascript" th:src="@{/js/navbar.js}"></script>
+<script type="text/javascript" th:src="@{/js/find-student.js}"></script>
+<script type="text/javascript" th:src="@{/js/modal.js}"></script>
+</body>
+</html>
